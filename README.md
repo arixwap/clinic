@@ -1,2 +1,2 @@
 # Clinic
-Clinic Web App - Laravel Based System
+Clinic Web App with Laravel based system
