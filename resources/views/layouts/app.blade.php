@@ -56,9 +56,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -77,11 +75,9 @@
                 <div class="row">
                     <div class="col-sm-3">
                         <ul class="list-group">
-                            <li class="list-group-item">Pendaftaran Pasien</li>
-                            <li class="list-group-item">Lihat Data Pasien</li>
-                            <li class="list-group-item">Morbi leo risus</li>
-                            <li class="list-group-item">Porta ac consectetur ac</li>
-                            <li class="list-group-item">Vestibulum at eros</li>
+                            <li class="list-group-item">
+                                <a href="{{ route('patient.create') }}">Pendaftaran Pasien</a>
+                            </li>
                         </ul>
                     </div>
                     <div class="col-sm-9">
