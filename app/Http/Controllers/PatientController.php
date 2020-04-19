@@ -24,7 +24,7 @@ class PatientController extends Controller
      */
     public function create()
     {
-        return view('form-patient');
+        return view('patient.create');
     }
 
     /**

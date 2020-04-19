@@ -21,4 +21,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('/patient', 'PatientController');
+// All route below will be need authorization / login user
+Route::middleware('auth')->group(function () {
+
+    Route::resource('/patient', 'PatientController');
+
+});

@@ -75,9 +75,16 @@
             </div>
         </nav>
         <main class="py-4">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-sm-3">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <a href="{{ route('patient.create') }}">Pendaftaran Pasien</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-9">
                         @yield('content')
                     </div>
                 </div>
