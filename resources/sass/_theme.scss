@@ -1,9 +1,61 @@
 /**
 * Theme Style
 *
-* This is an empty scss file for your custom styles
+* Disinilah tempatmu untuk membuat style theme untuk aplikasimu
+* File ini menggunakan SASS / SCSS (lebih kece dari CSS)
+* Atau boleh menggunakan CSS biasa jika belum mengerti SASS
+*
+* Referensi utk belajar SASS : https://sass-lang.com/guide
+*
+* Jangan lupa menjalankan `npm run watch`
+* agar file scss bisa langsung dicompile
 **/
 
 body {
-    background-color: $body-bg;
+    background-color: $body-bg; // variabel sass dari file _variables.scss
+}
+
+// Halaman Admin Menu Sidebar
+ul.admin-side-menu {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: $white; // variabel milik bootstrap
+
+    // Bisa nested. Jadi hasilnya di CSS akan seperti ini
+    // ul.admin-side-menu li {}
+    li {
+
+        // Penggunaan & artinya memilih tag li di atas / selector yang sedang aktif.
+        // Hasilnya akan seperti ini : ul.admin-side-menu li>a
+        //
+        // Referensi untuk mencoba coding SASS dan hasilnya dalam CSS : https://www.sassmeister.com/
+        // INGAT INI! $nama-variable akan menjadi error jika dicoba di sassmeister, krn belum didefinisikan
+        &>a {
+            position: relative;
+            display: block;
+            padding: 0.75rem 1.25rem;
+            border: 1px solid rgba($dark, 0.125);
+        }
+
+        &:not(:first-of-type)>a {
+            border-top: none;
+        }
+    }
+
+
+    // Untuk Sub Menu - hanya support sampai 1 sub menu saja
+    ul {
+        font-size: 0.9em;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li>a {
+            padding-left: 35px;
+            border-top: none;
+        }
+    }
 }

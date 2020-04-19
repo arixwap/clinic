@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Patient; // Disini nama model harus dimasukan
+use App\Patient; //   <---------------------- Memanggil model eloquent Patient
 
 class PatientController extends Controller
 {
@@ -14,7 +14,14 @@ class PatientController extends Controller
      */
     public function index()
     {
-        //
+        // Memanggil semua data patient
+        // Referensi : https://laravel.com/docs/eloquent#retrieving-models
+
+        $patients = Patient::all();
+
+        return view('patient.index', array(
+            'patients' => $patients
+        ));
     }
 
     /**
@@ -24,6 +31,8 @@ class PatientController extends Controller
      */
     public function create()
     {
+        // Hanya menampilkan form saja tanpa mengirim data apapun ke view
+
         return view('patient.create');
     }
 
@@ -35,10 +44,20 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
-        // ddg($request->all());dsds
-        $patient = Patient::create(
+
+        // dd($request->all()); // Menampilkan semua data yang dikirim melalui form
+
+        // Langsung menyimpan semua data yang dikirim di form ke dalam table patients
+
+        Patient::create(
             $request->all()
         );
+
+        // Referensi lebih lengkap : https://laravel.com/docs/eloquent#inserting-and-updating-models
+        // Cari saja yang ada method create() -nya
+
+        // Redirect ke halaman index patient
+        return redirect( route('patient.index') );
     }
 
     /**
@@ -49,7 +68,8 @@ class PatientController extends Controller
      */
     public function show($id)
     {
-        //
+        // Sementara tidak digunakan
+        // Hanya berfungsi menampilkan data patient lebih detail
     }
 
     /**
@@ -60,7 +80,13 @@ class PatientController extends Controller
      */
     public function edit($id)
     {
-        //
+        // Cari data patient dengan id yang dipilih
+        // Referensi : https://laravel.com/docs/eloquent#retrieving-single-models
+        $patient = Patient::findOrFail($id);
+
+        return view('patient.edit', array(
+            'patient' => $patient
+        ));
     }
 
     /**
@@ -72,7 +98,17 @@ class PatientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Cari data patient dengan ID yang dipilih
+        $patient = Patient::findOrFail($id);
+
+        // Update data patient dengan semua data form yang dikirim
+        // Referensi : https://laravel.com/docs/eloquent#updates
+        $patient->update(
+            $request->all()
+        );
+
+        // Redirect ke halaman index patient
+        return redirect( route('patient.index') );
     }
 
     /**
@@ -83,6 +119,11 @@ class PatientController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // Langsung hapus Patient dengan ID yang dipilih
+        // Referensi : Referensi : https://laravel.com/docs/eloquent#deleting-models
+        Patient::destroy($id);
+
+        // Redirect ke halaman index patient
+        return redirect( route('patient.index') );
     }
 }

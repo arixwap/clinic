@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @push('inject-header')
+    {{--
+        Salah satu fitur blade laravel untuk menginject html tag
+        Style ini akan diinject ke file resources/views/layouts/app.blade.php
+        di bagian @stack('inject-header')
+        Tergantung dari layouts mana yang di panggil di dalam perintah @extends('layouts.nama_file')
+    --}}
     <style>
         .full-height {
             height: calc(100vh - 103px);

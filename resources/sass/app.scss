@@ -1,14 +1,19 @@
-// Functions
+// Theme Functions - file untuk menambahkan fungsi SASS tertentu
 @import 'functions';
 
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito:200,600');
+// Import Fonts dari cloud
+@import url('https://fonts.googleapis.com/css?family=Nunito');
 
-// Variables
+// Theme Variables - file untuk menambahkan variabel SCSS / CSS.
+// Kamu bisa mengubah variabel bawaan Bootstrap disini!!
 @import 'variables';
 
-// Bootstrap
+// Bootstrap - tanda `~` artinya diambil dari folder /node_modules/ di root
 @import '~bootstrap/scss/bootstrap';
 
-// Main Theme Styles
+// Font Awesome 4.7.0 - untuk menampilkan icon
+// Referensi : https://fontawesome.com/v4.7.0/icons/
+@import '~font-awesome/scss/font-awesome';
+
+// Main Theme Styles - file tempat membuat style temamu !!!
 @import 'theme';

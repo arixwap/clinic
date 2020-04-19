@@ -1,7 +1,12 @@
 /**
 * Theme Variables
 *
-* Use this file to overwrite the basic Bootstrap variables and add your own variables
+* Gunakan file ini untuk menambahkan variable scss mu sendiri
+* ATAU mengganti variable dari Bootstrap
+*
+* Untuk mengganti variable dari Bootstrap bisa dilihat contohnya di folder
+* node_modules/bootstrap/scss/_variables.scss
+* Copy saja variable yang akan dipilih disana dan tempel di file ini
 **/
 
 
@@ -25,3 +30,14 @@ $yellow: #ffed4a;
 $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
+
+// Bootstrap Colors
+$primary: $green;
+
+// Menghapus border radius default dari Bootstrap
+$border-radius: 0;
+$border-radius-lg: 0;
+$border-radius-sm: 0;
+
+// Menghapus link decoration bawaan bootstrap
+$link-hover-decoration: none;
