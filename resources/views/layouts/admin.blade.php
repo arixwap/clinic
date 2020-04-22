@@ -83,7 +83,7 @@
                                     <li><a href="{{ route('patient.create') }}">Pendaftaran Baru</a></li>
                                 </ul>
                             </li>
-                            <li><a href="#">Dokter</a></li>
+                            <li><a href="{{ route('doctor.create') }}">Daftar Dokter</a></li>
                         </ul>
                     </div>
                     <div class="col-sm-9">

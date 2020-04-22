@@ -58,7 +58,7 @@
     <div class="flex-center position-ref full-height">
         <div class="content">
             <div class="title m-b-md">
-                Laravel
+                Klinik Pradnya Usadha
             </div>
 
             <div class="links">
