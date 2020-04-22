@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-header">Dokter Baru</div>
                 <div class="card-body">
-                    <form action="{{ route('patient.store') }}" method="post">
+                    <form action="{{ route('doctor.store') }}" method="post">
                         {{-- CSRF and Method Form Laravel --}}
                         {{ csrf_field() }}
                         {{ method_field('POST') }}
