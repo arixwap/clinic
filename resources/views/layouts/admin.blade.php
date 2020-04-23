@@ -77,14 +77,19 @@
                         <ul class="admin-side-menu">
                             <li><a href="{{ route('home') }}">Dashboard</a></li>
                             <li>
-                                <a href="{{ route('patient.create') }}">Pasien</a>
+                                <a href="{{ route('patient.index') }}">Pasien</a>
                                 <ul>
-                                    <li><a href="{{ route('patient.index') }}">Daftar Pasien</a></li>
-                                    <li><a href="{{ route('patient.create') }}">Pendaftaran Baru</a></li>
+                                    <li><a href="{{ route('patient.index') }}">Lihat Data Pasien</a></li>
+                                    <li><a href="{{ route('patient.create') }}">Tambah Pasien</a></li>
                                 </ul>
                             </li>
-                            <li><a href="{{ route('doctor.create') }}">Daftar Dokter</a></li>
-                        </ul>
+                            <li>
+                                <a href="{{ route('doctor.index') }}">Dokter</a>
+                                <ul>
+                                    <li><a href="{{ route('doctor.index') }}">Lihat Data Dokter</a></li>
+                                    <li><a href="{{ route('doctor.create') }}">Tambah Dokter</a></li>
+                                </ul>
+                            </li>
                     </div>
                     <div class="col-sm-9">
                         @yield('content')
