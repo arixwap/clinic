@@ -25,6 +25,14 @@
                             <input name="password" type="text" class="form-control" required>
                         </div>
                         <div class="form-group">
+                            <label>Tempat Lahir</label>
+                            <input name="birthplace" type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Tanggal Lahir</label>
+                            <input name="birthdate" type="date" class="form-control" required>
+                        </div>
+                        <div class="form-group">
                             <label>Jenis Kelamin</label>
                             <select name="gender" class="form-control" required>
                                 <option value="">-Pilih-</option>

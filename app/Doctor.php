@@ -14,6 +14,8 @@ class Doctor extends Model
         'full_name',
         'username',
         'password',
+        'birthplace',
+        'birthdate',
         'gender',
         'address',
         'phone',
