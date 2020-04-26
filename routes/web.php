@@ -33,11 +33,6 @@ Route::middleware('auth')->group(function () {
 
     // Route yang mengambil file controller - app/Http/Controllers/PatientController.php
     Route::resource('/patient', 'PatientController');
-
-});
-Route::middleware('auth')->group(function () {
-
-    // Route yang mengambil file controller - app/Http/Controllers/PatientController.php
     Route::resource('/doctor', 'DoctorController');
 
 });

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Doctor; //   <---------------------- Memanggil model eloquent Patient
+use Illuminate\Support\Facades\Hash;
+use App\User;
+use App\Doctor;
 
 class DoctorController extends Controller
 {
@@ -14,14 +16,9 @@ class DoctorController extends Controller
      */
     public function index()
     {
-        // Memanggil semua data patient
-        // Referensi : https://laravel.com/docs/eloquent#retrieving-models
+        $data['doctors'] = Doctor::all();
 
-        $doctors = Doctor::all();
-
-        return view('doctor.index', array(
-            'doctors' => $doctors
-        ));
+        return view('doctor.index', $data);
     }
 
     /**
@@ -31,9 +28,9 @@ class DoctorController extends Controller
      */
     public function create()
     {
-        // Hanya menampilkan form saja tanpa mengirim data apapun ke view
+        $data['qualifications'] = Doctor::getQualifications();
 
-        return view('doctor.create');
+        return view('doctor.create', $data);
     }
 
     /**
@@ -44,19 +41,21 @@ class DoctorController extends Controller
      */
     public function store(Request $request)
     {
+        // Simpan data dokter sebagai user
+        // Hanya data tertentu yang dipilih dari $request yang diterima
+        $user = User::create([
+            'name' => $request->input('full_name'),
+            'email' => $request->input('email'),
+            'password' => Hash::make( $request->input('password') ), // data password di encrypt
+        ]);
 
-        // dd($request->all()); // Menampilkan semua data yang dikirim melalui form
+        /**
+         * Simpan data utama dokter, dengan menggunakan user relationship
+         * Semua data yang dikirim di dalam $request langsung disimpan
+         * Hanya tinggal pake :), engga perlu isi Join Joinan
+         */
+        $user->doctor()->create( $request->all() );
 
-        // Langsung menyimpan semua data yang dikirim di form ke dalam table patients
-
-        Doctor::create(
-            $request->all()
-        );
-
-        // Referensi lebih lengkap : https://laravel.com/docs/eloquent#inserting-and-updating-models
-        // Cari saja yang ada method create() -nya
-
-        // Redirect ke halaman index patient
         return redirect( route('doctor.index') );
     }
 
@@ -69,7 +68,6 @@ class DoctorController extends Controller
     public function show($id)
     {
         // Sementara tidak digunakan
-        // Hanya berfungsi menampilkan data patient lebih detail
     }
 
     /**
@@ -80,13 +78,10 @@ class DoctorController extends Controller
      */
     public function edit($id)
     {
-        // Cari data patient dengan id yang dipilih
-        // Referensi : https://laravel.com/docs/eloquent#retrieving-single-models
-        $doctor = Doctor::findOrFail($id);
+        $data['qualifications'] = Doctor::getQualifications();
+        $data['doctor'] = Doctor::findOrFail($id);
 
-        return view('doctor.edit', array(
-            'doctor' => $doctor
-        ));
+        return view('doctor.edit', $data);
     }
 
     /**
@@ -98,16 +93,26 @@ class DoctorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Cari data patient dengan ID yang dipilih
         $doctor = Doctor::findOrFail($id);
 
-        // Update data patient dengan semua data form yang dikirim
-        // Referensi : https://laravel.com/docs/eloquent#updates
-        $doctor->update(
-            $request->all()
-        );
+        // Update data doctor
+        $doctor->update( $request->all() );
 
-        // Redirect ke halaman index patient
+        // Buat array untuk update data user
+        $dataUser = [
+            'name' => $request->input('full_name'),
+            'email' => $request->input('email'),
+        ];
+
+        // Masukan data password ke dalam array update user, jika
+        // diinput lewat form
+        if ( $request->has('password') ) {
+            $dataUser['password'] = Hash::make( $request->input('password') );
+        }
+
+        // Update data User milik si Doctor
+        $doctor->user()->update( $dataUser );
+
         return redirect( route('doctor.index') );
     }
 
@@ -119,11 +124,14 @@ class DoctorController extends Controller
      */
     public function destroy($id)
     {
-        // Langsung hapus Patient dengan ID yang dipilih
-        // Referensi : Referensi : https://laravel.com/docs/eloquent#deleting-models
-        Doctor::destroy($id);
+        $doctor = Doctor::findOrFail($id);
 
-        // Redirect ke halaman index patient
+        // Delete data User milik si Doctor
+        $doctor->user()->delete();
+
+        // Delete data Doctor
+        $doctor->delete();
+
         return redirect( route('doctor.index') );
     }
 }

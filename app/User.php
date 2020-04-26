@@ -36,4 +36,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Relationship tabel Users ke tabel Doctors
+     */
+    public function doctor()
+    {
+        /**
+         * hasOne digunakan jika ada relation tabel 1 to 1, dimana tabel ini merupakan sumber dari relation
+         * Misalnya :
+         * tabel User boleh tidak memiliki data di Tabel Doctor
+         *
+         * Laravel otomatis mengetahui kolom 'user_id' di tabel Doctor merupakan foreign key dari tabel ini
+         * Itulah sebabnya mengapa penamaan Model, Tabel dan Kolom tabel harus menggunakan bahasa inggris
+         */
+        return $this->hasOne('App\Doctor'); // Pemanggilan file dari directory / folder
+    }
 }
