@@ -13,7 +13,11 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    @if ( Auth::user()->isDoctor() )
+                        Selamat datang Dokter {{ Auth::user()->doctor->full_name }}
+                    @else
+                        Anda telah login!
+                    @endif
                 </div>
             </div>
         </div>

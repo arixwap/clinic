@@ -52,4 +52,13 @@ class User extends Authenticatable
          */
         return $this->hasOne('App\Doctor'); // Pemanggilan file dari directory / folder
     }
+
+    /**
+     * Check jika User adalah Doctor atau bukan
+     * Return true / false
+     */
+    public function isDoctor()
+    {
+        return $this->doctor;
+    }
 }
