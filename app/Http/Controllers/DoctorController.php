@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\Doctor;
+use App\Option;
 
 class DoctorController extends Controller
 {
@@ -28,7 +29,8 @@ class DoctorController extends Controller
      */
     public function create()
     {
-        $data['qualifications'] = Doctor::getQualifications();
+        $data['qualifications'] = Option::where('name', 'qualification')->get();
+        $data['polyclinics'] = Option::where('name', 'polyclinic')->get();
 
         return view('doctor.create', $data);
     }
@@ -67,7 +69,7 @@ class DoctorController extends Controller
      */
     public function show($id)
     {
-        // Sementara tidak digunakan
+        abort(404);
     }
 
     /**
@@ -78,7 +80,8 @@ class DoctorController extends Controller
      */
     public function edit($id)
     {
-        $data['qualifications'] = Doctor::getQualifications();
+        $data['qualifications'] = Option::where('name', 'qualification')->get();
+        $data['polyclinics'] = Option::where('name', 'polyclinic')->get();
         $data['doctor'] = Doctor::findOrFail($id);
 
         return view('doctor.edit', $data);

@@ -40,9 +40,19 @@
                             <label>Alamat Lengkap</label>
                             <textarea name="address" rows="3" class="form-control" required>{{ $doctor->address }}</textarea>
                         </div>
-                        <div class="form-group">
-                            <label>Telepon</label>
-                            <input name="phone" type="tel" class="form-control" value="{{ $doctor->phone }}" required>
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label>Telepon</label>
+                                <input name="phone" type="tel" class="form-control" value="{{ $doctor->phone }}" required>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Poliklinik</label>
+                                <select name="polyclinic" class="form-control" required>
+                                    @foreach ( $polyclinics as $polyclinic )
+                                        <option value="{{ $polyclinic->value }}" {{ ($doctor->polyclinic == $polyclinic->value) ? 'selected' : '' }}>{{ $polyclinic->value }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                         <br>
 
@@ -57,7 +67,7 @@
                                 <label>Kualifikasi</label>
                                 <select name="qualification" class="form-control" required>
                                     @foreach ( $qualifications as $qualification )
-                                        <option value="{{ $qualification }}" {{ ($doctor->qualification == $qualification) ? 'selected' : '' }}>{{ $qualification }}</option>
+                                        <option value="{{ $qualification->value }}" {{ ($doctor->qualification == $qualification->value) ? 'selected' : '' }}>{{ $qualification->value }}</option>
                                     @endforeach
                                 </select>
                             </div>

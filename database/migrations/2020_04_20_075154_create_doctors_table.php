@@ -27,6 +27,7 @@ class CreateDoctorsTable extends Migration
             $table->string('str')->nullable();              // Nomor Surat Tanda Registrasi Dokter
             $table->date('str_start_date')->nullable();     // Tanggal STR Ditetapkan
             $table->date('str_end_date')->nullable();       // Tanggal STR Berlaku Sampai
+            $table->string('polyclinic')->nullable();
             $table->text('photo_url')->nullable();
             $table->timestamps();
         });

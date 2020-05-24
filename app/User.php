@@ -38,7 +38,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Relationship tabel Users ke tabel Doctors
+     * Relationship 1 to 1 - tabel `users` ke tabel `doctors`
      */
     public function doctor()
     {

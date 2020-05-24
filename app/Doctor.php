@@ -26,27 +26,7 @@ class Doctor extends Model
     ];
 
     /**
-     * Arix Wap - Note
-     *
-     * Tambahkan daftar Kualifikasi Dokter disini
-     * Jika ada perubahan nama kualifikasi, ubah namanya saja. JANGAN mengubah valuenya!
-     * karena akan berpengaruh ke data dokter lain jika data dokter yang tersimpan sudah banyak
-     */
-    protected static $qualifications = [
-        'umum'      => 'Dokter Umum',
-        'spog'      => 'Dokter Spesialis Obstetri dan Ginekologi',
-        'sptht'     => 'Dokter Spesialis Telinga Hidung Tenggorok',
-        'spkg'      => 'Dokter Gigi',
-        'sppd'      => 'Dokter Spesialis Ahli Penyakit Dalam',
-        'spa'       => 'Dokter Spesialis Anak',
-    ];
-
-    public static function getQualifications() {
-        return Doctor::$qualifications;
-    }
-
-    /**
-     * Relationship tabel Doctors ke tabel Users
+     * Relationship 1 to 1 - tabel `doctors` ke tabel `users`
      */
     public function user()
     {
@@ -62,5 +42,13 @@ class Doctor extends Model
          * Itulah sebabnya mengapa penamaan Model, Tabel dan Kolom tabel harus menggunakan bahasa inggris
          */
         return $this->belongsTo('App\User'); // Pemanggilan file dari directory / folder
+    }
+
+    /**
+     * Relationship 1 to many - tabel `doctors` ke tabel `schedules`
+     */
+    public function schedule()
+    {
+        return $this->hasMany('App\Schedule');
     }
 }

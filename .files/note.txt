@@ -1,0 +1,41 @@
+TASK
+- CRUD Option
+- Input Jadwal Dokter
+- Input Checkup
+
+
+
+Input Jadwal Praktek Dokter
+- Hari Praktek : Checkbox Senin - Minggu
+- Jam Praktek (Di setiap Checkbox) :
+  - Jam Mulai
+  - Jam Selesai
+  - Batas Pasien
+- Tanggal Off Praktek : Input Date
+
+Input Jadwal Pasien
+- Radio Button : Pasien Terdaftar, Pasien Baru
+  - Jika Pilih - Pasien Terdaftar
+    - Muncul Input Search dengan sistem autofill
+    - Text yang muncul : Nama Pasien (L/P) 18th - Alamat
+  - Jika Pilih - Pasien Baru
+    - Muncul Form yang sama seperti Input Pasien Baru
+- Switch Button BPJS : Default Off
+  - Jika true: Muncul Input Nomor BPJS
+- Input Textarea Keluhan
+- Pilih Poliklinik : Input Select
+- Pilih Dokter : Input Select List Dokter sesuai Poliklinik
+  - Text yang muncul : Nama Dokter - Kualifikasi
+- Pilih Tanggal Cek : Default Hari Ini. Sesuai jadwal dokter yang dipilih
+- Pilih Jam Praktek : Sesuai jadwal dokter yang dipilih
+- Submit
+***
+- Setelah Submit, akan muncul nomor antrian dan tersimpan ke database
+
+
+Halaman Dokter
+- Lihat Daftar Checkup yang masuk Hari ini, Jam ini
+- Lihat Daftar Checkup yang akan datang
+- Lihat Riwayat Checkup
+- Atur Jadwal Praktek
+- Ubah Data Diri Dokter

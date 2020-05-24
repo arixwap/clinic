@@ -45,8 +45,6 @@ class PatientController extends Controller
     public function store(Request $request)
     {
 
-        // dd($request->all()); // Menampilkan semua data yang dikirim melalui form
-
         // Langsung menyimpan semua data yang dikirim di form ke dalam table patients
 
         Patient::create(
@@ -68,8 +66,7 @@ class PatientController extends Controller
      */
     public function show($id)
     {
-        // Sementara tidak digunakan
-        // Hanya berfungsi menampilkan data patient lebih detail
+        abort(404);
     }
 
     /**

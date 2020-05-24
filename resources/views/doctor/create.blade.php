@@ -40,9 +40,19 @@
                             <label>Alamat Lengkap</label>
                             <textarea name="address" rows="3" class="form-control" required></textarea>
                         </div>
-                        <div class="form-group">
-                            <label>Telepon</label>
-                            <input name="phone" type="tel" class="form-control" required>
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label>Telepon</label>
+                                <input name="phone" type="tel" class="form-control" required>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Poliklinik</label>
+                                <select name="polyclinic" class="form-control" required>
+                                    @foreach ( $polyclinics as $polyclinic )
+                                        <option value="{{ $polyclinic->value }}">{{ $polyclinic->value }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                         <br>
 
@@ -57,7 +67,7 @@
                                 <label>Kualifikasi</label>
                                 <select name="qualification" class="form-control" required>
                                     @foreach ( $qualifications as $qualification )
-                                        <option value="{{ $qualification }}">{{ $qualification }}</option>
+                                        <option value="{{ $qualification->value }}">{{ $qualification->value }}</option>
                                     @endforeach
                                 </select>
                             </div>
