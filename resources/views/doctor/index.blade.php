@@ -21,7 +21,7 @@
                                 <tr>
                                     <th scope="row">{{ $i + 1 }}</th>
                                     <td>{{ $doctor->full_name }}</td>
-                                    <td>{{ $doctor->gender }}</td>
+                                    <td>{{ __($doctor->gender) }}</td>
                                     <td>{{ $doctor->address }}</td>
                                     <td class="text-center">
                                         <form action="{{ route('doctor.destroy', $doctor->id) }}" method="POST">

@@ -11,7 +11,7 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">{{ __('Name') }}</th>
-                                <th scope="col">{{ __('Type') }}</th>
+                                <th scope="col">{{ __('Birthday') }}</th>
                                 <th scope="col">{{ __('Gender') }}</th>
                                 <th scope="col">{{ __("Address") }}</th>
                                 <th scope="col" class="text-center">{{ __('Action') }}</th>
@@ -22,8 +22,8 @@
                                 <tr>
                                     <th scope="row">{{ $i + 1 }}</th>
                                     <td>{{ $patient->full_name }}</td>
-                                    <td>{{ $patient->patient_type }}</td>
-                                    <td>{{ $patient->gender }}</td>
+                                    <td>{{ Date::parse($patient->birthdate)->format('d F Y') }}</td>
+                                    <td>{{ __($patient->gender) }}</td>
                                     <td>{{ $patient->address }}</td>
                                     <td class="text-center">
                                         <form action="{{ route('patient.destroy', $patient->id) }}" method="POST">

@@ -1,8 +1,9 @@
 TASK
 - CRUD Option
+
 - Input Jadwal Dokter
 - Input Checkup
-
+- User Role
 
 
 Input Jadwal Praktek Dokter
@@ -34,14 +35,11 @@ Input Jadwal Pasien
 
 
 Role
-- Super Admin
-  - Bisa Semuanya
-- Pengelola
-  - CRUD Admin
-  - CRUD Dokter
+- Pengelola / Superadmin
+  - Bisa Semua
 - Admin :
   - CRUD Pasien
-  - Buat Jadwal Checkup
+  - Buat Jadwal Checkup Pasien
 - Dokter
   - Lihat Daftar Checkup yang masuk Hari ini, Jam ini
   - Lihat Daftar Checkup yang akan datang
