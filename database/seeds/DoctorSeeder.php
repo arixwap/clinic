@@ -24,7 +24,7 @@ class DoctorSeeder extends Seeder
         // Create data doctor dengan sync relation user
         $user->doctor()->create([
             'full_name' => 'Dr. Tirta Mandira Hudhi',
-            'gender' => 'Laki Laki',
+            'gender' => 'Male',
             'birthplace' => 'Surakarta',
             'birthdate' => '1991-07-30',
             'address' => 'Surakarta, Jawa Tengah',
@@ -109,7 +109,7 @@ class DoctorSeeder extends Seeder
         // Create data doctor dengan sync relation user
         $user->doctor()->create([
             'full_name' => 'Dr. Kadek Agus Kurniawan',
-            'gender' => 'Laki Laki',
+            'gender' => 'Male',
             'birthplace' => 'Denpasar',
             'birthdate' => '1987-01-30',
             'address' => 'Denpasar, Bali',

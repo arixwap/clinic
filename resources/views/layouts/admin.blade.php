@@ -75,19 +75,19 @@
                 <div class="row">
                     <div class="col-sm-3">
                         <ul class="admin-side-menu">
-                            <li><a href="{{ route('home') }}">Dashboard</a></li>
+                            <li><a href="{{ route('home') }}">{{ __('Dashboard') }}</a></li>
                             <li>
-                                <a href="{{ route('patient.index') }}">Pasien</a>
+                                <a href="{{ route('patient.index') }}">{{ __('Patient') }}</a>
                                 <ul>
-                                    <li><a href="{{ route('patient.index') }}">Lihat Data Pasien</a></li>
-                                    <li><a href="{{ route('patient.create') }}">Tambah Pasien</a></li>
+                                    <li><a href="{{ route('patient.index') }}">{{ __('Patient List') }}</a></li>
+                                    <li><a href="{{ route('patient.create') }}">{{ __('Add Patient') }}</a></li>
                                 </ul>
                             </li>
                             <li>
-                                <a href="{{ route('doctor.index') }}">Dokter</a>
+                                <a href="{{ route('doctor.index') }}">{{ __('Doctor') }}</a>
                                 <ul>
-                                    <li><a href="{{ route('doctor.index') }}">Lihat Data Dokter</a></li>
-                                    <li><a href="{{ route('doctor.create') }}">Tambah Dokter</a></li>
+                                    <li><a href="{{ route('doctor.index') }}">{{ __('Doctor List') }}</a></li>
+                                    <li><a href="{{ route('doctor.create') }}">{{ __('Add Doctor') }}</a></li>
                                 </ul>
                             </li>
                     </div>

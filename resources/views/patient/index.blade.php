@@ -10,11 +10,11 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Nama</th>
-                                <th scope="col">Tipe</th>
-                                <th scope="col">Jenis Kelamin</th>
-                                <th scope="col">Alamat</th>
-                                <th scope="col" class="text-center">Opsi</th>
+                                <th scope="col">{{ __('Name') }}</th>
+                                <th scope="col">{{ __('Type') }}</th>
+                                <th scope="col">{{ __('Gender') }}</th>
+                                <th scope="col">{{ __("Address") }}</th>
+                                <th scope="col" class="text-center">{{ __('Action') }}</th>
                             </tr>
                         </thead>
                         <tbody>

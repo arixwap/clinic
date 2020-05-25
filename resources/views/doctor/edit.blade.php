@@ -4,7 +4,7 @@
     <div class="container">
         <div class="justify-content-center">
             <div class="card">
-                <div class="card-header">Edit Dokter</div>
+                <div class="card-header">{{ __('Edit Doctor') }}</div>
                 <div class="card-body">
                     <form action="{{ route('doctor.update', $doctor->id) }}" method="post">
                         {{-- CSRF and Method Form Laravel --}}
@@ -12,41 +12,41 @@
                         {{ method_field('PATCH') }}
                         {{-- End of - CSRF Method Form Laravel --}}
 
-                        <div class="h5">Data Utama</div>
+                        <div class="h5">{{ __('Main Data') }}</div>
                         <hr>
                         <div class="form-group">
-                            <label>Nama Lengkap</label>
+                            <label>{{ __('Full Name') }}</label>
                             <input name="full_name" type="text" class="form-control" value="{{ $doctor->full_name }}" required>
                         </div>
                         <div class="row">
                             <div class="col-md-4 form-group">
-                                <label>Jenis Kelamin</label>
+                                <label>{{ __('Gender') }}</label>
                                 <select name="gender" class="form-control" required>
                                     <option value="">-Pilih-</option>
-                                    <option value="Laki Laki" {{ ($doctor->gender == 'Laki Laki') ? 'selected' : '' }}>Laki Laki</option>
-                                    <option value="Perempuan" {{ ($doctor->gender == 'Perempuan') ? 'selected' : '' }}>Perempuan</option>
+                                    <option value="Male" {{ ($doctor->gender == 'Male') ? 'selected' : '' }}>{{ __('Male') }}</option>
+                                    <option value="Female" {{ ($doctor->gender == 'Female') ? 'selected' : '' }}>{{ __('Female') }}</option>
                                 </select>
                             </div>
                             <div class="col-md-4 form-group">
-                                <label>Tempat Lahir</label>
+                                <label>{{ __('Born Place') }}</label>
                                 <input name="birthplace" type="text" class="form-control" value="{{ $doctor->birthplace }}" required>
                             </div>
                             <div class="col-md-4 form-group">
-                                <label>Tanggal Lahir</label>
+                                <label>{{ __('Birthday') }}</label>
                                 <input name="birthdate" type="date" class="form-control" value="{{ $doctor->birthdate }}" required>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Alamat Lengkap</label>
+                            <label>{{ __('Address') }}</label>
                             <textarea name="address" rows="3" class="form-control" required>{{ $doctor->address }}</textarea>
                         </div>
                         <div class="row">
                             <div class="col-md-6 form-group">
-                                <label>Telepon</label>
+                                <label>{{ __('Phone') }}</label>
                                 <input name="phone" type="tel" class="form-control" value="{{ $doctor->phone }}" required>
                             </div>
                             <div class="col-md-6 form-group">
-                                <label>Poliklinik</label>
+                                <label>{{ __('Polyclinic') }}</label>
                                 <select name="polyclinic" class="form-control" required>
                                     @foreach ( $polyclinics as $polyclinic )
                                         <option value="{{ $polyclinic->value }}" {{ ($doctor->polyclinic == $polyclinic->value) ? 'selected' : '' }}>{{ $polyclinic->value }}</option>
@@ -56,15 +56,15 @@
                         </div>
                         <br>
 
-                        <div class="h5">Data Kedokteran</div>
+                        <div class="h5">{{ __('Doctor Data') }}</div>
                         <hr>
                         <div class="row">
                             <div class="col-md-6 form-group">
-                                <label>Universitas</label>
+                                <label>{{ __('University') }}</label>
                                 <input name="university" type="text" class="form-control" value="{{ $doctor->university }}">
                             </div>
                             <div class="col-md-6 form-group">
-                                <label>Kualifikasi</label>
+                                <label>{{ __('Qualification') }}</label>
                                 <select name="qualification" class="form-control" required>
                                     @foreach ( $qualifications as $qualification )
                                         <option value="{{ $qualification->value }}" {{ ($doctor->qualification == $qualification->value) ? 'selected' : '' }}>{{ $qualification->value }}</option>
@@ -74,32 +74,32 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6 form-group">
-                                <label>Nomor STR Dokter (Surat Tanda Registrasi)</label>
+                                <label>{{ __('Doctor STR') }}</label>
                                 <input name="str" type="text" class="form-control" value="{{ $doctor->str }}">
                             </div>
                             <div class="col-md-3 form-group">
-                                <label>Berlaku Dari</label>
+                                <label>{{ __('Valid From') }}</label>
                                 <input name="str_start_date" type="date" class="form-control" value="{{ $doctor->str_start_date }}">
                             </div>
                             <div class="col-md-3 form-group">
-                                <label>Sampai</label>
+                                <label>{{ __('Until') }}</label>
                                 <input name="str_end_date" type="date" class="form-control" value="{{ $doctor->str_end_date }}">
                             </div>
                         </div>
                         <br>
 
-                        <div class="h5">Data Akun</div>
-                        <small>Untuk keperluan login sistem</small>
+                        <div class="h5">{{ __('Account Data') }}</div>
+                        <small>{{ __('Data for login to system') }}</small>
                         <hr>
                         <div class="form-group">
-                            <label>Email</label>
+                            <label>{{ __('Email') }}</label>
                             <input name="email" type="text" class="form-control" value="{{ $doctor->user->email }}" required>
                         </div>
                         <div class="form-group">
-                            <label>Password</label>
+                            <label>{{ __('Password') }}</label>
                             <input name="password" type="password" class="form-control">
                         </div>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
                     </form>
                 </div>
             </div>
