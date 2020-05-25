@@ -21,12 +21,14 @@ class CreateCheckupsTable extends Migration
             $table->foreignId('user_id');
             $table->tinyInteger('number');
             $table->date('date');
-            $table->string('time', 30)->nullable();
+            $table->time('time_start', 0);
+            $table->time('time_end', 0);
             $table->string('bpjs')->nullable();
             $table->text('description')->nullable();
             $table->text('doctor_note')->nullable();
             $table->boolean('new_patient');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

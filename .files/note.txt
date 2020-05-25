@@ -33,9 +33,18 @@ Input Jadwal Pasien
 - Setelah Submit, akan muncul nomor antrian dan tersimpan ke database
 
 
-Halaman Dokter
-- Lihat Daftar Checkup yang masuk Hari ini, Jam ini
-- Lihat Daftar Checkup yang akan datang
-- Lihat Riwayat Checkup
-- Atur Jadwal Praktek
-- Ubah Data Diri Dokter
+Role
+- Super Admin
+  - Bisa Semuanya
+- Pengelola
+  - CRUD Admin
+  - CRUD Dokter
+- Admin :
+  - CRUD Pasien
+  - Buat Jadwal Checkup
+- Dokter
+  - Lihat Daftar Checkup yang masuk Hari ini, Jam ini
+  - Lihat Daftar Checkup yang akan datang
+  - Lihat Riwayat Checkup
+  - Atur Jadwal Praktek
+  - Ubah Data Diri Dokter

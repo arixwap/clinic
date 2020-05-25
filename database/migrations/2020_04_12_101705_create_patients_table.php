@@ -23,6 +23,7 @@ class CreatePatientsTable extends Migration
             $table->string('gender')->nullable();
             $table->string('patient_type')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

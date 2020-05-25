@@ -30,6 +30,7 @@ class CreateDoctorsTable extends Migration
             $table->string('polyclinic')->nullable();
             $table->text('photo_url')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

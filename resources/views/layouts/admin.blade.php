@@ -90,6 +90,7 @@
                                     <li><a href="{{ route('doctor.create') }}">{{ __('Add Doctor') }}</a></li>
                                 </ul>
                             </li>
+                        </ul>
                     </div>
                     <div class="col-sm-9">
                         @yield('content')
