@@ -26,10 +26,15 @@
     "Data for login to system": "Untuk keperluan login sistem",
     "Valid From": "Berlaku dari",
     "Until": "Sampai",
-    "Polyclinic": "Poliklinik",
     "University": "Universitas",
     "Qualification": "Kualifikasi",
+    "Doctor Qualification": "Kualifikasi Dokter",
+    "Doctor Qualification List": "Daftar Kualifikasi Dokter",
     "Doctor STR": "Nomor STR Dokter (Surat Tanda Registrasi)",
+
+    "Polyclinic": "Poliklinik",
+    "Polyclinics": "Poliklinik",
+    "Polyclinic List": "Daftar Poliklinik",
 
     "Type": "Tipe",
     "Action": "Opsi",

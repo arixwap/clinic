@@ -36,4 +36,9 @@ Route::middleware('auth')->group(function () {
     Route::get('dokter/baru', 'DoctorController@create')->name('doctor.create');
     Route::get('dokter/ubah/{id}', 'DoctorController@edit')->name('doctor.edit');
 
+    Route::resource('polyclinic', 'PolyclinicController');
+    Route::get('poliklinik', 'PolyclinicController@index')->name('polyclinic.index');
+
+    Route::resource('qualification', 'QualificationController');
+    Route::get('kualifikasi-dokter', 'QualificationController@index')->name('qualification.index');
 });

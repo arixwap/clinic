@@ -88,6 +88,8 @@
                                 <ul>
                                     <li><a href="{{ route('doctor.index') }}">{{ __('Doctor List') }}</a></li>
                                     <li><a href="{{ route('doctor.create') }}">{{ __('Add Doctor') }}</a></li>
+                                    <li><a href="{{ route('polyclinic.index') }}">{{ __('Polyclinics') }}</a></li>
+                                    <li><a href="{{ route('qualification.index') }}">{{ __('Doctor Qualification') }}</a></li>
                                 </ul>
                             </li>
                         </ul>
