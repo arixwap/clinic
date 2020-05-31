@@ -1,5 +1,8 @@
 TASK
 - CRUD Option
+  - Settings
+    - Polyclinic List
+    - Doctor Qualifications
 
 - Input Jadwal Dokter
 - Input Checkup
@@ -35,7 +38,7 @@ Input Jadwal Pasien
 
 
 Role
-- Pengelola / Superadmin
+- Owner / Superadmin
   - Bisa Semua
 - Admin :
   - CRUD Pasien
