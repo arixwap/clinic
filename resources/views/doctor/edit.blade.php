@@ -100,6 +100,7 @@
                             <input name="password" type="password" class="form-control">
                         </div>
                         <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
+                        <a href="{{ route('doctor.index') }}" type="button" class="btn btn-secondary ml-3">{{ __('Back') }}</a>
                     </form>
                 </div>
             </div>

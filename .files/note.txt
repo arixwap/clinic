@@ -1,13 +1,8 @@
 TASK
-- CRUD Option
-  - Settings
-    - Polyclinic List
-    - Doctor Qualifications
-
 - Input Jadwal Dokter
 - Input Checkup
-- User Role
-
+- CRUD User
+- Riwayat : Jumlah pasien checkup / minggu / bulan / tahun
 
 Input Jadwal Praktek Dokter
 - Hari Praktek : Checkbox Senin - Minggu
@@ -37,7 +32,7 @@ Input Jadwal Pasien
 - Setelah Submit, akan muncul nomor antrian dan tersimpan ke database
 
 
-Role
+User Role
 - Owner / Superadmin
   - Bisa Semua
 - Admin :
@@ -49,3 +44,10 @@ Role
   - Lihat Riwayat Checkup
   - Atur Jadwal Praktek
   - Ubah Data Diri Dokter
+
+
+---------------------------------------------------------------------------
+IMPROVEMENT
+- Migrate to Vue
+- Customable User Role
+- Customable Multi Language via Admin

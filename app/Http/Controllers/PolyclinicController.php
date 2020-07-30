@@ -37,7 +37,13 @@ class PolyclinicController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Option::create(array(
+            'name' => 'polyclinic',
+            'value' => $request->input('polyclinic'),
+            'order' => 0
+        ));
+
+        return response('success', 200);
     }
 
     /**
@@ -71,7 +77,11 @@ class PolyclinicController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $polyclinic = option::findOrFail($id);
+        $polyclinic->value = $request->input('polyclinic');
+        $polyclinic->save();
+
+        return response('success', 200);
     }
 
     /**
@@ -82,6 +92,7 @@ class PolyclinicController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Option::destroy($id);
+        return redirect( route('polyclinic.index') );
     }
 }

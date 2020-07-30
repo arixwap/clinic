@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Option;
 
 class QualificationController extends Controller
 {
@@ -13,7 +14,9 @@ class QualificationController extends Controller
      */
     public function index()
     {
-        return view('setting.qualification');
+        $data['qualifications'] = Option::where('name', 'qualification')->get();
+
+        return view('setting.qualification', $data);
     }
 
     /**
@@ -34,7 +37,13 @@ class QualificationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Option::create(array(
+            'name' => 'qualification',
+            'value' => $request->input('qualification'),
+            'order' => 0
+        ));
+
+        return response('success', 200);
     }
 
     /**
@@ -68,7 +77,11 @@ class QualificationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $qualification = option::findOrFail($id);
+        $qualification->value = $request->input('qualification');
+        $qualification->save();
+
+        return response('success', 200);
     }
 
     /**
@@ -79,6 +92,7 @@ class QualificationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Option::destroy($id);
+        return redirect( route('qualification.index') );
     }
 }

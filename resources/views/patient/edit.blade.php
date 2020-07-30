@@ -4,7 +4,7 @@
     <div class="container">
         <div class="justify-content-center">
             <div class="card">
-                <div class="card-header">Edit Pasien</div>
+                <div class="card-header">{{ __('Edit Patient') }}</div>
                 <div class="card-body">
                     <form action="{{ route('patient.update', $patient->id) }}" method="post">
                         {{-- CSRF and Method Form Laravel --}}
@@ -22,34 +22,35 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Nama Lengkap</label>
+                            <label>{{ __('Full Name') }}</label>
                             <input name="full_name" type="text" class="form-control" value="{{ $patient->full_name }}" required>
                         </div>
                         <div class="form-group">
-                            <label>Tempat Lahir</label>
+                            <label>{{ __('Born Place') }}</label>
                             <input name="birthplace" type="text" class="form-control" value="{{ $patient->birthplace }}" required>
                         </div>
                         <div class="form-group">
-                            <label>Tanggal Lahir</label>
+                            <label>{{ __('Birthday') }}</label>
                             <input name="birthdate" type="date" class="form-control" value="{{ $patient->birthdate }}" required>
                         </div>
                         <div class="form-group">
-                            <label>Jenis Kelamin</label>
+                            <label>{{ __('Gender') }}</label>
                             <select name="gender" class="form-control" required>
-                                <option value="">-Pilih-</option>
-                                <option value="Laki Laki" {{ ($patient->gender == 'Laki Laki') ? 'selected' : '' }}>Laki Laki</option>
-                                <option value="Perempuan" {{ ($patient->gender == 'Perempuan') ? 'selected' : '' }}>Perempuan</option>
+                                <option value="">{{ __('-Select-') }}</option>
+                                <option value="Male" {{ ( $patient->gender == 'Male' ) ? 'selected' : '' }}>{{ __('Male') }}</option>
+                                <option value="Female" {{ ( $patient->gender == 'Female' ) ? 'selected' : '' }}>{{ __('Female') }}</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Alamat Lengkap</label>
+                            <label>{{ __('Address') }}</label>
                             <textarea name="address" rows="3" class="form-control" required>{{ $patient->address }}</textarea>
                         </div>
                         <div class="form-group">
-                            <label>Telephone</label>
+                            <label>{{ __('Phone') }}</label>
                             <input name="phone" type="tel" class="form-control" value="{{ $patient->phone }}" required>
                         </div>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
+                        <a href="{{ route('patient.index') }}" type="button" class="btn btn-secondary ml-3">{{ __('Back') }}</a>
                     </form>
                 </div>
             </div>
