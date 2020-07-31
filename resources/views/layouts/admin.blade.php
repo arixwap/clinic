@@ -18,19 +18,12 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{{ route('home') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ config('app.name', 'Clinic') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
@@ -66,7 +59,7 @@
         <main class="py-4">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-sm-3">
+                    <div class="col-md-2">
                         <ul class="admin-side-menu">
                             <li><a href="{{ route('home') }}">{{ __('Dashboard') }}</a></li>
                             <li>
@@ -81,13 +74,13 @@
                                 <ul>
                                     <li><a href="{{ route('doctor.index') }}">{{ __('Doctor List') }}</a></li>
                                     <li><a href="{{ route('doctor.create') }}">{{ __('Add Doctor') }}</a></li>
-                                    <li><a href="{{ route('polyclinic.index') }}">{{ __('Polyclinics') }}</a></li>
-                                    <li><a href="{{ route('qualification.index') }}">{{ __('Doctor Qualification') }}</a></li>
+                                    <li><a href="{{ route('qualification.index') }}">{{ __('Qualification') }}</a></li>
                                 </ul>
                             </li>
+                            <li><a href="{{ route('polyclinic.index') }}">{{ __('Polyclinics') }}</a></li>
                         </ul>
                     </div>
-                    <div class="col-sm-9">
+                    <div class="col-md">
                         @yield('content')
                     </div>
                 </div>

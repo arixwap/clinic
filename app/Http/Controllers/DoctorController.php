@@ -58,7 +58,7 @@ class DoctorController extends Controller
          */
         $user->doctor()->create( $request->all() );
 
-        return redirect( route('doctor.index') );
+        return redirect( route('schedule.index', $user->doctor->id) );
     }
 
     /**
@@ -136,5 +136,23 @@ class DoctorController extends Controller
         $doctor->delete();
 
         return redirect( route('doctor.index') );
+    }
+
+    /**
+     * See selected $id doctor schedule list
+     */
+    public function schedule(Request $request, $id)
+    {
+        $data['doctor'] = Doctor::findOrFail($id);
+
+        return view('doctor.schedule', $data);
+    }
+
+    /**
+     * Update doctor schedule
+     */
+    public function updateSchedule(Request $request, $id)
+    {
+        //
     }
 }

@@ -41,7 +41,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <p class="h5 modal-title" id="modal-add-title">{{ __('New Qualification') }}</p>
+                    <p class="h5 modal-title" id="modal-add-title">{{ __('Add Qualification') }}</p>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

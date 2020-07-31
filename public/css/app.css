@@ -15571,5 +15571,29 @@ ul.admin-side-menu ul li > a {
   border-top: none;
 }
 
+.weekday-group {
+  position: relative;
+}
+
+.weekday-group .btn-activated-weekday {
+  opacity: 0.35;
+}
+
+.weekday-group .weekday-toggle {
+  display: none;
+}
+
+.weekday-group.active .btn-activated-weekday {
+  opacity: 1;
+}
+
+.weekday-group.active .weekday-toggle {
+  display: block;
+}
+
+.weekday-group .time-group:nth-child(2) .btn-delete-time {
+  visibility: hidden;
+}
+
 
 /*# sourceMappingURL=app.css.map*/

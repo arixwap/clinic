@@ -31,6 +31,27 @@ Input Jadwal Pasien
 ***
 - Setelah Submit, akan muncul nomor antrian dan tersimpan ke database
 
+Dashboard
+- Tombol Input Jadwal Checkup Baru
+- Daftar Praktek Dokter Hari Ini
+- Daftar Pasien Hari Ini
+- Riwayat Kunjungan 1 Minggu Terakhir / 1 Bulan Terakhir
+
+Menu
+- Dashboard
+- Patient
+  - Checkup List
+  - Patient List : Tambah Tombol Rekam Medis
+  - Add Patient
+- Doctor
+  - Doctor List
+  - Add Doctor
+  - Schedule
+  - Qualification
+- Poliklinik
+- History
+  - Checkup History : Incoming, Past, All
+- Account Setting
 
 User Role
 - Owner / Superadmin
@@ -38,6 +59,7 @@ User Role
 - Admin :
   - CRUD Pasien
   - Buat Jadwal Checkup Pasien
+  - Ubah Jadwal Dokter
 - Dokter
   - Lihat Daftar Checkup yang masuk Hari ini, Jam ini
   - Lihat Daftar Checkup yang akan datang

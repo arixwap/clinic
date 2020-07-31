@@ -6,25 +6,27 @@
             <div class="card">
                 <div class="card-header">{{ __('Doctor List') }}</div>
                 <div class="card-body">
-                    <a href="{{ route('doctor.create') }}" class="btn btn-success mb-3">{{ __('Add Doctor') }}</a>
+                    <a href="{{ route('doctor.create') }}" class="btn btn-success mb-3">{{ __('Add') }}</a>
                     <table class="table">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">{{ __('Name') }}</th>
-                                <th scope="col">{{ __('Gender') }}</th>
-                                <th scope="col">{{ __("Address") }}</th>
+                                <th scope="col">{{ __('Qualification') }}</th>
+                                <th scope="col">{{ __("Polyclinic") }}</th>
+                                <th scope="col"></th>
                                 <th scope="col" class="text-center">{{ __('Action') }}</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach( $doctors as $i => $doctor )
                                 <tr>
-                                    <th scope="row">{{ $i + 1 }}</th>
-                                    <td>{{ $doctor->full_name }}</td>
-                                    <td>{{ __($doctor->gender) }}</td>
-                                    <td>{{ $doctor->address }}</td>
-                                    <td class="text-center">
+                                    <th class="align-middle" scope="row">{{ $i + 1 }}</th>
+                                    <td class="align-middle">{{ $doctor->full_name }}</td>
+                                    <td class="align-middle">{{ __($doctor->qualification) }}</td>
+                                    <td class="align-middle">{{ $doctor->polyclinic }}</td>
+                                    <td class="align-middle"><a href="{{ route('schedule.index', $doctor->id) }}" class="btn btn-primary btn-sm btn-block">{{ __('Schedule') }}</a></td>
+                                    <td class="align-middle text-center">
                                         <a href="{{ route('doctor.edit', $doctor->id) }}" class="btn btn-link text-secondary shadow-none"><i class="fa fa-pencil"></i></a>
                                         <button type="button" class="btn btn-link text-danger shadow-none" data-toggle="modal" data-target="#modal-form-delete" data-name="{{ $doctor->full_name }}" data-url="{{ route('doctor.destroy', $doctor->id) }}"><i class="fa fa-times"></i></button>
                                     </td>

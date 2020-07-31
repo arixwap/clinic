@@ -59,3 +59,30 @@ ul.admin-side-menu {
         }
     }
 }
+
+// Doctor Schedule Style
+.weekday-group {
+    position: relative;
+
+    .btn-activated-weekday {
+        opacity: 0.35;
+    }
+
+    .weekday-toggle {
+        display: none;
+    }
+
+    &.active {
+        .btn-activated-weekday {
+            opacity: 1;
+        }
+
+        .weekday-toggle {
+            display: block;
+        }
+    }
+
+    .time-group:nth-child(2) .btn-delete-time {
+        visibility: hidden;
+    }
+}
