@@ -35,61 +35,61 @@ class DoctorSeeder extends Seeder
         // Create data schedule dengan sync relation user doctor
         $user->doctor->schedule()->createMany([
             [
-                'weekday' => 'Senin',
+                'weekday' => 'mon',
                 'time_start' => '09:00',
                 'time_end' => '11:00',
                 'limit' => '5',
             ],
             [
-                'weekday' => 'Senin',
+                'weekday' => 'mon',
                 'time_start' => '19:00',
                 'time_end' => '21:00',
                 'limit' => '5',
             ],
             [
-                'weekday' => 'Selasa',
+                'weekday' => 'tue',
                 'time_start' => '09:00',
                 'time_end' => '11:00',
                 'limit' => '5',
             ],
             [
-                'weekday' => 'Selasa',
+                'weekday' => 'tue',
                 'time_start' => '19:00',
                 'time_end' => '21:00',
                 'limit' => '5',
             ],
             [
-                'weekday' => 'Rabu',
+                'weekday' => 'wed',
                 'time_start' => '09:00',
                 'time_end' => '11:00',
                 'limit' => '5',
             ],
             [
-                'weekday' => 'Rabu',
+                'weekday' => 'wed',
                 'time_start' => '19:00',
                 'time_end' => '21:00',
                 'limit' => '5',
             ],
             [
-                'weekday' => 'Kamis',
+                'weekday' => 'thu',
                 'time_start' => '09:00',
                 'time_end' => '11:00',
                 'limit' => '5',
             ],
             [
-                'weekday' => 'Kamis',
+                'weekday' => 'thu',
                 'time_start' => '19:00',
                 'time_end' => '21:00',
                 'limit' => '5',
             ],
             [
-                'weekday' => 'Jumat',
+                'weekday' => 'fri',
                 'time_start' => '09:00',
                 'time_end' => '11:00',
                 'limit' => '5',
             ],
             [
-                'weekday' => 'Jumat',
+                'weekday' => 'fri',
                 'time_start' => '19:00',
                 'time_end' => '21:00',
                 'limit' => '5',
@@ -118,31 +118,31 @@ class DoctorSeeder extends Seeder
         ]);
 
         // Create data schedule dengan sync relation user doctor
-        $user->doctor->schedule()->createMany([
-            [
-                'weekday' => 'Senin',
-                'time_start' => '18:00',
-                'time_end' => '21:00',
-                'limit' => '10',
-            ],
-            [
-                'weekday' => 'Selasa',
-                'time_start' => '18:00',
-                'time_end' => '21:00',
-                'limit' => '10',
-            ],
-            [
-                'weekday' => 'Kamis',
-                'time_start' => '18:00',
-                'time_end' => '21:00',
-                'limit' => '10',
-            ],
-            [
-                'weekday' => 'Jumat',
-                'time_start' => '18:00',
-                'time_end' => '21:00',
-                'limit' => '10',
-            ],
-        ]);
+        // $user->doctor->schedule()->createMany([
+        //     [
+        //         'weekday' => 'mo',
+        //         'time_start' => '18:00',
+        //         'time_end' => '21:00',
+        //         'limit' => '10',
+        //     ],
+        //     [
+        //         'weekday' => 'tue',
+        //         'time_start' => '18:00',
+        //         'time_end' => '21:00',
+        //         'limit' => '10',
+        //     ],
+        //     [
+        //         'weekday' => 'thu',
+        //         'time_start' => '18:00',
+        //         'time_end' => '21:00',
+        //         'limit' => '10',
+        //     ],
+        //     [
+        //         'weekday' => 'fri',
+        //         'time_start' => '18:00',
+        //         'time_end' => '21:00',
+        //         'limit' => '10',
+        //     ],
+        // ]);
     }
 }

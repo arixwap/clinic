@@ -25,4 +25,4 @@ mix.sourceMaps(productionSourceMaps, 'source-map');
  * Untuk melakukan Browser Sync
  * Agar tampilan web bisa dilihat melalui Smartphone melalui ip address computer port 3000
  */
-// mix.browserSync('http://clinic.test');
+// mix.browserSync(process.env.APP_URL);

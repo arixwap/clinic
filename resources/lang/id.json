@@ -19,12 +19,12 @@
 
     "Dashboard": "Dashboard",
     "Patient": "Pasien",
-    "Patient List": "Daftar Pasien",
+    "Patient List": "Data Pasien",
     "Add Patient": "Tambah Pasien",
     "Edit Patient": "Edit Pasien",
 
     "Doctor": "Dokter",
-    "Doctor List": "Daftar Dokter",
+    "Doctor List": "Data Dokter",
     "Add Doctor": "Tambah Dokter",
     "Edit Doctor": "Edit Dokter",
     "Main Data": "Data Utama",
@@ -53,11 +53,14 @@
     "Start Time": "Jam Mulai",
     "End Time": "Jam Selesai",
     "Patient Limit": "Batas Pasien",
+    "Add Time": "Tambah Jam",
+    "Off Day": "Jadwal Off",
+    "Calendar Offday": "Kalendar Jadwal Off",
 
     "Polyclinic": "Poliklinik",
     "Polyclinics": "Poliklinik",
     "New Polyclinic": "Poliklinik Baru",
-    "Polyclinic List": "Daftar Poliklinik",
+    "Polyclinic List": "Data Poliklinik",
 
     "Type": "Tipe",
     "Action": "Opsi",

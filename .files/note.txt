@@ -1,16 +1,10 @@
 TASK
-- Input Jadwal Dokter
-- Input Checkup
-- CRUD User
-- Riwayat : Jumlah pasien checkup / minggu / bulan / tahun
-
-Input Jadwal Praktek Dokter
-- Hari Praktek : Checkbox Senin - Minggu
-- Jam Praktek (Di setiap Checkbox) :
-  - Jam Mulai
-  - Jam Selesai
-  - Batas Pasien
-- Tanggal Off Praktek : Input Date
+- Process Update Doctor Schedule
+- Dashboard
+  - Tombol Input Jadwal Checkup Baru
+  - Daftar Praktek Dokter Hari Ini
+  - Daftar Pasien Hari Ini
+  - Riwayat Kunjungan 1 Minggu Terakhir / 1 Bulan Terakhir
 
 Input Jadwal Pasien
 - Radio Button : Pasien Terdaftar, Pasien Baru
@@ -31,11 +25,9 @@ Input Jadwal Pasien
 ***
 - Setelah Submit, akan muncul nomor antrian dan tersimpan ke database
 
-Dashboard
-- Tombol Input Jadwal Checkup Baru
-- Daftar Praktek Dokter Hari Ini
-- Daftar Pasien Hari Ini
-- Riwayat Kunjungan 1 Minggu Terakhir / 1 Bulan Terakhir
+
+- CRUD User
+- Riwayat : Jumlah pasien checkup / minggu / bulan / tahun
 
 Menu
 - Dashboard
@@ -70,6 +62,7 @@ User Role
 
 ---------------------------------------------------------------------------
 IMPROVEMENT
+- TUI Calendar - https://github.com/nhn/tui.calendar
 - Migrate to Vue
 - Customable User Role
 - Customable Multi Language via Admin

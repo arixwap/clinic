@@ -37279,7 +37279,10 @@ module.exports = function(module) {
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // window.Vue = require('vue');
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // --------------------------------------------------------WIP---------------------------------------------
+// require('./tui-calendar');
+// --------------------------------------------------------WIP---------------------------------------------
+// window.Vue = require('vue');
 
 /**
  * The following block of code may be used to automatically register your
