@@ -17,8 +17,8 @@ class CreateSchedulesTable extends Migration
             $table->id();
             $table->foreignId('doctor_id');
             $table->string('weekday', 3);
-            $table->time('time_start', 0);
-            $table->time('time_end', 0);
+            $table->time('time_start', 0)->default('00:00:00');
+            $table->time('time_end', 0)->default('00:00:00');
             $table->tinyInteger('limit')->nullable();
             $table->boolean('off')->default(false);
             $table->timestamps();

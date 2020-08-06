@@ -26,8 +26,8 @@
                                             <div class="col">{{ __('Patient Limit') }}</div>
                                         </div>
                                         @forelse ( $schedule['times'] as $time )
-                                        <div class="time-group row">
-                                            <div class="form-group col-4">
+                                            <div class="time-group row">
+                                                <div class="form-group col-4">
                                                     <input type="hidden" name="id_schedule[{{ $index }}][]" value="{{ $time->id }}">
                                                     <input type="time" name="time_start[{{ $index }}][]" class="form-control" value="{{ $time->time_start }}" autocomplete="off" required>
                                                 </div>
@@ -81,9 +81,9 @@
         // Set inout disabled or enable inside weekday group
         function setInputWeekday() {
             $('.weekday-group').each( function() {
-                $(this).find('.time-group input').prop('disabled', true);
+                $(this).find('.time-group input[type="time"]').prop('required', false);
                 if ( $(this).hasClass('active') ) {
-                    $(this).find('.time-group input').prop('disabled', false);
+                    $(this).find('.time-group input[type="time"]').prop('required', true);
                 }
             })
         }
@@ -113,8 +113,7 @@
         $(document).on('click', '.btn-add-time', function() {
             let group = $(this).closest('.weekday-group');
             let timeInputs = group.find('.time-group').first().clone();
-            timeInputs.find('input[type="hidden"]').val('');
-            timeInputs.find('input[type="time"]').val('');
+            timeInputs.find('input').val('');
             group.find('.time-group').last().after(timeInputs);
         })
 

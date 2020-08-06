@@ -12,11 +12,11 @@ class Schedule extends Model
      * @var array
      */
     protected $fillable = [
-        'week_day',
+        'weekday',
         'time_start',
         'time_end',
         'limit',
-        'closes_date',
+        'off',
     ];
 
     /**

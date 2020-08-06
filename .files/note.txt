@@ -1,5 +1,4 @@
 TASK
-- Process Update Doctor Schedule
 - Dashboard
   - Tombol Input Jadwal Checkup Baru
   - Daftar Praktek Dokter Hari Ini

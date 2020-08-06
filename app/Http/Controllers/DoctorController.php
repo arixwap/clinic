@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\Doctor;
+use App\Schedule;
 use App\Option;
 
 class DoctorController extends Controller
@@ -170,6 +171,63 @@ class DoctorController extends Controller
      */
     public function updateSchedule(Request $request, $id)
     {
-        dd($request->input());
+        $doctor = Doctor::findOrFail($id);
+        $inputIdSchedule = $request->input('id_schedule');
+        $activeWeekdays = $request->input('weekday') ?: array();
+        $inputTimeStart = $request->input('time_start');
+        $inputTimeEnd = $request->input('time_end');
+        $inputLimit = $request->input('limit');
+        $dataSchedules = array();
+
+        // Loop input time_start grouped index by weekday
+        foreach ( $inputTimeStart as $day => $times ) {
+
+            // Loop input time_start inside day group
+            foreach ( $times as $key => $timeStart ) {
+
+                if ( $timeStart ) {
+
+                    if ( ! $inputIdSchedule[$day][$key] ) {
+                        // Create new schedule object if no input ID
+                        $schedule = new Schedule(['weekday' => $day]);
+                    } else {
+                        // Find existing schedule object if input ID is set
+                        $schedule = Schedule::findOrFail($inputIdSchedule[$day][$key]);
+                    }
+
+                    $schedule->time_start = $timeStart;
+                    $schedule->time_end = $inputTimeEnd[$day][$key];
+                    $schedule->limit = $inputLimit[$day][$key];
+
+                    // Set schedule on or off
+                    if ( in_array($day, $activeWeekdays) ) {
+                        $schedule->off = false;
+                    } else {
+                        $schedule->off = true;
+                    }
+
+                    $dataSchedules[] = $schedule; // Push into array data schedule
+
+                }
+
+            }
+
+        }
+
+        // Populate exist ID schedule for exclude from delete
+        $idSchedules = array();
+        foreach ( $inputIdSchedule as $day => $idList ) {
+            $idSchedules = array_filter( array_merge($idSchedules, $idList) );
+        }
+
+        // Delete schedule
+        $schedule = Schedule::where('doctor_id', $id)
+                    ->whereNotIn('id', $idSchedules)
+                    ->delete();
+
+        // Insert & update bulk schedule data
+        $doctor->schedule()->saveMany($dataSchedules);
+
+        return redirect( route('schedule.index', $id) );
     }
 }
