@@ -26,7 +26,8 @@ class CreateCheckupsTable extends Migration
             $table->string('bpjs')->nullable();
             $table->text('description')->nullable();
             $table->text('doctor_note')->nullable();
-            $table->boolean('new_patient');
+            $table->boolean('new_patient')->default(false);
+            $table->boolean('is_done')->default(false)->comment('Is patient already done checkup or not');
             $table->timestamps();
             $table->softDeletes();
         });

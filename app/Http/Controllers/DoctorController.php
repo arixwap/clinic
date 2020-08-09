@@ -198,6 +198,7 @@ class DoctorController extends Controller
                     $schedule->time_start = $timeStart;
                     $schedule->time_end = $inputTimeEnd[$day][$key];
                     $schedule->limit = $inputLimit[$day][$key];
+                    if ( $schedule->limit <= 0 ) $schedule->limit = null;
 
                     // Set schedule on or off
                     if ( in_array($day, $activeWeekdays) ) {

@@ -37,62 +37,52 @@ class DoctorSeeder extends Seeder
             [
                 'weekday' => 'mon',
                 'time_start' => '09:00',
-                'time_end' => '11:00',
-                'limit' => '5',
+                'time_end' => '11:00'
             ],
             [
                 'weekday' => 'mon',
                 'time_start' => '19:00',
-                'time_end' => '21:00',
-                'limit' => '5',
+                'time_end' => '21:00'
             ],
             [
                 'weekday' => 'tue',
                 'time_start' => '09:00',
-                'time_end' => '11:00',
-                'limit' => '5',
+                'time_end' => '11:00'
             ],
             [
                 'weekday' => 'tue',
                 'time_start' => '19:00',
-                'time_end' => '21:00',
-                'limit' => '5',
+                'time_end' => '21:00'
             ],
             [
                 'weekday' => 'wed',
                 'time_start' => '09:00',
-                'time_end' => '11:00',
-                'limit' => '5',
+                'time_end' => '11:00'
             ],
             [
                 'weekday' => 'wed',
                 'time_start' => '19:00',
-                'time_end' => '21:00',
-                'limit' => '5',
+                'time_end' => '21:00'
             ],
             [
                 'weekday' => 'thu',
                 'time_start' => '09:00',
-                'time_end' => '11:00',
-                'limit' => '5',
+                'time_end' => '11:00'
             ],
             [
                 'weekday' => 'thu',
                 'time_start' => '19:00',
-                'time_end' => '21:00',
-                'limit' => '5',
+                'time_end' => '21:00'
             ],
             [
                 'weekday' => 'fri',
                 'time_start' => '09:00',
-                'time_end' => '11:00',
-                'limit' => '5',
+                'time_end' => '11:00'
             ],
             [
                 'weekday' => 'fri',
                 'time_start' => '19:00',
-                'time_end' => '21:00',
-                'limit' => '5',
+                'time_end' => '21:00'
             ],
         ]);
 
@@ -118,31 +108,19 @@ class DoctorSeeder extends Seeder
         ]);
 
         // Create data schedule dengan sync relation user doctor
-        // $user->doctor->schedule()->createMany([
-        //     [
-        //         'weekday' => 'mo',
-        //         'time_start' => '18:00',
-        //         'time_end' => '21:00',
-        //         'limit' => '10',
-        //     ],
-        //     [
-        //         'weekday' => 'tue',
-        //         'time_start' => '18:00',
-        //         'time_end' => '21:00',
-        //         'limit' => '10',
-        //     ],
-        //     [
-        //         'weekday' => 'thu',
-        //         'time_start' => '18:00',
-        //         'time_end' => '21:00',
-        //         'limit' => '10',
-        //     ],
-        //     [
-        //         'weekday' => 'fri',
-        //         'time_start' => '18:00',
-        //         'time_end' => '21:00',
-        //         'limit' => '10',
-        //     ],
-        // ]);
+        $user->doctor->schedule()->createMany([
+            [
+                'weekday' => 'fri',
+                'time_start' => '18:00',
+                'time_end' => '21:00',
+                'limit' => '2'
+            ],
+            [
+                'weekday' => 'sat',
+                'time_start' => '18:00',
+                'time_end' => '21:00',
+                'limit' => '2'
+            ]
+        ]);
     }
 }

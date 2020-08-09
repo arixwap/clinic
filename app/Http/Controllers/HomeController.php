@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Checkup;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,24 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('dashboard.index');
+    }
+
+    /**
+     * Show checkup form
+     */
+    public function checkup()
+    {
+        return view('dashboard.checkup');
+    }
+
+    /**
+     * Store checkup data
+     */
+    public function storeCheckup(Request $request)
+    {
+        dd($request->input());
+
+        return;
     }
 }

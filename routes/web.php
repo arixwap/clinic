@@ -16,24 +16,29 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes();
-// ID url
-Route::get('masuk', 'Auth\LoginController@showLoginForm')->name('login');
-Route::post('masuk', 'Auth\LoginController@login');
-Route::get('daftar', 'Auth\RegisterController@showRegistrationForm')->name('register');
-Route::post('daftar', 'Auth\RegisterController@register');
-Route::post('keluar', 'Auth\LoginController@logout')->name('logout');
-
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('home', function() {
     return redirect('/');
 });
 
+Auth::routes([
+    'register' => false, // Remove route register from public
+    'verify' => false,
+]);
+// ID url
+Route::get('masuk', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('masuk', 'Auth\LoginController@login');
+Route::post('keluar', 'Auth\LoginController@logout')->name('logout');
+
+
 /**
  * Semua route yang didaftarkan dibawah ini hanya bisa diakses jika User login
  * Referensi : https://laravel.com/docs/routing#route-group-middleware
  */
-Route::middleware('auth')->group(function () {
+Route::middleware('auth')->group( function() {
+
+    route::get('checkup', 'HomeController@checkup')->name('checkup.create');
+    route::post('checkup', 'HomeController@storeCheckup')->name('checkup.store');
 
     Route::resource('patient', 'PatientController');
     // ID url

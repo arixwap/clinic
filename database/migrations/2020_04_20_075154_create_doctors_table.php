@@ -16,8 +16,8 @@ class CreateDoctorsTable extends Migration
         Schema::create('doctors', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');                   // Foreign key ke tabel Users
-            $table->string('full_name')->nullable();
-            $table->string('gender')->nullable();
+            $table->string('full_name');
+            $table->string('gender');
             $table->string('birthplace')->nullable();
             $table->date('birthdate')->nullable();
             $table->text('address')->nullable();

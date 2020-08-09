@@ -1,10 +1,6 @@
 TASK
-- Dashboard
-  - Tombol Input Jadwal Checkup Baru
-  - Daftar Praktek Dokter Hari Ini
-  - Daftar Pasien Hari Ini
-  - Riwayat Kunjungan 1 Minggu Terakhir / 1 Bulan Terakhir
-
+- Form Checkup
+//--------
 Input Jadwal Pasien
 - Radio Button : Pasien Terdaftar, Pasien Baru
   - Jika Pilih - Pasien Terdaftar
@@ -23,27 +19,27 @@ Input Jadwal Pasien
 - Submit
 ***
 - Setelah Submit, akan muncul nomor antrian dan tersimpan ke database
+//--------
 
 
-- CRUD User
+- HTML Dashboard
+  - Daftar Pasien Hari Ini
+  - Tombol Input Jadwal Checkup Baru
+  - Daftar Praktek Dokter Hari Ini
+  - Riwayat Kunjungan 1 Minggu Terakhir / 1 Bulan Terakhir
+
+- Patient checkup
+  - Form
+  - Incoming Checkup List
+  - Past Checkup List
+  - All Checkup
+  - Patient Rekam Medis
+- CRUD User Admin
+- Rekam Medis Patient
 - Riwayat : Jumlah pasien checkup / minggu / bulan / tahun
 
-Menu
-- Dashboard
-- Patient
-  - Checkup List
-  - Patient List : Tambah Tombol Rekam Medis
-  - Add Patient
-- Doctor
-  - Doctor List
-  - Add Doctor
-  - Schedule
-  - Qualification
-- Poliklinik
-- History
-  - Checkup History : Incoming, Past, All
-- Account Setting
 
+//--------
 User Role
 - Owner / Superadmin
   - Bisa Semua
@@ -57,6 +53,7 @@ User Role
   - Lihat Riwayat Checkup
   - Atur Jadwal Praktek
   - Ubah Data Diri Dokter
+//--------
 
 
 ---------------------------------------------------------------------------

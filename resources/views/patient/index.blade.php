@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-header">Daftar Pasien</div>
                 <div class="card-body">
-                    <a href="{{ route('patient.create') }}" class="btn btn-success mb-3">{{ __('Add') }}</a>
+                    <a href="{{ route('patient.create') }}" class="btn btn-primary mb-3">{{ __('Add') }}</a>
                     <table class="table">
                         <thead>
                             <tr>

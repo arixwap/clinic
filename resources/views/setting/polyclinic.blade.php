@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-header">{{ __("Polyclinic List") }}</div>
                 <div class="card-body">
-                    <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#modal-form-add">{{ __('Add') }}</button>
+                    <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modal-form-add">{{ __('Add') }}</button>
                     <table class="table">
                         <thead>
                             <tr>
