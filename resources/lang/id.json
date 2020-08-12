@@ -22,6 +22,7 @@
     "Patient List": "Data Pasien",
     "Add Patient": "Tambah Pasien",
     "Edit Patient": "Edit Pasien",
+    "Search Patient": "Cari Pasien",
 
     "Doctor": "Dokter",
     "Doctor List": "Data Dokter",
@@ -57,6 +58,9 @@
     "Off Day": "Jadwal Off",
     "Calendar Offday": "Kalendar Jadwal Off",
 
+    "Checkup": "Checkup",
+    "New Checkup": "Checkup Baru",
+
     "Polyclinic": "Poliklinik",
     "Polyclinics": "Poliklinik",
     "New Polyclinic": "Poliklinik Baru",
@@ -70,6 +74,8 @@
     "Gender": "Jenis Kelamin",
     "Male": "Laki-laki",
     "Female": "Perempuan",
+    "M_gender": "L",
+    "F_gender": "P",
     "Address": "Alamat",
     "Born Place": "Tempat Lahir",
     "Birthday": "Tanggal Lahir",

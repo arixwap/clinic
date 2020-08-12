@@ -40,13 +40,14 @@ Route::middleware('auth')->group( function() {
     route::get('checkup', 'HomeController@checkup')->name('checkup.create');
     route::post('checkup', 'HomeController@storeCheckup')->name('checkup.store');
 
-    Route::resource('patient', 'PatientController');
+    Route::resource('patient', 'PatientController')->except(['show']);
+    Route::get('patient/search-ajax', 'PatientController@searchAjax')->name('patient.search-ajax');
     // ID url
     Route::get('pasien', 'PatientController@index')->name('patient.index');
     Route::get('pasien/baru', 'PatientController@create')->name('patient.create');
     Route::get('pasien/ubah/{id}', 'PatientController@edit')->name('patient.edit');
 
-    Route::resource('doctor', 'DoctorController');
+    Route::resource('doctor', 'DoctorController')->except(['show']);
     // ID url
     Route::get('dokter', 'DoctorController@index')->name('doctor.index');
     Route::get('dokter/baru', 'DoctorController@create')->name('doctor.create');
@@ -58,11 +59,11 @@ Route::middleware('auth')->group( function() {
     Route::get('jadwal/dokter/{id}', 'DoctorController@schedule')->name('schedule.index');
     Route::post('jadwal/dokter/{id}', 'DoctorController@updateSchedule')->name('schedule.edit');
 
-    Route::resource('polyclinic', 'PolyclinicController');
+    Route::resource('polyclinic', 'PolyclinicController')->except(['create', 'show', 'edit']);
     // ID url
     Route::get('poliklinik', 'PolyclinicController@index')->name('polyclinic.index');
 
-    Route::resource('qualification', 'QualificationController');
+    Route::resource('qualification', 'QualificationController')->except(['create', 'show', 'edit']);
     // ID url
     Route::get('kualifikasi-dokter', 'QualificationController@index')->name('qualification.index');
 });
