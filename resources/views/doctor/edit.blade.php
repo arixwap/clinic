@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-header">{{ __('Edit Doctor') }}</div>
                 <div class="card-body">
-                    <form action="{{ route('doctor.update', $doctor->id) }}" method="post">
+                    <form action="{{ route('doctor.update', $doctor->id) }}" method="post" autocomplete="off">
                         {{-- CSRF and Method Form Laravel --}}
                         {{ csrf_field() }}
                         {{ method_field('PATCH') }}

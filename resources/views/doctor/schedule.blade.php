@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-header">{{ __('Set Schedule') }}</div>
                 <div class="card-body">
-                    <form action="{{ route('schedule.edit', $doctor->id) }}" method="post">
+                    <form action="{{ route('schedule.edit', $doctor->id) }}" method="post" autocomplete="off">
                         {{-- CSRF and Method Form Laravel --}}
                         {{ csrf_field() }}
                         {{ method_field('POST') }}

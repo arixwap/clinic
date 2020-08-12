@@ -49,7 +49,7 @@
                     <p class="h5 modal-title text-center" id="modal-delete-title">{{ __('Delete') }} <span class="name"></span></p>
                 </div>
                 <div class="modal-body">
-                    <form action="#" method="POST">
+                    <form action="#" method="POST" autocomplete="off">
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
                         <div class="row">

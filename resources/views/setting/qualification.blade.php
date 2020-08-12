@@ -47,7 +47,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('qualification.store') }}" method="post">
+                    <form action="{{ route('qualification.store') }}" method="post" autocomplete="off">
                         {{-- CSRF and Method Form Laravel --}}
                         {{ csrf_field() }}
                         {{ method_field('POST') }}
@@ -75,7 +75,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="#" method="post">
+                    <form action="#" method="post" autocomplete="off">
                         {{-- CSRF and Method Form Laravel --}}
                         {{ csrf_field() }}
                         {{ method_field('PATCH') }}
@@ -100,7 +100,7 @@
                     <p class="h5 modal-title text-center" id="modal-delete-title">{{ __('Delete') }} <span class="name"></span></p>
                 </div>
                 <div class="modal-body">
-                    <form action="#" method="POST">
+                    <form action="#" method="POST" autocomplete="off">
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
                         <div class="row">

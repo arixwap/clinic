@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-header">{{ __('Add Patient') }}</div>
                 <div class="card-body">
-                    <form action="{{ route('patient.store') }}" method="post">
+                    <form action="{{ route('patient.store') }}" method="post" autocomplete="off">
                         {{-- CSRF and Method Form Laravel --}}
                         {{ csrf_field() }}
                         {{ method_field('POST') }}
