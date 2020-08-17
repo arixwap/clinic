@@ -6,13 +6,16 @@
             <div class="card">
                 <div class="card-header">{{ __('Set Schedule') }}</div>
                 <div class="card-body">
+                    <p class="h4 font-weight-bold">{{ $doctor->full_name }}</p>
+                    <p class="h5 font-weight-bold">{{ $doctor->polyclinic }}</p>
+                    <br>
                     <form action="{{ route('schedule.edit', $doctor->id) }}" method="post" autocomplete="off">
                         {{-- CSRF and Method Form Laravel --}}
                         {{ csrf_field() }}
                         {{ method_field('POST') }}
                         {{-- End of - CSRF Method Form Laravel --}}
                         <div class="row">
-                            @foreach ( $schedules as $index => $schedule )
+                            @foreach ( $schedules['weekdays'] as $index => $schedule )
                                 <div class="weekday-group col-md-6 mb-3 @unless($schedule['off']) active @endunless">
                                     <div class="btn-group-toggle mb-3" data-toggle="buttons">
                                         <label class="btn-activated-weekday btn btn-outline-primary btn-block shadow-none">

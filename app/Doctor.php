@@ -55,4 +55,34 @@ class Doctor extends Model
     {
         return $this->hasMany('App\Schedule');
     }
+
+    /**
+     * Return doctor schedule in weekday format
+     */
+    public function formatSchedules()
+    {
+        $offdates = array(); // ---------------------------------------WIP
+
+        // Build schedule index by weekday
+        $weekdays = [
+            'mon' => ['off' => true, 'day' => __('Monday'), 'times' => array()],
+            'tue' => ['off' => true, 'day' => __('Tuesday'), 'times' => array()],
+            'wed' => ['off' => true, 'day' => __('Wednesday'), 'times' => array()],
+            'thu' => ['off' => true, 'day' => __('Thursday'), 'times' => array()],
+            'fri' => ['off' => true, 'day' => __('Friday'), 'times' => array()],
+            'sat' => ['off' => true, 'day' => __('Saturday'), 'times' => array()],
+            'sun' => ['off' => true, 'day' => __('Sunday'), 'times' => array()]
+        ];
+
+        // Push data into weekday array
+        foreach ( $this->schedule as $schedule ) {
+            $weekdays[$schedule->weekday]['off'] = $schedule->off;
+            $weekdays[$schedule->weekday]['times'][] = $schedule;
+        }
+
+        return [
+            'weekdays' => $weekdays,
+            'offdates' => $offdates
+        ];
+    }
 }

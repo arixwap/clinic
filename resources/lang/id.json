@@ -18,11 +18,17 @@
     "Send Password Reset Link": "Kirim Link Reset Password",
 
     "Dashboard": "Dashboard",
+    "General": "Umum",
+    "BPJS": "BPJS",
     "Patient": "Pasien",
     "Patient List": "Data Pasien",
     "Add Patient": "Tambah Pasien",
     "Edit Patient": "Edit Pasien",
     "Search Patient": "Cari Pasien",
+    "New Patient": "Pasien Baru",
+    "Patient not found": "Pasien tidak ditemukan",
+    "Input BPJS number": "Masukan nomor BPJS",
+    "Complaints": "Keluhan",
 
     "Doctor": "Dokter",
     "Doctor List": "Data Dokter",
@@ -40,6 +46,8 @@
     "Doctor Qualification": "Kualifikasi Dokter",
     "Doctor Qualification List": "Daftar Kualifikasi Dokter",
     "Doctor STR": "Nomor STR Dokter (Surat Tanda Registrasi)",
+    "Select Doctor": "Pilih Dokter",
+    "Doctor not available": "Dokter tidak tersedia",
 
     "Sunday": "Minggu",
     "Monday": "Senin",
@@ -57,14 +65,19 @@
     "Add Time": "Tambah Jam",
     "Off Day": "Jadwal Off",
     "Calendar Offday": "Kalendar Jadwal Off",
+    "Select Date": "Pilih Tanggal",
+    "Select Time": "Pilih Jam",
 
     "Checkup": "Checkup",
     "New Checkup": "Checkup Baru",
+    "Checkup Date": "Tanggal Checkup",
+    "Checkup Time": "Jam Checkup",
 
     "Polyclinic": "Poliklinik",
     "Polyclinics": "Poliklinik",
     "New Polyclinic": "Poliklinik Baru",
     "Polyclinic List": "Data Poliklinik",
+    "Select Polyclinic": "Pilih Poliklinik",
 
     "Type": "Tipe",
     "Action": "Opsi",

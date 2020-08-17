@@ -123,40 +123,4 @@ class PatientController extends Controller
         // Redirect ke halaman index patient
         return redirect( route('patient.index') );
     }
-
-    /**
-     * Ajax search patient data
-     * Return in JSON format
-     */
-    public function searchAjax(Request $request)
-    {
-        if ( $search = $request->input("term") ) {
-
-            $patients = Patient::where("full_name", "LIKE", "%$search%")
-                                ->orWhere("birthplace", "LIKE", "%$search%")
-                                ->orWhere("address", "LIKE", "%$search%")
-                                ->orWhere("phone", "LIKE", "%$search%")
-                                ->get();
-
-            $data = array();
-            $gender = ['Male' => __('M_gender'), 'Female' => __('F_gender')];
-            foreach ( $patients as $patient ) {
-                $label = sprintf("%s (%s) %sth - %s",
-                            $patient->full_name,
-                            $gender[$patient->gender],
-                            intval(date('Y')) - intval(date('Y', strtotime($patient->birthdate))),
-                            $patient->address
-                        );
-                $data[] = [
-                    'id' => $patient->id,
-                    'value' => $label,
-                    'label' => $label
-                ];
-            }
-
-            return $data;
-        }
-
-        return response()->json(['error' => 'Not Found'], 404);
-    }
 }

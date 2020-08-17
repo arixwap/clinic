@@ -145,23 +145,7 @@ class DoctorController extends Controller
     public function schedule(Request $request, $id)
     {
         $data['doctor'] = Doctor::findOrFail($id);
-
-        // Build schedule data
-        $data['schedules'] = array(
-            'mon' => array('off' => true, 'day' => __('Monday'), 'times' => array()),
-            'tue' => array('off' => true, 'day' => __('Tuesday'), 'times' => array()),
-            'wed' => array('off' => true, 'day' => __('Wednesday'), 'times' => array()),
-            'thu' => array('off' => true, 'day' => __('Thursday'), 'times' => array()),
-            'fri' => array('off' => true, 'day' => __('Friday'), 'times' => array()),
-            'sat' => array('off' => true, 'day' => __('Saturday'), 'times' => array()),
-            'sun' => array('off' => true, 'day' => __('Sunday'), 'times' => array())
-        );
-
-        // Push data into weekday array
-        foreach ( $data['doctor']->schedule as $schedule ) {
-            $data['schedules'][$schedule->weekday]['off'] = $schedule->off;
-            $data['schedules'][$schedule->weekday]['times'][] = $schedule;
-        }
+        $data['schedules'] = $data['doctor']->formatSchedules();
 
         return view('doctor.schedule', $data);
     }

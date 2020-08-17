@@ -37,11 +37,12 @@ Route::post('keluar', 'Auth\LoginController@logout')->name('logout');
  */
 Route::middleware('auth')->group( function() {
 
-    route::get('checkup', 'HomeController@checkup')->name('checkup.create');
-    route::post('checkup', 'HomeController@storeCheckup')->name('checkup.store');
+    Route::get('ajax', 'AjaxController@index')->name('ajax');
+
+    Route::get('checkup', 'HomeController@checkup')->name('checkup.create');
+    Route::post('checkup', 'HomeController@storeCheckup')->name('checkup.store');
 
     Route::resource('patient', 'PatientController')->except(['show']);
-    Route::get('patient/search-ajax', 'PatientController@searchAjax')->name('patient.search-ajax');
     // ID url
     Route::get('pasien', 'PatientController@index')->name('patient.index');
     Route::get('pasien/baru', 'PatientController@create')->name('patient.create');

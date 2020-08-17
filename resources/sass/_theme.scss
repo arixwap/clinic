@@ -11,11 +11,42 @@
 * agar file scss bisa langsung dicompile
 **/
 
+html {
+    scroll-behavior: smooth;
+
+    // Scroll Bar
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: rgba($dark, 0.5);
+    }
+
+    .scrollbar-invert {
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: $white;
+        }
+    }
+}
+
 body {
     background-color: $body-bg; // variabel sass dari file _variables.scss
 }
 
-// Halaman Admin Menu Sidebar
+
+/**
+ * Admin Menu Side Bar
+ * -------------------------------------------------------------------------------
+*/
 ul.admin-side-menu {
     display: flex;
     flex-direction: column;
@@ -60,7 +91,178 @@ ul.admin-side-menu {
     }
 }
 
-// Doctor Schedule Style
+
+/**
+ * Form Group Disabled
+ * -------------------------------------------------------------------------------
+*/
+.form-group.disabled {
+    opacity: 0.35;
+
+    input,
+    textarea,
+    select {
+        pointer-events: none;
+    }
+}
+
+
+/**
+ * Custom Switch - Input Checkbox
+ * -------------------------------------------------------------------------------
+*/
+.custom-switch {
+    .custom-control-label {
+        cursor: pointer;
+    }
+}
+
+// Switch Checkbox Large
+.custom-switch-lg {
+    @extend .custom-switch;
+    $size: 1.5;
+    padding-left: calc(2.25rem * #{$size});
+
+    .custom-control-label {
+        max-width: fit-content;
+        min-height: calc(1.44rem * #{$size});
+        display: flex;
+        align-items: center;
+
+        &::before {
+            top: calc(0.22rem * #{$size});
+            left: calc(-2.25rem * #{$size});
+            width: calc(1.75rem * #{$size});
+            height: calc(1rem * #{$size});
+            border-radius: calc(0.5rem * #{$size});
+        }
+
+        &::after {
+            top: calc((0.22rem * #{$size}) + 2px);
+            left: calc((-2.25rem * #{$size}) + 2px);
+            width: calc((1rem * #{$size}) - 4px);
+            height: calc((1rem * #{$size}) - 4px);
+            border-radius: calc(0.5rem * #{$size});
+        }
+    }
+
+    .custom-control-input:checked~.custom-control-label::after {
+        transform: translateX(calc(0.75rem * #{$size}));
+    }
+}
+
+
+/**
+ * Customize Datepicker Style
+ * -------------------------------------------------------------------------------
+*/
+.ui-datepicker {
+    td {
+        padding: 2px;
+    }
+
+    thead {
+        color: $primary;
+    }
+
+    .ui-widget-header {
+        background: $primary;
+        color: $white;
+
+        .ui-datepicker-prev,
+        .ui-datepicker-next {
+            .ui-icon {
+                display: none;
+            }
+
+            &::before {
+                content: '';
+                cursor: pointer;
+                display: block;
+                width: 10px;
+                height: 10px;
+                border-left: 2px solid $white;
+                border-top: 2px solid $white;
+                position: absolute;
+                top: 50%;
+            }
+        }
+
+        .ui-datepicker-prev::before {
+            left: 10px;
+            transform: translateY(-50%) rotate(-45deg);
+        }
+
+        .ui-datepicker-next::before {
+            right: 10px;
+            transform: translateY(-50%) rotate(135deg);
+        }
+
+        select.ui-datepicker-year,
+        select.ui-datepicker-month {
+            background: $white;
+            border-color: $white;
+            color: $primary;
+            margin: 0 2px;
+
+            &:focus {
+                outline: none;
+            }
+
+            option {
+                background: $white;
+                color: $dark;
+            }
+        }
+
+        .ui-state-hover,
+        .ui-state-focus {
+            background: none;
+            border: none;
+        }
+
+        .ui-datepicker-prev-hover {
+            top: 2px;
+            left: 2px;
+        }
+
+        .ui-datepicker-next-hover {
+            top: 2px;
+            right: 2px;
+        }
+    }
+
+    .ui-state-default {
+        background: transparent;
+        color: $primary;
+        border-color: $primary;
+        text-align: center;
+
+        &.ui-state-active,
+        &.ui-state-hover {
+            background: $primary;
+            border-color: $primary;
+            color: $white;
+        }
+    }
+
+    .ui-state-highlight {
+        background: $secondary;
+        border-color: $secondary;
+        color: $white;
+    }
+
+    .ui-state-disabled {
+        opacity: 0.25;
+    }
+}
+
+
+
+/**
+ * Doctor Schedule Style
+ * -------------------------------------------------------------------------------
+*/
 .weekday-group {
     position: relative;
 

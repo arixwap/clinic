@@ -26,11 +26,17 @@ $purple: #9561e2;
 $pink: #f66d9b;
 $red: #e3342f;
 $orange: #f6993f;
-$yellow: #ffed4a;
+$yellow: #fde26c;
 $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
-$primary: #03b680;
+
+// Overide Bootstrap Colors
+$primary: #529771;
+$info: $blue;
+$success: $green;
+$warning: $yellow;
+$danger: $red;
 
 // Bootstrap Colors Map
 $theme-colors: ( //

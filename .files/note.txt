@@ -1,5 +1,6 @@
 TASK
-- Form Checkup
+- Form Checkup : Store Database
+
 //--------
 Input Jadwal Pasien
 - Radio Button : Pasien Terdaftar, Pasien Baru
@@ -58,6 +59,7 @@ User Role
 
 ---------------------------------------------------------------------------
 IMPROVEMENT
+- Form Checkup Patient - Add modal doctor schedule
 - TUI Calendar - https://github.com/nhn/tui.calendar
 - Migrate to Vue
 - Customable User Role

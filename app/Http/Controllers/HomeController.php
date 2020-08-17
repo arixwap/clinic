@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Checkup;
+use App\Doctor;
+use App\Option;
 
 class HomeController extends Controller
 {
@@ -32,7 +34,10 @@ class HomeController extends Controller
      */
     public function checkup()
     {
-        return view('dashboard.checkup');
+        $data['polyclinics'] = Option::where('name', 'polyclinic')->get();
+        $data['doctors'] = Doctor::all();
+
+        return view('dashboard.checkup', $data);
     }
 
     /**
