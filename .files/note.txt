@@ -1,43 +1,22 @@
 TASK
-- Form Checkup : Store Database
-
-//--------
-Input Jadwal Pasien
-- Radio Button : Pasien Terdaftar, Pasien Baru
-  - Jika Pilih - Pasien Terdaftar
-    - Muncul Input Search dengan sistem autofill
-    - Text yang muncul : Nama Pasien (L/P) 18th - Alamat
-  - Jika Pilih - Pasien Baru
-    - Muncul Form yang sama seperti Input Pasien Baru
-- Switch Button BPJS : Default Off
-  - Jika true: Muncul Input Nomor BPJS
-- Input Textarea Keluhan
-- Pilih Poliklinik : Input Select
-- Pilih Dokter : Input Select List Dokter sesuai Poliklinik
-  - Text yang muncul : Nama Dokter - Kualifikasi
-- Pilih Tanggal Cek : Default Hari Ini. Sesuai jadwal dokter yang dipilih
-- Pilih Jam Praktek : Sesuai jadwal dokter yang dipilih
-- Submit
-***
-- Setelah Submit, akan muncul nomor antrian dan tersimpan ke database
-//--------
-
+- Checkup List (Submenu Patient)
+  - Incoming Checkup
+  - Past Checkup
+  - All Checkup
+  - Patient Medical Record (Rekam Medis)
 
 - HTML Dashboard
-  - Daftar Pasien Hari Ini
-  - Tombol Input Jadwal Checkup Baru
-  - Daftar Praktek Dokter Hari Ini
-  - Riwayat Kunjungan 1 Minggu Terakhir / 1 Bulan Terakhir
+  - Incoming Checkup Today (Limit 10)
+  - Doctor Schedule Today
+  - Graphic: Patient Checkup Last Week / Last Month
 
-- Patient checkup
-  - Form
-  - Incoming Checkup List
-  - Past Checkup List
-  - All Checkup
-  - Patient Rekam Medis
 - CRUD User Admin
 - Rekam Medis Patient
 - Riwayat : Jumlah pasien checkup / minggu / bulan / tahun
+- Dashboard - Popup Weekdays All Doctor Schedule
+- Form Checkup Patient
+  - Popup information doctor schedule
+  - Alert on Limit Patient reach
 
 
 //--------
@@ -58,8 +37,7 @@ User Role
 
 
 ---------------------------------------------------------------------------
-IMPROVEMENT
-- Form Checkup Patient - Add modal doctor schedule
+FUTURE IMPROVEMENT
 - TUI Calendar - https://github.com/nhn/tui.calendar
 - Migrate to Vue
 - Customable User Role

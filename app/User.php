@@ -39,19 +39,19 @@ class User extends Authenticatable
     ];
 
     /**
-     * Relationship 1 to 1 - tabel `users` ke tabel `doctors`
+     * Relationship to Doctor - 1 to 1
      */
     public function doctor()
     {
-        /**
-         * hasOne digunakan jika ada relation tabel 1 to 1, dimana tabel ini merupakan sumber dari relation
-         * Misalnya :
-         * tabel User boleh tidak memiliki data di Tabel Doctor
-         *
-         * Laravel otomatis mengetahui kolom 'user_id' di tabel Doctor merupakan foreign key dari tabel ini
-         * Itulah sebabnya mengapa penamaan Model, Tabel dan Kolom tabel harus menggunakan bahasa inggris
-         */
-        return $this->hasOne('App\Doctor'); // Pemanggilan file dari directory / folder
+        return $this->hasOne('App\Doctor');
+    }
+
+    /**
+     * Relationship to Checkup - 1 to many
+     */
+    public function checkup()
+    {
+        return $this->hasMany('App\Checkup');
     }
 
     /**

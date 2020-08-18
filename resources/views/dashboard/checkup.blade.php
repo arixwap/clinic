@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-header">{{ __('New Checkup') }}</div>
                 <div class="card-body">
-                    <form action="{{ route('checkup.store') }}" method="post" autocomplete="off">
+                    <form action="{{ route('checkup.store') }}" method="post" class="form-checkup" autocomplete="off">
                         {{-- CSRF and Method Form Laravel --}}
                         {{ csrf_field() }}
                         {{ method_field('POST') }}
@@ -22,14 +22,14 @@
                             </div>
                         </div>
                         <div class="form-group bpjs-form" style="display: none">
-                            <input type="text" class="form-control" placeholder="{{ __('Input BPJS number') }}" required>
+                            <input name="bpjs" class="form-control" placeholder="{{ __('Input BPJS number') }}" required disabled>
                         </div>
 
                         <hr class="my-4">
 
                         <div class="form-group">
                             <div class="custom-control custom-switch-lg">
-                                <input type="checkbox" name="new_patient" class="custom-control-input" id="checkbox-new-patient">
+                                <input type="checkbox" name="new_patient" value="1" class="custom-control-input" id="checkbox-new-patient">
                                 <label class="custom-control-label" for="checkbox-new-patient">{{ __('New Patient') }}</label>
                             </div>
                         </div>
@@ -37,18 +37,18 @@
                         <div class="search-patient-form form-group">
                             <input type="text" class="form-control search-patient" placeholder="{{ __('Search Patient') }}" required>
                             <small class="alert-input text-danger" style="display: none">{{ __('Patient not found') }}</small>
-                            <input name="patient_id" type="hidden">
+                            <input name="patient_id" type="hidden" required>
                         </div>
 
                         <div class="new-patient-form" style="display: none">
                             <div class="form-group">
                                 <label>{{ __('Full Name') }}</label>
-                                <input name="full_name" type="text" class="form-control" required>
+                                <input name="full_name" type="text" class="form-control" required disabled>
                             </div>
                             <div class="row">
                                 <div class="col-md-4 form-group">
                                     <label>{{ __('Gender') }}</label>
-                                    <select name="gender" class="form-control" required>
+                                    <select name="gender" class="form-control" required disabled>
                                         <option value="">{{ __('-Select-') }}</option>
                                         <option value="Male">{{ __('Male') }}</option>
                                         <option value="Female">{{ __('Female') }}</option>
@@ -56,20 +56,20 @@
                                 </div>
                                 <div class="col-md-4 form-group">
                                     <label>{{ __('Born Place') }}</label>
-                                    <input name="birthplace" type="text" class="form-control" required>
+                                    <input name="birthplace" type="text" class="form-control" required disabled>
                                 </div>
                                 <div class="col-md-4 form-group">
                                     <label>{{ __('Birthday') }}</label>
-                                    <input name="birthdate" class="form-control datepicker" data-alt-format="d M yy" data-max-date="0" data-change-month="true" data-change-year="true" required>
+                                    <input name="birthdate" class="form-control datepicker" data-alt-format="d M yy" data-max-date="0" data-change-month="true" data-change-year="true" required disabled>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label>{{ __('Address') }}</label>
-                                <textarea name="address" rows="3" class="form-control" required></textarea>
+                                <textarea name="address" rows="3" class="form-control" required disabled></textarea>
                             </div>
                             <div class="form-group">
                                 <label>{{ __('Phone') }}</label>
-                                <input name="phone" type="tel" class="form-control" required>
+                                <input name="phone" type="tel" class="form-control" required disabled>
                             </div>
                         </div>
 
@@ -125,12 +125,22 @@
 @push('footer-after-script')
     <script>
 
+        // Prevent submit form on non new patient and empty input patient_id
+        $('form.form-checkup').on('submit', function(event) {
+            let isNewPatient = $('#checkbox-new-patient').prop('checked');
+            let patientId = $('input[name="patient_id"]').val();
+
+            if ( ! isNewPatient && ! patientId ) event.preventDefault();
+        })
+
         // Toggle patient type
         $('input[name="patient_type"]').change(function(){
             if ( $(this).val() == 'bpjs' ) {
                 $('.bpjs-form').show();
+                $('.bpjs-form').find('input, select, textarea').prop('disabled', false);
             } else {
                 $('.bpjs-form').hide();
+                $('.bpjs-form').find('input, select, textarea').prop('disabled', true);
             }
         })
 
@@ -138,10 +148,14 @@
         $('input[name="new_patient"]').change(function(){
             if ( $(this).prop('checked') ) {
                 $('.new-patient-form').show();
+                $('.new-patient-form').find('input, select, textarea').prop('disabled', false);
                 $('.search-patient-form').hide();
+                $('.search-patient-form').find('input, select, textarea').prop('disabled', true);
             } else {
                 $('.new-patient-form').hide();
+                $('.new-patient-form').find('input, select, textarea').prop('disabled', true);
                 $('.search-patient-form').show();
+                $('.search-patient-form').find('input, select, textarea').prop('disabled', false);
             }
         })
 
@@ -154,6 +168,7 @@
                     $(this).parent().find('.alert-input').hide();
                 } else {
                     $(this).parent().find('.alert-input').show();
+                    $('input[name="patient_id"]').val('');
                 }
             },
             select: function(event, ui) {

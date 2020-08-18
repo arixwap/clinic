@@ -15,17 +15,23 @@ class Checkup extends Model
      * @var array
      */
     protected $fillable = [
+        'schedule_id',
+        'patient_id',
+        'doctor_id',
+        'user_id',
         'number',
         'date',
-        'time',
+        'time_start',
+        'time_end',
         'bpjs',
         'description',
         'doctor_note',
         'new_patient',
+        'is_done',
     ];
 
     /**
-     * Relationship many to 1 - tabel 'checkups' ke tabel 'schedules'
+     * Relationship to Schedule - many to 1
      */
     public function schedule()
     {
@@ -33,7 +39,7 @@ class Checkup extends Model
     }
 
     /**
-     * Relationship many to 1 - tabel 'checkups' ke tabel 'patients'
+     * Relationship to Patient - many to 1
      */
     public function patient()
     {
@@ -41,7 +47,7 @@ class Checkup extends Model
     }
 
     /**
-     * Relationship many to 1 - tabel 'checkups' ke tabel 'doctors'
+     * Relationship to Doctor - many to 1
      */
     public function doctor()
     {
@@ -49,7 +55,7 @@ class Checkup extends Model
     }
 
     /**
-     * Relationship many to 1 - tabel 'checkups' ke tabel 'users'
+     * Relationship to User - many to 1
      */
     public function user()
     {

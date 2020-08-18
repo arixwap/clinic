@@ -30,30 +30,27 @@ class Doctor extends Model
     ];
 
     /**
-     * Relationship 1 to 1 - tabel `doctors` ke tabel `users`
+     * Relationship to User - 1 to 1
      */
     public function user()
     {
-        /**
-         * belongsTo digunakan jika ada relation tabel 1 to 1, dimana tabel ini merupakan target dari relation
-         * Misalnya :
-         * tabel Doctor pasti memiliki data di Tabel User,
-         * namun tabel User belum tentu memiliki data di tabel Doctor
-         *
-         * Laravel otomatis mengetahui kolom 'user_id' merupakan foreign key dari
-         * relationship tabel Doctors dengan Users
-         *
-         * Itulah sebabnya mengapa penamaan Model, Tabel dan Kolom tabel harus menggunakan bahasa inggris
-         */
-        return $this->belongsTo('App\User'); // Pemanggilan file dari directory / folder
+        return $this->belongsTo('App\User');
     }
 
     /**
-     * Relationship 1 to many - tabel `doctors` ke tabel `schedules`
+     * Relationship to Schedule - 1 to many
      */
     public function schedule()
     {
         return $this->hasMany('App\Schedule');
+    }
+
+    /**
+     * Relationship to Checkup - 1 to many
+     */
+    public function checkup()
+    {
+        return $this->hasMany('App\Checkup');
     }
 
     /**

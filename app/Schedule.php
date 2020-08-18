@@ -22,17 +22,27 @@ class Schedule extends Model
 
     /**
      * New Appended Attribute
+     *
+     * @var array
      */
     protected $appends = [
         'time_range'
     ];
 
     /**
-     * Relationship many to 1 - tabel `schedules` ke tabel `doctors`
+     * Relationship to Doctor - many to 1
      */
     public function doctor()
     {
         return $this->belongsTo('App\Doctor');
+    }
+
+    /**
+     * Relationship to Checkup - 1 to many
+     */
+    public function checkup()
+    {
+        return $this->hasMany('App\Checkup');
     }
 
     /**

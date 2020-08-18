@@ -21,6 +21,13 @@ class Patient extends Model
         'address',
         'phone',
         'gender',
-        'patient_type'
     ];
+
+    /**
+     * Relationship to Checkup - 1 to many
+     */
+    public function checkup()
+    {
+        return $this->hasMany('App\Checkup');
+    }
 }
