@@ -42434,7 +42434,16 @@ function initDatepicker(element) {
   if (dataAltFormat != undefined) {
     var altInput = $('<input>');
     altInput.attr('type', 'hidden');
-    altInput.attr('name', $(element).attr('name'));
+    altInput.attr('name', $(element).attr('name')); // If value defined - Set value for alt input
+
+    var dateValue = $(element).val();
+    var altDateValue = $.datepicker.formatDate(dataAltFormat, new Date(dateValue));
+
+    if (dateValue) {
+      altInput.val(dateValue);
+      $(element).val(altDateValue);
+    }
+
     $(element).after(altInput);
     $(element).removeAttr('name');
     options.altField = altInput;

@@ -60,7 +60,7 @@
                                 </div>
                                 <div class="col-md-4 form-group">
                                     <label>{{ __('Birthday') }}</label>
-                                    <input name="birthdate" class="form-control datepicker" data-alt-format="d M yy" data-max-date="0" data-change-month="true" data-change-year="true" required disabled>
+                                    <input name="birthdate" type="text" class="form-control datepicker" data-alt-format="d M yy" data-max-date="0" data-change-month="true" data-change-year="true" required disabled>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -103,7 +103,7 @@
                         <div class="row">
                             <div class="col-md-6 form-group disabled">
                                 <label>{{ __('Checkup Date') }}</label>
-                                <input name="checkup_date" class="form-control datepicker checkup-date" placeholder="{{ __('Select Date') }}" data-alt-format="DD, dd MM yy" data-min-date="0" data-max-date="+1y" required>
+                                <input name="checkup_date" type="text" class="form-control datepicker checkup-date" placeholder="{{ __('Select Date') }}" data-alt-format="DD, dd MM yy" data-min-date="0" data-max-date="+1y" required>
                             </div>
                             <div class="col-md-6 form-group disabled">
                                 <label>{{ __('Checkup Time') }}</label>

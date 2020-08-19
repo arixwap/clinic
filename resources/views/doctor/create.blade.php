@@ -33,7 +33,7 @@
                             </div>
                             <div class="col-md-4 form-group">
                                 <label>{{ __('Birthday') }}</label>
-                                <input name="birthdate" type="date" class="form-control" required>
+                                <input name="birthdate" type="text" class="form-control datepicker" data-alt-format="d MM yy" data-max-date="-15y" data-change-month="true" data-change-year="true" required>
                             </div>
                         </div>
                         <div class="form-group">
@@ -43,7 +43,7 @@
                         <div class="row">
                             <div class="col-md-6 form-group">
                                 <label>{{ __('Phone') }}</label>
-                                <input name="phone" type="tel" class="form-control" required>
+                                <input name="phone" type="tel" class="form-control">
                             </div>
                             <div class="col-md-6 form-group">
                                 <label>{{ __('Polyclinic') }}</label>
@@ -79,11 +79,11 @@
                             </div>
                             <div class="col-md-3 form-group">
                                 <label>{{ __('Valid From') }}</label>
-                                <input name="str_start_date" type="date" class="form-control">
+                                <input name="str_start_date" type="text" class="form-control datepicker" data-alt-format="d MM yy" data-change-month="true" data-change-year="true">
                             </div>
                             <div class="col-md-3 form-group">
                                 <label>{{ __('Until') }}</label>
-                                <input name="str_end_date" type="date" class="form-control">
+                                <input name="str_end_date" type="text" class="form-control datepicker" data-alt-format="d MM yy" data-change-month="true" data-change-year="true">
                             </div>
                         </div>
                         <br>

@@ -70,6 +70,14 @@ function initDatepicker(element) {
         altInput.attr('type', 'hidden');
         altInput.attr('name', $(element).attr('name'));
 
+        // If value defined - Set value for alt input
+        let dateValue = $(element).val();
+        let altDateValue = $.datepicker.formatDate(dataAltFormat, new Date(dateValue));
+        if (dateValue) {
+            altInput.val(dateValue);
+            $(element).val(altDateValue);
+        }
+
         $(element).after(altInput);
         $(element).removeAttr('name');
 

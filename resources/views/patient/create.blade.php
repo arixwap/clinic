@@ -12,34 +12,26 @@
                         {{ method_field('POST') }}
                         {{-- End of - CSRF Method Form Laravel --}}
                         <div class="form-group">
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="patient-type-umum" name="patient_type" value="Umum" class="custom-control-input" checked>
-                                <label class="custom-control-label" for="patient-type-umum">Umum</label>
-                            </div>
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="patient-type-bpjs" name="patient_type" value="BPJS" class="custom-control-input">
-                                <label class="custom-control-label" for="patient-type-bpjs">BPJS</label>
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <label>{{ __('Full Name') }}</label>
                             <input name="full_name" type="text" class="form-control" required>
                         </div>
-                        <div class="form-group">
-                            <label>{{ __('Born Place') }}</label>
-                            <input name="birthplace" type="text" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>{{ __('Birthday') }}</label>
-                            <input name="birthdate" type="date" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>{{ __('Gender') }}</label>
-                            <select name="gender" class="form-control" required>
-                                <option value="">{{ __('-Select-') }}</option>
-                                <option value="Male">{{ __('Male') }}</option>
-                                <option value="Female">{{ __('Female') }}</option>
-                            </select>
+                        <div class="row">
+                            <div class="col-md-4 form-group">
+                                <label>{{ __('Gender') }}</label>
+                                <select name="gender" class="form-control" required>
+                                    <option value="">{{ __('-Select-') }}</option>
+                                    <option value="Male">{{ __('Male') }}</option>
+                                    <option value="Female">{{ __('Female') }}</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label>{{ __('Born Place') }}</label>
+                                <input name="birthplace" type="text" class="form-control" required>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label>{{ __('Birthday') }}</label>
+                                <input name="birthdate" type="text" class="form-control datepicker" data-alt-format="d MM yy" data-max-date="0" data-change-month="true" data-change-year="true" required>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label>{{ __('Address') }}</label>

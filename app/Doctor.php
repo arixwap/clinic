@@ -26,15 +26,19 @@ class Doctor extends Model
         'str',
         'str_start_date',
         'str_end_date',
+        'polyclinic',
         'photo_url',
     ];
 
     /**
      * Relationship to User - 1 to 1
+     * 'App\User'   => Eloquent Filename
+     * 'id'         => foreign_key id for relationship  -> table users.id
+     * 'user_id'    => local_key id for relationship    -> table doctors.user_id
      */
     public function user()
     {
-        return $this->hasOne('App\User');
+        return $this->hasOne('App\User', 'id', 'user_id');
     }
 
     /**
