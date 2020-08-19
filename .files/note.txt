@@ -1,17 +1,55 @@
 TASK
 - Checkup List (Submenu Patient)
+  - Form Filter by Doctor
   - Incoming Checkup
   - Past Checkup
   - All Checkup
-  - Patient Medical Record (Rekam Medis)
+  - Button Patient Medical Record (Rekam Medis)
+- Checkup List (Doctor UI)
+  - Form Filter by Doctor : Autoset this doctor
+  - List same as Admin UI
+  - Can View another doctor checkup
+  - Unable | Edit another doctor checkup
+
+- View Checkup Information (Admin & Doctor UI)
+  - Same layout as form checkup
+  - Button View Medical Record
+
+- Edit Checkup Conditional
+  - Only available : is_done = 0
+  - Checkup date pass after 1 day => autoset is_done 1
+- Edit Checkup (Admin UI)
+  - Edit BPJS Number
+  - Edit Data Patient
+  - Change Selected Doctor / Schedule
+  - Only can view doctor note after inputed
+  - Button is_done checkup
+  - Button Cancel Checkup => Delete
+- Edit Checkup (Doctor UI)
+  - Unable | Edit another doctor checkup data
+  - Edit BPJS Number
+  - Edit Data Patient
+  - Unable | Change Selected Doctor / Schedule
+  - Show input textarea Doctor Note
+  - Button is_done checkup
+  - Unable | Button Cancel Checkup => Delete
+
+- Medical Record (Admin & Doctor UI)
+  - Patient Data
+  - List of preview checkup history
+  - Button See detail checkup
 
 - HTML Dashboard
   - Incoming Checkup Today (Limit 10)
+    - List CTA View       : Checkup Detail
+    - List CTA Done       : set checkup is_done
   - Doctor Schedule Today
+    - List CTA Edit       : Edit schedule
+    - Bottom CTA View     : Popup full weekday schedule all doctor
   - Graphic: Patient Checkup Last Week / Last Month
 
 - CRUD User Admin
-- Rekam Medis Patient
+- Rekam Medis Patient : Patient List & Detail, Checkup List & Detail
 - Riwayat : Jumlah pasien checkup / minggu / bulan / tahun
 - Dashboard - Popup Weekdays All Doctor Schedule
 - Form Checkup Patient
@@ -22,17 +60,17 @@ TASK
 //--------
 User Role
 - Owner / Superadmin
+  - CRUD User
   - Bisa Semua
 - Admin :
   - CRUD Pasien
-  - Buat Jadwal Checkup Pasien
-  - Ubah Jadwal Dokter
+  - CRUD Patient Checkup
+  - CRUD Doctor
+  - CRUD Option Data
 - Dokter
-  - Lihat Daftar Checkup yang masuk Hari ini, Jam ini
-  - Lihat Daftar Checkup yang akan datang
-  - Lihat Riwayat Checkup
-  - Atur Jadwal Praktek
-  - Ubah Data Diri Dokter
+  - Edit Basic Information & Schedule ownself Doctor
+  - View All Checkup & Medical Record
+  - Edit ownselft patient data checkup
 //--------
 
 
