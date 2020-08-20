@@ -39,7 +39,7 @@
                         </div>
                         <div class="form-group">
                             <label>{{ __('Phone') }}</label>
-                            <input name="phone" type="tel" class="form-control" required>
+                            <input name="phone" type="tel" class="form-control">
                         </div>
                         <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
                         <a href="{{ route('patient.index') }}" type="button" class="btn btn-secondary ml-2">{{ __('Back') }}</a>

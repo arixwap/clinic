@@ -45,21 +45,16 @@ class DoctorController extends Controller
     public function store(Request $request)
     {
         // Simpan data dokter sebagai user
-        // Hanya data tertentu yang dipilih dari $request yang diterima
         $user = User::create([
             'name' => $request->input('full_name'),
             'email' => $request->input('email'),
             'password' => Hash::make( $request->input('password') ), // data password di encrypt
         ]);
 
-        /**
-         * Simpan data utama dokter, dengan menggunakan user relationship
-         * Semua data yang dikirim di dalam $request langsung disimpan
-         * Hanya tinggal pake :), engga perlu isi Join Joinan
-         */
-        $user->doctor()->create( $request->all() );
+        // Simpan data utama dokter, dengan menggunakan user relationship
+        $user->doctor()->create($request->all());
 
-        return redirect( route('schedule.index', $user->doctor->id) );
+        return redirect()->route('schedule.index', $user->doctor->id);
     }
 
     /**
@@ -70,7 +65,7 @@ class DoctorController extends Controller
      */
     public function show($id)
     {
-        abort(404);
+        return abort(404);
     }
 
     /**
@@ -108,16 +103,15 @@ class DoctorController extends Controller
             'email' => $request->input('email'),
         ];
 
-        // Masukan data password ke dalam array update user, jika
-        // diinput lewat form
+        // Masukan password jika input form terisi
         if ( $request->has('password') ) {
             $dataUser['password'] = Hash::make( $request->input('password') );
         }
 
-        // Update data User milik si Doctor
+        // Update User relationship Doctor
         $doctor->user()->update( $dataUser );
 
-        return redirect( route('doctor.index') );
+        return redirect()->route('doctor.index');
     }
 
     /**
@@ -136,7 +130,7 @@ class DoctorController extends Controller
         // Delete data Doctor
         $doctor->delete();
 
-        return redirect( route('doctor.index') );
+        return redirect()->route('doctor.index');
     }
 
     /**
@@ -213,6 +207,6 @@ class DoctorController extends Controller
         // Insert & update bulk schedule data
         $doctor->schedule()->saveMany($dataSchedules);
 
-        return redirect( route('schedule.index', $id) );
+        return redirect()->route('schedule.index', $id);
     }
 }

@@ -70,7 +70,7 @@
                         </div>
                         <hr>
                         <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
-                        <a href="{{ route('doctor.index') }}" type="button" class="btn btn-secondary ml-3">{{ __('Back') }}</a>
+                        <a href="{{ route('doctor.index') }}" type="button" class="btn btn-secondary ml-2">{{ __('Back') }}</a>
                     </form>
                 </div>
             </div>
