@@ -1,4 +1,15 @@
 {
+    "login": "masuk",
+    "logout": "keluar",
+    "create": "tambah",
+    "edit": "ubah",
+    "patient": "pasien",
+    "doctor": "dokter",
+    "schedule": "jadwal",
+    "checkup": "checkup",
+    "polyclinic": "poliklinik",
+    "qualification": "kualifikasi",
+
     "Login": "Masuk",
     "Register": "Daftar",
     "Logout": "Keluar",

@@ -17,18 +17,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('home', function() {
-    return redirect('/');
-});
 
+// Authentication Route
 Auth::routes([
     'register' => false, // Remove route register from public
     'verify' => false,
 ]);
-// ID url
-Route::get('masuk', 'Auth\LoginController@showLoginForm')->name('login');
-Route::post('masuk', 'Auth\LoginController@login');
-Route::post('keluar', 'Auth\LoginController@logout')->name('logout');
+// Localizing URL
+Route::get(__('login'), 'Auth\LoginController@showLoginForm')->name('login');
+Route::post(__('login'), 'Auth\LoginController@login');
+Route::post(__('logout'), 'Auth\LoginController@logout')->name('logout');
 
 
 /**
@@ -39,32 +37,18 @@ Route::middleware('auth')->group( function() {
 
     Route::get('ajax', 'AjaxController@index')->name('ajax');
 
-    Route::get('checkup', 'HomeController@checkup')->name('checkup.create');
-    Route::post('checkup', 'HomeController@storeCheckup')->name('checkup.store');
+    // Resource Route Patient
+    Route::resource(__('patient'), 'PatientController', ['names' => 'patient'])->except(['show']);
 
-    Route::resource('patient', 'PatientController')->except(['show']);
-    // ID url
-    Route::get('pasien', 'PatientController@index')->name('patient.index');
-    Route::get('pasien/baru', 'PatientController@create')->name('patient.create');
-    Route::get('pasien/ubah/{id}', 'PatientController@edit')->name('patient.edit');
+    // Resource Route Doctor
+    Route::resource(__('doctor'), 'DoctorController', ['names' => 'doctor'])->except(['show']);
+    Route::get(__('doctor').'/'.__('schedule').'/{id}', 'DoctorController@schedule')->name('schedule.index');
+    Route::post(__('doctor').'/'.__('schedule').'/{id}', 'DoctorController@updateSchedule')->name('schedule.edit');
 
-    Route::resource('doctor', 'DoctorController')->except(['show']);
-    // ID url
-    Route::get('dokter', 'DoctorController@index')->name('doctor.index');
-    Route::get('dokter/baru', 'DoctorController@create')->name('doctor.create');
-    Route::get('dokter/ubah/{id}', 'DoctorController@edit')->name('doctor.edit');
+    Route::resource(__('polyclinic'), 'PolyclinicController', ['names' => 'polyclinic'])->except(['create', 'show', 'edit']);
 
-    Route::get('doctor/schedule/{id}', 'DoctorController@schedule')->name('schedule.index');
-    Route::post('doctor/schedule/{id}', 'DoctorController@scheduleUpdate')->name('schedule.edit');
-    // ID url
-    Route::get('jadwal/dokter/{id}', 'DoctorController@schedule')->name('schedule.index');
-    Route::post('jadwal/dokter/{id}', 'DoctorController@updateSchedule')->name('schedule.edit');
+    Route::resource(__('qualification'), 'QualificationController', ['names' => 'qualification'])->except(['create', 'show', 'edit']);
 
-    Route::resource('polyclinic', 'PolyclinicController')->except(['create', 'show', 'edit']);
-    // ID url
-    Route::get('poliklinik', 'PolyclinicController@index')->name('polyclinic.index');
-
-    Route::resource('qualification', 'QualificationController')->except(['create', 'show', 'edit']);
-    // ID url
-    Route::get('kualifikasi-dokter', 'QualificationController@index')->name('qualification.index');
+    // Resource Route Checkup
+    Route::resource(__('checkup'), 'CheckupController', ['names' => 'checkup']);
 });

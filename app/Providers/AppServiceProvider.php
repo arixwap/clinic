@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Route;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +24,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->bootLocalizeRoute();
+    }
+
+    /**
+     * Localizing Language Route Resource URL
+     */
+    public function bootLocalizeRoute()
+    {
+        Route::resourceVerbs([
+            'create' => __('create'),
+            'edit' => __('edit')
+        ]);
     }
 }
