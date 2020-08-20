@@ -16,7 +16,10 @@
     "Yes": "Ya",
     "No": "Tidak",
     "Add": "Tambah",
+    "View": "Lihat",
+    "Edit": "Ubah",
     "Save": "Simpan",
+    "Done": "Selesai",
     "Delete": "Hapus",
     "Back": "Kembali",
     "Name": "Nama",
@@ -68,6 +71,8 @@
     "Friday": "Jumat",
     "Saturday": "Sabtu",
 
+    "Date": "Tanggal",
+    "Time": "Jam",
     "Schedule": "Jadwal",
     "Set Schedule": "Atur Jadwal",
     "Start Time": "Jam Mulai",
@@ -83,6 +88,7 @@
     "New Checkup": "Checkup Baru",
     "Checkup Date": "Tanggal Checkup",
     "Checkup Time": "Jam Checkup",
+    "Number": "Nomor",
 
     "Polyclinic": "Poliklinik",
     "Polyclinics": "Poliklinik",

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -28,6 +29,16 @@ class Checkup extends Model
         'doctor_note',
         'new_patient',
         'is_done',
+    ];
+
+    /**
+     * Appended Attribute
+     *
+     * @var array
+     */
+    protected $appends = [
+        'time_range',
+        'line_number',
     ];
 
     /**
@@ -60,5 +71,38 @@ class Checkup extends Model
     public function user()
     {
         return $this->belongsTo('App\User');
+    }
+
+    /**
+     * Create attribute Line Number by format attribute number
+     * Example : 1 to 0001
+     *
+     * @return string
+     */
+    public function getLineNumberAttribute()
+    {
+        $lineDigit = 4;
+
+        $loop = $lineDigit - intval( strlen($this->number) );
+        $prefix = '';
+        for ( $i = 1; $i <= $loop; $i++ ) {
+            $prefix = $prefix . '0';
+        }
+
+        return $prefix . $this->number;
+    }
+
+    /**
+     * Create attribute Time Range by time_start and time_end.
+     * Example result: 07:00 PM - 09:00 PM
+     *
+     * @return string
+     */
+    public function getTimeRangeAttribute()
+    {
+        $time_start = Carbon::parse($this->time_start)->format('h:i A');
+        $time_end = Carbon::parse($this->time_end)->format('h:i A');
+
+        return "{$time_start} - {$time_end}";
     }
 }

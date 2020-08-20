@@ -19,7 +19,9 @@ class CheckupController extends Controller
      */
     public function index()
     {
-        //
+        $data['checkups'] = Checkup::orderBy('date', 'ASC')->get();
+
+        return view('checkup.index', $data);
     }
 
     /**
@@ -65,7 +67,7 @@ class CheckupController extends Controller
         }
 
         // Get last line number by selected schedule
-        $number = 0;
+        $number = 1;
         $lastCheckup = Checkup::where('schedule_id', $schedule->id)
                             ->where('date', $checkupDate)
                             ->orderBy('number', 'DESC')->first();

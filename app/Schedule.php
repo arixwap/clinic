@@ -2,8 +2,8 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
 
 class Schedule extends Model
 {
@@ -21,7 +21,7 @@ class Schedule extends Model
     ];
 
     /**
-     * New Appended Attribute
+     * Appended Attribute
      *
      * @var array
      */

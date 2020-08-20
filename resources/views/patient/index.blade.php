@@ -4,7 +4,7 @@
     <div class="container">
         <div class="justify-content-center">
             <div class="card">
-                <div class="card-header">Daftar Pasien</div>
+                <div class="card-header">{{ __('Patient List') }}</div>
                 <div class="card-body">
                     <a href="{{ route('patient.create') }}" class="btn btn-primary mb-3">{{ __('Add') }}</a>
                     <table class="table">

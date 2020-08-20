@@ -65,6 +65,7 @@
                             <li>
                                 <a href="{{ route('patient.index') }}">{{ __('Patient') }}</a>
                                 <ul>
+                                    <li><a href="{{ route('checkup.index') }}">{{ __('Checkup') }}</a></li>
                                     <li><a href="{{ route('patient.index') }}">{{ __('Patient List') }}</a></li>
                                     <li><a href="{{ route('patient.create') }}">{{ __('Add Patient') }}</a></li>
                                 </ul>

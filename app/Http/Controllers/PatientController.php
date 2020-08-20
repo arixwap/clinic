@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Patient; //   <---------------------- Memanggil model eloquent Patient
+use App\Patient;
 
 class PatientController extends Controller
 {
