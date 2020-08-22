@@ -17141,6 +17141,17 @@ ul.admin-side-menu ul li > a {
 }
 
 /**
+ * Button Group Input Checkbox & Radio - Fix hidden input
+ * -------------------------------------------------------------------------------
+*/
+
+.btn-group-toggle input[type=radio],
+.btn-group-toggle input[type=checkbox] {
+  visibility: hidden;
+  position: absolute;
+}
+
+/**
  * Custom Switch - Input Checkbox
  * -------------------------------------------------------------------------------
 */

@@ -74,6 +74,26 @@ class Checkup extends Model
     }
 
     /**
+     * Get checkup is_done
+     * if date checkup is passed, set checkup is_done = 1
+     *
+     * @return boolean
+     */
+    public function getIsDoneAttribute()
+    {
+        $now = Carbon::now();
+        $checkupDate = $this->date;
+
+        // Set is_done if date passed 1 day
+        if ( $now->diffInDays($checkupDate, false) < 0 ) {
+            $this->is_done = 1;
+            $this->save();
+        }
+
+        return $this->attributes['is_done'];
+    }
+
+    /**
      * Create attribute Line Number by format attribute number
      * Example : 1 to 0001
      *

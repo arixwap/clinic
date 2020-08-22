@@ -8,6 +8,7 @@ use App\Doctor;
 use App\Option;
 use App\Patient;
 use App\Schedule;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class CheckupController extends Controller
@@ -17,9 +18,54 @@ class CheckupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data['checkups'] = Checkup::orderBy('date', 'ASC')->get();
+        $checkup = Checkup::orderBy('date', 'ASC');
+
+        // Filter checkup by search string
+        if ( $search = $request->input('search') ) {
+
+            $checkup->where( function ($query) use ($search) {
+
+                // Search checkup by patient name - relation Checkup to Patient
+                $query->orWhereHas('patient', function ($query) use ($search) {
+                    $query->where("full_name", "LIKE", "%$search%");
+                });
+
+                // Search checkup by doctor name or polyclinic - relation Checkup to Doctor
+                $query->orWhereHas('doctor', function ($query) use ($search) {
+                    $query->where("full_name", "LIKE", "%$search%")
+                        ->orWhere("polyclinic", "LIKE", "%$search%");
+                });
+
+            });
+
+        }
+
+        // Filter checkup by doctor_id
+        if ( $doctorId = $request->input('doctor') ) {
+            $checkup->where('doctor_id', $doctorId);
+        }
+
+        // Filter checkup by date
+        $now = Carbon::now();
+        $view = $request->input('view') ?: 'incoming';
+
+        switch ($view) {
+            case 'done':
+                $checkup->whereRaw("TIMESTAMP(`date`, `time_end`) <= '$now'");
+                break;
+            case 'incoming':
+                $checkup->whereRaw("TIMESTAMP(`date`, `time_start`) >= '$now'");
+                break;
+            default : break;
+        }
+
+        $data['search'] = $search;
+        $data['selectedDoctor'] = $doctorId;
+        $data['view'] = $view;
+        $data['checkups'] = $checkup->get();
+        $data['doctors'] = Doctor::all();
 
         return view('checkup.index', $data);
     }
@@ -74,7 +120,7 @@ class CheckupController extends Controller
         if ( $lastCheckup ) $number = $lastCheckup->number + 1;
 
         // Store checkup data
-        $patient->checkup()->create([
+        $patient->checkups()->create([
             'schedule_id' => $schedule->id,
             'doctor_id' => $schedule->doctor_id,
             'user_id' => Auth::id(),

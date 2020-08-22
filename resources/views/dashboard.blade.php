@@ -11,11 +11,6 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    {{-- @if ( Auth::user()->isDoctor() )
-                        Selamat datang Dokter {{ Auth::user()->doctor->full_name }}
-                    @else
-                        Anda telah login!
-                    @endif --}}
                     <div class="row">
                         <div class="col-md-6">
                             <div class="alert alert-primary">Pasien Hari Ini</div>
@@ -31,7 +26,7 @@
                                 <li>Ketut Gek (L) 30th &emsp;<span class="fa fa-edit"></span></li>
                                 <li>Putu Mita (L) 30th &emsp;<span class="fa fa-edit"></span></li>
                             </ul>
-                            <a href="{{ route('checkup.create') }}" class="btn btn-primary">Checkup Pasien Baru</a>
+                            <a href="{{ route('checkup.create') }}" class="btn btn-primary">{{ __('New Checkup') }}</a>
                             <button class="btn btn-secondary">Lihat Semuanya</button>
                         </div>
                         <div class="col-md-6">
