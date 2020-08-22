@@ -205,7 +205,7 @@ class DoctorController extends Controller
                     ->delete();
 
         // Insert & update bulk schedule data
-        $doctor->schedule()->saveMany($dataSchedules);
+        $doctor->schedules()->saveMany($dataSchedules);
 
         return redirect()->route('schedule.index', $id);
     }

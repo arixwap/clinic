@@ -44,7 +44,7 @@ class Doctor extends Model
     /**
      * Relationship to Schedule - 1 to many
      */
-    public function schedule()
+    public function schedules()
     {
         return $this->hasMany('App\Schedule');
     }
@@ -52,7 +52,7 @@ class Doctor extends Model
     /**
      * Relationship to Checkup - 1 to many
      */
-    public function checkup()
+    public function checkups()
     {
         return $this->hasMany('App\Checkup');
     }
@@ -76,7 +76,7 @@ class Doctor extends Model
         ];
 
         // Push data into weekday array
-        foreach ( $this->schedule as $schedule ) {
+        foreach ( $this->schedules as $schedule ) {
             $weekdays[$schedule->weekday]['off'] = $schedule->off;
             $weekdays[$schedule->weekday]['times'][] = $schedule;
         }

@@ -26,7 +26,7 @@ class Patient extends Model
     /**
      * Relationship to Checkup - 1 to many
      */
-    public function checkup()
+    public function checkups()
     {
         return $this->hasMany('App\Checkup');
     }

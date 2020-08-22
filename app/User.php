@@ -49,14 +49,15 @@ class User extends Authenticatable
     /**
      * Relationship to Checkup - 1 to many
      */
-    public function checkup()
+    public function checkups()
     {
         return $this->hasMany('App\Checkup');
     }
 
     /**
-     * Check jika User adalah Doctor atau bukan
-     * Return true / false
+     * Check if user is doctor
+     *
+     * @return boolean
      */
     public function isDoctor()
     {
