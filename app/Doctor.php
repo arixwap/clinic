@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Date;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -31,6 +32,15 @@ class Doctor extends Model
     ];
 
     /**
+     * Appended Attribute
+     *
+     * @var array
+     */
+    protected $appends = [
+        'formatted_birthdate',
+    ];
+
+    /**
      * Relationship to User - 1 to 1
      * 'App\User'   => Eloquent Filename
      * 'id'         => foreign_key id for relationship  -> table users.id
@@ -55,6 +65,16 @@ class Doctor extends Model
     public function checkups()
     {
         return $this->hasMany('App\Checkup');
+    }
+
+    /**
+     * Get birthdate in human readable format
+     *
+     * @return string
+     */
+    public function getFormattedBirthdateAttribute()
+    {
+        return Date::parse($this->attributes['birthdate'])->format('l, d F Y');
     }
 
     /**

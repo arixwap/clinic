@@ -24,7 +24,7 @@
                                     <tr>
                                         <th class="align-middle" scope="row">{{ $i + 1 }}</th>
                                         <td class="align-middle">{{ $patient->full_name }}</td>
-                                        <td class="align-middle">{{ Date::parse($patient->birthdate)->format('d F Y') }}</td>
+                                        <td class="align-middle">{{ $patient->formatted_birthdate }}</td>
                                         <td class="align-middle">{{ __($patient->gender) }}</td>
                                         <td class="align-middle">{{ $patient->address }}</td>
                                         <td class="align-middle text-center">

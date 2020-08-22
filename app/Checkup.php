@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Date;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -37,6 +38,7 @@ class Checkup extends Model
      * @var array
      */
     protected $appends = [
+        'formatted_date',
         'time_range',
         'line_number',
     ];
@@ -74,6 +76,16 @@ class Checkup extends Model
     }
 
     /**
+     * Get date in human readable format
+     *
+     * @return string
+     */
+    public function getFormattedDateAttribute()
+    {
+        return Date::parse($this->attributes['date'])->format('l, d F Y');
+    }
+
+    /**
      * Get checkup is_done
      * if date checkup is passed, set checkup is_done = 1
      *
@@ -81,7 +93,7 @@ class Checkup extends Model
      */
     public function getIsDoneAttribute()
     {
-        $now = Carbon::now();
+        $now = Date::now();
         $checkupDate = $this->date;
 
         // Set is_done if date passed 1 day
