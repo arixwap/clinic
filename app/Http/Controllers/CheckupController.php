@@ -20,7 +20,7 @@ class CheckupController extends Controller
      */
     public function index(Request $request)
     {
-        $checkup = Checkup::orderBy('date', 'ASC');
+        $checkup = Checkup::select();
 
         // Filter checkup by search string
         if ( $search = $request->input('search') ) {
@@ -53,12 +53,22 @@ class CheckupController extends Controller
 
         switch ($view) {
             case 'done':
-                $checkup->whereRaw("TIMESTAMP(`date`, `time_end`) <= '$now'");
+                $checkup->whereRaw("TIMESTAMP(`date`, `time_end`) <= '$now'")
+                        ->orWhere("is_done", true)
+                        ->orderBy('date', 'DESC');
                 break;
             case 'incoming':
-                $checkup->whereRaw("TIMESTAMP(`date`, `time_start`) >= '$now'");
+                $checkup->whereRaw("TIMESTAMP(`date`, `time_start`) >= '$now'")
+                        ->where('is_done', false)
+                        ->orderBy('date', 'ASC');
                 break;
-            default : break;
+            case 'cancel':
+                $checkup->onlyTrashed()
+                        ->orderBy('date', 'DESC');
+                break;
+            default :
+                $checkup->orderBy('date', 'DESC');
+                break;
         }
 
         $data['search'] = $search;
@@ -144,7 +154,9 @@ class CheckupController extends Controller
      */
     public function show($id)
     {
-        //
+        $data['checkup'] = Checkup::findOrFail($id);
+
+        return view('checkup.show', $data);
     }
 
     /**
@@ -155,7 +167,16 @@ class CheckupController extends Controller
      */
     public function edit($id)
     {
-        //
+        $checkup = Checkup::findOrFail($id);
+
+        $data['checkup'] = $checkup;
+        $data['polyclinics'] = Option::where('name', 'polyclinic')->get();
+        $data['doctors'] = Doctor::all();
+        $data['schedules'] = Schedule::where('doctor_id', $checkup->doctor_id)
+                                    ->where('weekday', $checkup->schedule->weekday)
+                                    ->get();
+
+        return view('checkup.edit', $data);
     }
 
     /**
@@ -167,7 +188,9 @@ class CheckupController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        dd($request->input());
+
+        return redirect()->route('checkup.show', $id);
     }
 
     /**

@@ -69,7 +69,7 @@
                                 @foreach( $checkups as $checkup )
                                     <tr>
                                         <td class="align-middle">
-                                            <strong>{{ Date::parse($checkup->date)->format('d F Y') }}</strong>
+                                            <strong>{{ Date::parse($checkup->date)->format('l, d F Y') }}</strong>
                                             <br>
                                             <small>{{ $checkup->time_range }}</small>
                                         </td>

@@ -44,11 +44,16 @@ body {
 
 
 /**
- * Override Button Style
+ * Override Button, Badge Style
  * -------------------------------------------------------------------------------
 */
-.btn {
-    @extend .rounded-pill;
+.btn,
+.badge {
+    border-radius: 50rem;
+}
+
+.badge {
+    padding: spacer(2) spacer(3);
 }
 
 
@@ -278,6 +283,23 @@ ul.admin-side-menu {
             border-top: none;
         }
     }
+}
+
+
+/**
+ * Form Readonly Style
+ * -------------------------------------------------------------------------------
+*/
+.form-readonly {
+    @extend .form-control;
+    background: transparent;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    padding-left: 0;
+    padding-right: 0;
+    pointer-events: none;
+    resize: none;
 }
 
 

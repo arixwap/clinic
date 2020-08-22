@@ -1,7 +1,7 @@
 {
     "login": "masuk",
     "logout": "keluar",
-    "create": "tambah",
+    "create": "baru",
     "edit": "ubah",
     "patient": "pasien",
     "doctor": "dokter",
@@ -35,6 +35,7 @@
     "Dashboard": "Dashboard",
     "General": "Umum",
     "BPJS": "BPJS",
+    "BPJS Number": "No. BPJS",
     "Patient": "Pasien",
     "Patient List": "Data Pasien",
     "Add Patient": "Tambah Pasien",
@@ -88,12 +89,16 @@
 
     "Checkup": "Checkup",
     "New Checkup": "Checkup Baru",
+    "Edit Checkup": "Ubah Checkup",
+    "Cancel Checkup": "Batal Checkup",
     "Checkup Date": "Tanggal Checkup",
     "Checkup Time": "Jam Checkup",
     "Incoming Checkup": "Checkup Masuk",
     "Done Checkup": "Checkup Selesai",
     "All Checkup": "Semua Checkup",
     "Number": "Nomor",
+    "Medical Record": "Rekam Medis",
+    "Doctor Note": "Catatan Dokter",
 
     "Polyclinic": "Poliklinik",
     "Polyclinics": "Poliklinik",

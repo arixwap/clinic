@@ -4,80 +4,66 @@
     <div class="container">
         <div class="justify-content-center">
             <div class="card">
-                <div class="card-header">{{ __('New Checkup') }}</div>
+                <div class="card-header">{{ __('Edit Checkup') }}</div>
                 <div class="card-body">
-                    <form action="{{ route('checkup.store') }}" method="post" class="form-checkup" autocomplete="off">
+                    <form action="{{ route('checkup.update', $checkup->id) }}" method="post" class="form-checkup" autocomplete="off">
                         {{-- CSRF and Method Form Laravel --}}
                         {{ csrf_field() }}
-                        {{ method_field('POST') }}
+                        {{ method_field('PATCH') }}
                         {{-- End of - CSRF Method Form Laravel --}}
                         <div class="form-group">
                             <div class="btn-group-toggle" data-toggle="buttons">
-                                <label class="btn btn-outline-primary font-weight-bold active">
-                                    <input type="radio" name="patient_type" value="general" checked> {{ __('General') }}
+                                <label class="btn btn-outline-primary font-weight-bold {{ ! $checkup->bpjs ? 'active' : '' }}">
+                                <input type="radio" name="patient_type" value="general" {{ ! $checkup->bpjs ? 'checked' : '' }}> {{ __('General') }}
                                 </label>
-                                <label class="btn btn-outline-primary font-weight-bold ml-2">
-                                    <input type="radio" name="patient_type" value="bpjs"> {{ __('BPJS') }}
+                                <label class="btn btn-outline-primary font-weight-bold ml-2 {{ $checkup->bpjs ? 'active' : '' }}">
+                                    <input type="radio" name="patient_type" value="bpjs" {{ $checkup->bpjs ? 'checked' : '' }}> {{ __('BPJS') }}
                                 </label>
                             </div>
                         </div>
-                        <div class="form-group bpjs-form" style="display: none">
-                            <input name="bpjs" class="form-control" placeholder="{{ __('Input BPJS number') }}" required disabled>
+                        <div class="form-group bpjs-form" style="{{ ! $checkup->bpjs ? 'display: none;' : '' }}">
+                            <input name="bpjs" class="form-control" value="{{ $checkup->bpjs }}" placeholder="{{ __('Input BPJS number') }}" {{ ! $checkup->bpjs ? 'required disabled' : '' }}>
                         </div>
 
                         <hr class="my-4">
 
                         <div class="form-group">
-                            <div class="custom-control custom-switch-lg">
-                                <input type="checkbox" name="new_patient" value="1" class="custom-control-input" id="checkbox-new-patient">
-                                <label class="custom-control-label" for="checkbox-new-patient">{{ __('New Patient') }}</label>
+                            <label>{{ __('Full Name') }}</label>
+                            <input name="full_name" type="text" class="form-control" value="{{ $checkup->patient->full_name }}" required>
+                            <input name="patient_id" type="hidden" value="{{ $checkup->patient_id }}" required>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 form-group">
+                                <label>{{ __('Gender') }}</label>
+                                <select name="gender" class="form-control" required>
+                                    <option value="">{{ __('-Select-') }}</option>
+                                    <option value="Male" {{ $checkup->patient->gender == 'Male' ? 'selected' : '' }}>{{ __('Male') }}</option>
+                                    <option value="Female" {{ $checkup->patient->gender == 'Female' ? 'selected' : '' }}>{{ __('Female') }}</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label>{{ __('Born Place') }}</label>
+                                <input name="birthplace" type="text" class="form-control" value="{{ $checkup->patient->birthplace }}" required>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label>{{ __('Birthday') }}</label>
+                                <input name="birthdate" type="text" class="form-control datepicker" data-alt-format="d M yy" data-max-date="0" data-change-month="true" data-change-year="true" value="{{ $checkup->patient->birthdate }}" required>
                             </div>
                         </div>
-
-                        <div class="search-patient-form form-group">
-                            <input type="text" class="form-control search-patient" placeholder="{{ __('Search Patient') }}" required>
-                            <small class="alert-input text-danger" style="display: none">{{ __('Patient not found') }}</small>
-                            <input name="patient_id" type="hidden" required>
+                        <div class="form-group">
+                            <label>{{ __('Address') }}</label>
+                            <textarea name="address" rows="3" class="form-control" required>{{ $checkup->patient->address }}</textarea>
                         </div>
-
-                        <div class="new-patient-form" style="display: none">
-                            <div class="form-group">
-                                <label>{{ __('Full Name') }}</label>
-                                <input name="full_name" type="text" class="form-control" required disabled>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4 form-group">
-                                    <label>{{ __('Gender') }}</label>
-                                    <select name="gender" class="form-control" required disabled>
-                                        <option value="">{{ __('-Select-') }}</option>
-                                        <option value="Male">{{ __('Male') }}</option>
-                                        <option value="Female">{{ __('Female') }}</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-4 form-group">
-                                    <label>{{ __('Born Place') }}</label>
-                                    <input name="birthplace" type="text" class="form-control" required disabled>
-                                </div>
-                                <div class="col-md-4 form-group">
-                                    <label>{{ __('Birthday') }}</label>
-                                    <input name="birthdate" type="text" class="form-control datepicker" data-alt-format="d M yy" data-max-date="0" data-change-month="true" data-change-year="true" required disabled>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>{{ __('Address') }}</label>
-                                <textarea name="address" rows="3" class="form-control" required disabled></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label>{{ __('Phone') }}</label>
-                                <input name="phone" type="tel" class="form-control" required disabled>
-                            </div>
+                        <div class="form-group">
+                            <label>{{ __('Phone') }}</label>
+                            <input name="phone" type="tel" class="form-control" value="{{ $checkup->patient->phone }}" required>
                         </div>
 
                         <hr class="my-4">
 
                         <div class="form-group">
                             <label>{{ __('Complaints') }}</label>
-                            <textarea name="description" rows="3" class="form-control" required></textarea>
+                            <textarea name="description" rows="3" class="form-control" required>{{ $checkup->description }}"</textarea>
                         </div>
                         <div class="row">
                             <div class="col-md-6 form-group">
@@ -85,36 +71,45 @@
                                 <select name="polyclinic" class="form-control" required>
                                     <option value="">{{ __('Select Polyclinic') }}</option>
                                     @foreach ( $polyclinics as $polyclinic )
-                                        <option value="{{ $polyclinic->value }}">{{ $polyclinic->value }}</option>
+                                        <option value="{{ $polyclinic->value }}" {{ $checkup->doctor->polyclinic == $polyclinic->value ? 'selected' : '' }}>{{ $polyclinic->value }}</option>
                                     @endforeach
                                 </select>
                                 <small class="alert-input text-danger" style="display: none">{{ __('Doctor not available') }}</small>
                             </div>
-                            <div class="col-md-6 form-group disabled">
+                            <div class="col-md-6 form-group">
                                 <label>{{ __('Doctor') }}</label>
                                 <select name="doctor" class="form-control" required>
                                     <option value="">{{ __('Select Doctor') }}</option>
                                     @foreach ( $doctors as $doctor )
-                                        <option value="{{ $doctor->id }}" class="has-value" data-polyclinic="{{ $doctor->polyclinic }}" style="display: none">{{ $doctor->full_name }}</option>
+                                        <option value="{{ $doctor->id }}" class="has-value" data-polyclinic="{{ $doctor->polyclinic }}" {{ $checkup->doctor_id == $doctor->id ? 'selected' : '' }}>{{ $doctor->full_name }}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6 form-group disabled">
+                            <div class="col-md-6 form-group">
                                 <label>{{ __('Checkup Date') }}</label>
-                                <input name="checkup_date" type="text" class="form-control datepicker checkup-date" placeholder="{{ __('Select Date') }}" data-alt-format="DD, dd MM yy" data-min-date="0" data-max-date="+1y" required>
+                                <input name="checkup_date" type="text" class="form-control datepicker checkup-date" placeholder="{{ __('Select Date') }}" data-alt-format="DD, dd MM yy" data-min-date="0" data-max-date="+1y" value="{{ $checkup->date }}" required>
                             </div>
-                            <div class="col-md-6 form-group disabled">
+                            <div class="col-md-6 form-group">
                                 <label>{{ __('Checkup Time') }}</label>
                                 <select name="checkup_time" class="form-control" required>
                                     <option value="">{{ __('Select Time') }}</option>
+                                    @foreach ( $schedules as $schedule )
+                                        <option value="{{ $schedule->id }}" class="has-value" {{ $checkup->schedule_id == $schedule->id ? 'selected' : '' }}>{{ $schedule->time_range }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
+                        @if ( Auth::user()->isDoctor() )
+                            <div class="form-group">
+                                <label>{{ __('Doctor Note') }}</label>
+                                <textarea name="doctor_note" rows="3" class="form-control" required></textarea>
+                            </div>
+                        @endif
 
                         <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
-                        <a href="{{ route('checkup.index') }}" type="button" class="btn btn-secondary ml-2">{{ __('Back') }}</a>
+                        <a href="{{ route('home') }}" type="button" class="btn btn-secondary ml-2">{{ __('Back') }}</a>
                     </form>
                 </div>
             </div>
@@ -125,7 +120,22 @@
 @push('footer-after-script')
     <script>
 
-        let schedules;
+        let schedules = @json($checkup->doctor->formatSchedules());
+        initDoctorList();
+        initCheckupDates();
+
+        // Initial doctor list on first load edit
+        function initDoctorList() {
+            let polyclinic = $('select[name=polyclinic]').val();
+
+            $('select[name="doctor"] option.has-value').each( function() {
+                if ( $(this).data('polyclinic') == polyclinic ) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        }
 
         // Prevent submit form on non new patient and empty input patient_id
         $('form.form-checkup').on('submit', function(event) {
