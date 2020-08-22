@@ -1,16 +1,4 @@
 TASK
-- Checkup List (Submenu Patient)
-  - Form Filter by Doctor
-  - Incoming Checkup
-  - Past Checkup
-  - All Checkup
-  - Button Patient Medical Record (Rekam Medis)
-- Checkup List (Doctor UI)
-  - Form Filter by Doctor : Autoset this doctor
-  - List same as Admin UI
-  - Can View another doctor checkup
-  - Unable | Edit another doctor checkup
-
 - View Checkup Information (Admin & Doctor UI)
   - Same layout as form checkup
   - Button View Medical Record
@@ -38,6 +26,12 @@ TASK
   - Patient Data
   - List of preview checkup history
   - Button See detail checkup
+
+- Checkup List (Doctor UI)
+  - Form Filter by Doctor : Autoset this doctor
+  - List same as Admin UI
+  - Can View another doctor checkup
+  - Unable | Edit another doctor checkup
 
 - HTML Dashboard
   - Incoming Checkup Today (Limit 10)

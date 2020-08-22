@@ -100,7 +100,7 @@
                             <input name="password" type="password" class="form-control" required>
                         </div>
                         <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
-                        <a href="{{ route('doctor.index') }}" type="button" class="btn btn-secondary ml-2">{{ __('Back') }}</a>
+                        <a href="{{ route('doctor.index') }}" role="button" class="btn btn-secondary ml-2">{{ __('Back') }}</a>
                     </form>
                 </div>
             </div>

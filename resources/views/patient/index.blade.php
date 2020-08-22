@@ -6,34 +6,38 @@
             <div class="card">
                 <div class="card-header">{{ __('Patient List') }}</div>
                 <div class="card-body">
-                    <a href="{{ route('patient.create') }}" class="btn btn-primary mb-3">{{ __('Add') }}</a>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">{{ __('Name') }}</th>
-                                <th scope="col">{{ __('Birthday') }}</th>
-                                <th scope="col">{{ __('Gender') }}</th>
-                                <th scope="col">{{ __("Address") }}</th>
-                                <th scope="col" class="text-center">{{ __('Action') }}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach( $patients as $i => $patient )
+                    <a href="{{ route('patient.create') }}" role="button" class="btn btn-primary mb-3">{{ __('Add') }}</a>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
                                 <tr>
-                                    <th scope="row">{{ $i + 1 }}</th>
-                                    <td>{{ $patient->full_name }}</td>
-                                    <td>{{ Date::parse($patient->birthdate)->format('d F Y') }}</td>
-                                    <td>{{ __($patient->gender) }}</td>
-                                    <td>{{ $patient->address }}</td>
-                                    <td class="text-center">
-                                        <a href="{{ route('patient.edit', $patient->id) }}" class="btn btn-link text-secondary shadow-none"><i class="fa fa-pencil"></i></a>
-                                        <button type="button" class="btn btn-link text-danger shadow-none" data-toggle="modal" data-target="#modal-form-delete" data-name="{{ $patient->full_name }}" data-url="{{ route('patient.destroy', $patient->id) }}"><i class="fa fa-times"></i></button>
-                                    </td>
+                                    <th scope="col">#</th>
+                                    <th scope="col">{{ __('Name') }}</th>
+                                    <th scope="col">{{ __('Birthday') }}</th>
+                                    <th scope="col">{{ __('Gender') }}</th>
+                                    <th scope="col">{{ __("Address") }}</th>
+                                    <th scope="col" class="text-center">{{ __('Action') }}</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach( $patients as $i => $patient )
+                                    <tr>
+                                        <th class="align-middle" scope="row">{{ $i + 1 }}</th>
+                                        <td class="align-middle">{{ $patient->full_name }}</td>
+                                        <td class="align-middle">{{ Date::parse($patient->birthdate)->format('d F Y') }}</td>
+                                        <td class="align-middle">{{ __($patient->gender) }}</td>
+                                        <td class="align-middle">{{ $patient->address }}</td>
+                                        <td class="align-middle text-center">
+                                            <a href="{{ route('patient.edit', $patient->id) }}" role="button" class="btn btn-link text-secondary shadow-none"><i class="fa fa-pencil"></i></a>
+                                            <button type="button" class="btn btn-link text-danger shadow-none" data-toggle="modal" data-target="#modal-form-delete" data-name="{{ $patient->full_name }}" data-url="{{ route('patient.destroy', $patient->id) }}"><i class="fa fa-times"></i></button>
+                                            <br>
+                                            <a href="#" role="button" class="btn btn-info btn-sm btn-block">{{ __('Medical Record') }}</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

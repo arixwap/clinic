@@ -42,7 +42,7 @@
                             <input name="phone" type="tel" class="form-control" value="{{ $patient->phone }}">
                         </div>
                         <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
-                        <a href="{{ route('patient.index') }}" type="button" class="btn btn-secondary ml-3">{{ __('Back') }}</a>
+                        <a href="{{ route('patient.index') }}" role="button" class="btn btn-secondary ml-3">{{ __('Back') }}</a>
                     </form>
                 </div>
             </div>

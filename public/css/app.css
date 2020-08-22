@@ -10173,7 +10173,8 @@ button.bg-cyan:focus {
   border-radius: 50% !important;
 }
 
-.rounded-pill {
+.rounded-pill,
+.btn {
   border-radius: 50rem !important;
 }
 
@@ -17089,41 +17090,9 @@ body {
 }
 
 /**
- * Admin Menu Side Bar
+ * Override Button Style
  * -------------------------------------------------------------------------------
 */
-
-ul.admin-side-menu {
-  display: flex;
-  flex-direction: column;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  background-color: #fff;
-}
-
-ul.admin-side-menu li > a {
-  position: relative;
-  display: block;
-  padding: 0.75rem 1.25rem;
-  border: 1px solid rgba(52, 58, 64, 0.125);
-}
-
-ul.admin-side-menu li:not(:first-of-type) > a {
-  border-top: none;
-}
-
-ul.admin-side-menu ul {
-  font-size: 0.9em;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-ul.admin-side-menu ul li > a {
-  padding-left: 35px;
-  border-top: none;
-}
 
 /**
  * Form Group Disabled
@@ -17297,6 +17266,43 @@ ul.admin-side-menu ul li > a {
 
 .ui-datepicker .ui-state-disabled {
   opacity: 0.25;
+}
+
+/**
+ * Admin Menu Side Bar
+ * -------------------------------------------------------------------------------
+*/
+
+ul.admin-side-menu {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background-color: #fff;
+}
+
+ul.admin-side-menu li > a {
+  position: relative;
+  display: block;
+  padding: 0.75rem 1.25rem;
+  border: 1px solid rgba(52, 58, 64, 0.125);
+}
+
+ul.admin-side-menu li:not(:first-of-type) > a {
+  border-top: none;
+}
+
+ul.admin-side-menu ul {
+  font-size: 0.9em;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+ul.admin-side-menu ul li > a {
+  padding-left: 35px;
+  border-top: none;
 }
 
 /**

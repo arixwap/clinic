@@ -27,7 +27,7 @@
                                 <li>Putu Mita (L) 30th &emsp;<span class="fa fa-edit"></span></li>
                             </ul>
                             <a href="{{ route('checkup.create') }}" class="btn btn-primary">{{ __('New Checkup') }}</a>
-                            <button class="btn btn-secondary">Lihat Semuanya</button>
+                            <button class="btn btn-secondary ml-2">Lihat Semuanya</button>
                         </div>
                         <div class="col-md-6">
                             <div class="alert alert-primary">Jadwal Praktek Dokter Hari Ini</div>

@@ -7,28 +7,30 @@
                 <div class="card-header">{{ __("Doctor Qualification List") }}</div>
                 <div class="card-body">
                     <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modal-form-add">{{ __('Add') }}</button>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">{{ __('Name') }}</th>
-                                <th scope="col" class="text-center">{{ __('Action') }}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach( $qualifications as $i => $item )
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
                                 <tr>
-                                    <th scope="row">{{ $i + 1 }}</th>
-                                    <td>{{ $item->value }}</td>
-                                    <td class="text-center">
-                                        <button type="button" class="btn-edit btn btn-link text-secondary shadow-none" data-toggle="modal" data-target="#modal-form-edit" data-name="{{ $item->value }}" data-url="{{ route('qualification.update', $item->id) }}"><i class="fa fa-pencil"></i></a>
-                                        <button type="button" class="btn btn-link text-danger shadow-none" data-toggle="modal" data-target="#modal-form-delete" data-name="{{ $item->value }}" data-url="{{ route('qualification.destroy', $item->id) }}"><i class="fa fa-times"></i></button>
-                                        </form>
-                                    </td>
+                                    <th scope="col">#</th>
+                                    <th scope="col">{{ __('Name') }}</th>
+                                    <th scope="col" class="text-center">{{ __('Action') }}</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach( $qualifications as $i => $item )
+                                    <tr>
+                                        <th scope="row">{{ $i + 1 }}</th>
+                                        <td>{{ $item->value }}</td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn-edit btn btn-link text-secondary shadow-none" data-toggle="modal" data-target="#modal-form-edit" data-name="{{ $item->value }}" data-url="{{ route('qualification.update', $item->id) }}"><i class="fa fa-pencil"></i></a>
+                                            <button type="button" class="btn btn-link text-danger shadow-none" data-toggle="modal" data-target="#modal-form-delete" data-name="{{ $item->value }}" data-url="{{ route('qualification.destroy', $item->id) }}"><i class="fa fa-times"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
