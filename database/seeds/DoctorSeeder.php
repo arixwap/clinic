@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Database\Seeder;
+use App\Role;
 use App\User;
+use Illuminate\Database\Seeder;
 
 class DoctorSeeder extends Seeder
 {
@@ -12,13 +13,13 @@ class DoctorSeeder extends Seeder
      */
     public function run()
     {
-        /**
-         * Seeding - Dokter Umum
-         */
-        $user = User::create([
-            'name' => 'Tirta Hudhi',
-            'email' => 'tirta@gmail.com',
-            'password' => Hash::make('12345678'),
+        $role = Role::where('slug', 'doctor')->first();
+
+        // Seeding - Dokter Umum
+        $user = $role->users()->create([
+            'name' => 'Tirta Mandira Hudhi',
+            'email' => 'tirta@clinic.test',
+            'password' => Hash::make('12345678')
         ]);
 
         // Create data doctor dengan sync relation user
@@ -29,11 +30,11 @@ class DoctorSeeder extends Seeder
             'birthdate' => '1991-07-30',
             'address' => 'Surakarta, Jawa Tengah',
             'qualification' => 'Dokter Umum',
-            'polyclinic' => 'Poliklinik Umum',
+            'polyclinic' => 'Poliklinik Umum'
         ]);
 
         // Create data schedule dengan sync relation user doctor
-        $user->doctor->schedule()->createMany([
+        $user->doctor->schedules()->createMany([
             [
                 'weekday' => 'mon',
                 'time_start' => '09:00',
@@ -83,17 +84,15 @@ class DoctorSeeder extends Seeder
                 'weekday' => 'fri',
                 'time_start' => '19:00',
                 'time_end' => '21:00'
-            ],
+            ]
         ]);
+        // --
 
-
-        /**
-         * Seeding - Dokter Gigi
-         */
-        $user = User::create([
-            'name' => 'Agus Kurniawan',
-            'email' => 'agus@gmail.com',
-            'password' => Hash::make('12345678'),
+        // Seeding - Dokter Gigi
+        $user = $role->users()->create([
+            'name' => 'Kadek Agus Kurniawan',
+            'email' => 'agus@clinic.test',
+            'password' => Hash::make('12345678')
         ]);
 
         // Create data doctor dengan sync relation user
@@ -104,11 +103,11 @@ class DoctorSeeder extends Seeder
             'birthdate' => '1987-01-30',
             'address' => 'Denpasar, Bali',
             'qualification' => 'Dokter Gigi',
-            'polyclinic' => 'Poliklinik Gigi',
+            'polyclinic' => 'Poliklinik Gigi'
         ]);
 
         // Create data schedule dengan sync relation user doctor
-        $user->doctor->schedule()->createMany([
+        $user->doctor->schedules()->createMany([
             [
                 'weekday' => 'fri',
                 'time_start' => '18:00',
@@ -122,5 +121,6 @@ class DoctorSeeder extends Seeder
                 'limit' => '2'
             ]
         ]);
+        // --
     }
 }

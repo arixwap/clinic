@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use App\Patient;
 use Carbon\Carbon;
+use Illuminate\Database\Seeder;
 
 class PatientSeeder extends Seeder
 {
