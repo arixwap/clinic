@@ -43,7 +43,7 @@ class AjaxController extends Controller
                 'Male' => __('M_gender'),
                 'Female' => __('F_gender')
             ];
-            $patients = Patient::where("full_name", "LIKE", "%$search%")
+            $patients = Patient::where("name", "LIKE", "%$search%")
                             ->orWhere("birthplace", "LIKE", "%$search%")
                             ->orWhere("address", "LIKE", "%$search%")
                             ->orWhere("phone", "LIKE", "%$search%")
@@ -51,7 +51,7 @@ class AjaxController extends Controller
 
             foreach ( $patients as $patient ) {
                 $label = sprintf("%s (%s) %sth - %s",
-                            $patient->full_name,
+                            $patient->name,
                             $gender[$patient->gender],
                             intval(date('Y')) - intval(date('Y', strtotime($patient->birthdate))),
                             $patient->address

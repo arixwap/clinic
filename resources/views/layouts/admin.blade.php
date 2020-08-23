@@ -65,9 +65,9 @@
                             <li>
                                 <a href="{{ route('patient.index') }}">{{ __('Patient') }}</a>
                                 <ul>
-                                    <li><a href="{{ route('checkup.index') }}">{{ __('Checkup') }}</a></li>
+                                    <li><a href="{{ route('checkup.index') }}">{{ __('Checkup List') }}</a></li>
                                     <li><a href="{{ route('patient.index') }}">{{ __('Patient List') }}</a></li>
-                                    <li><a href="{{ route('patient.create') }}">{{ __('Add Patient') }}</a></li>
+                                    {{-- <li><a href="{{ route('patient.create') }}">{{ __('Add Patient') }}</a></li> --}}
                                 </ul>
                             </li>
                             <li>
@@ -79,6 +79,14 @@
                                 </ul>
                             </li>
                             <li><a href="{{ route('polyclinic.index') }}">{{ __('Polyclinics') }}</a></li>
+                            <li>
+                                <a href="{{ route('user.index') }}">{{ __('User') }}</a>
+                                <ul>
+                                    <li><a href="{{ route('user.index') }}">{{ __('User List') }}</a></li>
+                                    <li><a href="{{ route('user.create') }}">{{ __('Add User') }}</a></li>
+                                    <li><a href="{{ route('role.index') }}">{{ __('Role') }}</a></li>
+                                </ul>
+                            </li>
                         </ul>
                     </div>
                     <div class="col-md">

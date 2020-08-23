@@ -15,7 +15,7 @@ class PatientSeeder extends Seeder
     {
         Patient::insert([
             [
-                'full_name' => 'Wayan Subagia',
+                'name' => 'Wayan Subagia',
                 'birthplace' => 'Klungkung',
                 'birthdate' => '1963-01-11',
                 'address' => 'Akah, Klungkung',
@@ -25,7 +25,7 @@ class PatientSeeder extends Seeder
                 'updated_at' => Carbon::now()
             ],
             [
-                'full_name' => 'Ketut Mellinggih',
+                'name' => 'Ketut Mellinggih',
                 'birthplace' => 'Payangan',
                 'birthdate' => '1958-04-01',
                 'address' => 'Br Babadan, Ds Payangan',
@@ -35,7 +35,7 @@ class PatientSeeder extends Seeder
                 'updated_at' => Carbon::now()
             ],
             [
-                'full_name' => 'Toni Desrentes',
+                'name' => 'Toni Desrentes',
                 'birthplace' => 'Saint-Médard-en-Jalles, France',
                 'birthdate' => '1997-08-17',
                 'address' => 'Villa Cemadik, Br. Pujung Kaja, Tampaksiring',

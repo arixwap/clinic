@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-header">{{ __('Set Schedule') }}</div>
                 <div class="card-body">
-                    <p class="h4 font-weight-bold">{{ $doctor->full_name }}</p>
+                    <p class="h4 font-weight-bold">{{ $doctor->user->name }}</p>
                     <p class="h5 font-weight-bold">{{ $doctor->polyclinic }}</p>
                     <br>
                     <form action="{{ route('schedule.edit', $doctor->id) }}" method="post" autocomplete="off">

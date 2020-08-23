@@ -17370,6 +17370,7 @@ ul.admin-side-menu ul li > a {
   padding-right: 0;
   pointer-events: none;
   resize: none;
+  height: auto;
 }
 
 /**

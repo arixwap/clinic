@@ -3,6 +3,8 @@
     "logout": "keluar",
     "create": "baru",
     "edit": "ubah",
+    "user": "user",
+    "role": "akses",
     "patient": "pasien",
     "doctor": "dokter",
     "schedule": "jadwal",
@@ -27,10 +29,27 @@
     "E-Mail Address": "Email",
     "Password": "Password",
     "Confirm Password": "Konfirmasi Password",
+    "Change Password": "Ubah Password",
     "Remember Me": "Ingat Saya",
     "Forgot Your Password?": "Lupa Password?",
     "Reset Password": "Reset Password",
     "Send Password Reset Link": "Kirim Link Reset Password",
+
+    "User": "User",
+    "Users": "Jumlah User",
+    "User List": "Data User",
+    "Add User": "Tambah User",
+    "Role": "Akses",
+    "Slug": "Slug",
+    "Email": "Email",
+    "Description": "Keterangan",
+    "Created Date": "Tanggal Dibuat",
+    "Role List": "Data Akses",
+    "Add Role": "Tambah Akses",
+    "New Role": "Akses Baru",
+    "Edit Role": "Ubah Akses",
+    "Delete Role": "Hapus Akses",
+    "Role Name": "Nama Akses",
 
     "Dashboard": "Dashboard",
     "General": "Umum",
@@ -88,6 +107,7 @@
     "Select Time": "Pilih Jam",
 
     "Checkup": "Checkup",
+    "Checkup List": "Data Checkup",
     "New Checkup": "Checkup Baru",
     "Edit Checkup": "Ubah Checkup",
     "Cancel Checkup": "Batal Checkup",
@@ -105,6 +125,7 @@
     "New Polyclinic": "Poliklinik Baru",
     "Polyclinic List": "Data Poliklinik",
     "Select Polyclinic": "Pilih Poliklinik",
+    "All Polyclinic": "Semua Poliklinik",
 
     "Type": "Tipe",
     "Action": "Opsi",
@@ -121,5 +142,5 @@
     "Birthday": "Tanggal Lahir",
     "Phone": "Telepon",
     "Search": "Cari",
-    "Search by patient name, polyclinic or doctor": "Cari nama pasien, poliklinik atau dokter"
+    "Search by patient name, bpjs or doctor": "Cari nama pasien, bpjs atau dokter"
 }

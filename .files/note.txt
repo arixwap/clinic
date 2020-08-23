@@ -1,4 +1,8 @@
 TASK
+- Checkup Update Database
+- Checkup List : Filter Date
+- Patient & Doctor List: Search Filter
+
 - Edit Checkup (Admin UI)
   - Edit BPJS Number
   - Edit Data Patient
@@ -30,12 +34,12 @@ TASK
   - Popup Weekdays All Doctor Schedule
 
 - CRUD User & Role
-  - Owner / Superadmin
+  - Superadmin (Owner)
     - CRUD User
     - Edit / Undone Checkup even status is_done
       - Edit autoset is_done in Checkup Model
     - Bisa Semua
-  - Admin :
+  - User :
     - CRUD Pasien
     - CRUD Patient Checkup
     - CRUD Doctor
@@ -74,6 +78,7 @@ TASK
 
 ---------------------------------------------------------------------------
 FUTURE IMPROVEMENT
+- Backend Validation
 - TUI Calendar - https://github.com/nhn/tui.calendar
 - Migrate to Vue
 - Customable User Role

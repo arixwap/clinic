@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Doctor;
+use App\Option;
+use App\Role;
+use App\Schedule;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use App\User;
-use App\Doctor;
-use App\Schedule;
-use App\Option;
 
 class DoctorController extends Controller
 {
@@ -44,15 +45,12 @@ class DoctorController extends Controller
      */
     public function store(Request $request)
     {
-        // Simpan data dokter sebagai user
-        $user = User::create([
-            'name' => $request->input('full_name'),
-            'email' => $request->input('email'),
-            'password' => Hash::make( $request->input('password') ), // data password di encrypt
-        ]);
+        $data = $request->all();
+        $data['password'] = Hash::make($data['password']); // data password di encrypt
 
-        // Simpan data utama dokter, dengan menggunakan user relationship
-        $user->doctor()->create($request->all());
+        $role = Role::where('slug', 'doctor')->firstOrFail();
+        $user = $role->users()->create($data); // Simpan data dokter sebagai user
+        $user->doctor()->create($data); // Simpan data dokter, dengan user relationship
 
         return redirect()->route('schedule.index', $user->doctor->id);
     }
@@ -92,24 +90,16 @@ class DoctorController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $data = $request->except(['password']);
+        if ( $password = $request->input('password') ) $data['password'] = Hash::make($password);
+
+        // Update doctor
         $doctor = Doctor::findOrFail($id);
+        $doctor->update($data);
 
-        // Update data doctor
-        $doctor->update( $request->all() );
-
-        // Buat array untuk update data user
-        $dataUser = [
-            'name' => $request->input('full_name'),
-            'email' => $request->input('email'),
-        ];
-
-        // Masukan password jika input form terisi
-        if ( $request->has('password') ) {
-            $dataUser['password'] = Hash::make( $request->input('password') );
-        }
-
-        // Update User relationship Doctor
-        $doctor->user()->update( $dataUser );
+        // Update user by doctor_id
+        $user = User::findOrFail($doctor->user_id);
+        $user->update($data);
 
         return redirect()->route('doctor.index');
     }

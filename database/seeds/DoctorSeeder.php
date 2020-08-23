@@ -17,18 +17,17 @@ class DoctorSeeder extends Seeder
 
         // Seeding - Dokter Umum
         $user = $role->users()->create([
-            'name' => 'Tirta Mandira Hudhi',
+            'name' => 'Dr. Tirta Mandira Hudhi',
             'email' => 'tirta@clinic.test',
-            'password' => Hash::make('12345678')
+            'password' => Hash::make('12345678'),
+            'gender' => 'Male',
+            'birthplace' => 'Surakarta',
+            'birthdate' => '1991-07-30',
+            'address' => 'Surakarta, Jawa Tengah'
         ]);
 
         // Create data doctor dengan sync relation user
         $user->doctor()->create([
-            'full_name' => 'Dr. Tirta Mandira Hudhi',
-            'gender' => 'Male',
-            'birthplace' => 'Surakarta',
-            'birthdate' => '1991-07-30',
-            'address' => 'Surakarta, Jawa Tengah',
             'qualification' => 'Dokter Umum',
             'polyclinic' => 'Poliklinik Umum'
         ]);
@@ -90,18 +89,17 @@ class DoctorSeeder extends Seeder
 
         // Seeding - Dokter Gigi
         $user = $role->users()->create([
-            'name' => 'Kadek Agus Kurniawan',
+            'name' => 'Dr. Kadek Agus Kurniawan',
             'email' => 'agus@clinic.test',
-            'password' => Hash::make('12345678')
+            'password' => Hash::make('12345678'),
+            'gender' => 'Male',
+            'birthplace' => 'Denpasar',
+            'birthdate' => '1987-01-30',
+            'address' => 'Denpasar, Bali'
         ]);
 
         // Create data doctor dengan sync relation user
         $user->doctor()->create([
-            'full_name' => 'Dr. Kadek Agus Kurniawan',
-            'gender' => 'Male',
-            'birthplace' => 'Denpasar',
-            'birthdate' => '1987-01-30',
-            'address' => 'Denpasar, Bali',
             'qualification' => 'Dokter Gigi',
             'polyclinic' => 'Poliklinik Gigi'
         ]);

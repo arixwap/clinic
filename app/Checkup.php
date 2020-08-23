@@ -2,7 +2,7 @@
 
 namespace App;
 
-use Date;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -16,10 +16,6 @@ class Checkup extends Model
      * @var array
      */
     protected $fillable = [
-        'schedule_id',
-        'patient_id',
-        'doctor_id',
-        'user_id',
         'number',
         'date',
         'time_start',
@@ -81,7 +77,7 @@ class Checkup extends Model
      */
     public function getFormattedDateAttribute()
     {
-        return Date::parse($this->attributes['date'])->format('l, d F Y');
+        return Carbon::parse($this->attributes['date'])->format('l, d F Y');
     }
 
     /**
@@ -92,7 +88,7 @@ class Checkup extends Model
      */
     public function getIsDoneAttribute()
     {
-        $now = Date::now();
+        $now = Carbon::now();
         $checkupDate = $this->date;
 
         // Set is_done if date passed 1 day
@@ -131,8 +127,8 @@ class Checkup extends Model
      */
     public function getTimeRangeAttribute()
     {
-        $time_start = Date::parse($this->time_start)->format('h:i A');
-        $time_end = Date::parse($this->time_end)->format('h:i A');
+        $time_start = Carbon::parse($this->time_start)->format('h:i A');
+        $time_end = Carbon::parse($this->time_end)->format('h:i A');
 
         return "{$time_start} - {$time_end}";
     }

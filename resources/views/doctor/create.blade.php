@@ -16,7 +16,7 @@
                         <hr>
                         <div class="form-group">
                             <label>{{ __('Full Name') }}</label>
-                            <input name="full_name" type="text" class="form-control" required>
+                            <input name="name" type="text" class="form-control" required>
                         </div>
                         <div class="row">
                             <div class="col-md-4 form-group">

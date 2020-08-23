@@ -16,19 +16,12 @@ class Doctor extends Model
      * @var array
      */
     protected $fillable = [
-        'full_name',
-        'gender',
-        'birthplace',
-        'birthdate',
-        'address',
-        'phone',
         'university',
         'qualification',
         'str',
         'str_start_date',
         'str_end_date',
         'polyclinic',
-        'photo_url',
     ];
 
     /**

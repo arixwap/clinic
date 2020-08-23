@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->date('birthdate')->nullable();
             $table->longText('address')->nullable();
             $table->string('phone')->nullable();
+            $table->text('photo')->nullable()->comment('Photo URL');
             $table->timestamps();
             $table->softDeletes();
 

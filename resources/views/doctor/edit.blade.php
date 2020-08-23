@@ -16,34 +16,34 @@
                         <hr>
                         <div class="form-group">
                             <label>{{ __('Full Name') }}</label>
-                            <input name="full_name" type="text" class="form-control" value="{{ $doctor->full_name }}" required>
+                            <input name="name" type="text" class="form-control" value="{{ $doctor->user->name }}" required>
                         </div>
                         <div class="row">
                             <div class="col-md-4 form-group">
                                 <label>{{ __('Gender') }}</label>
                                 <select name="gender" class="form-control" required>
                                     <option value="">-Pilih-</option>
-                                    <option value="Male" {{ ($doctor->gender == 'Male') ? 'selected' : '' }}>{{ __('Male') }}</option>
-                                    <option value="Female" {{ ($doctor->gender == 'Female') ? 'selected' : '' }}>{{ __('Female') }}</option>
+                                    <option value="Male" {{ ($doctor->user->gender == 'Male') ? 'selected' : '' }}>{{ __('Male') }}</option>
+                                    <option value="Female" {{ ($doctor->user->gender == 'Female') ? 'selected' : '' }}>{{ __('Female') }}</option>
                                 </select>
                             </div>
                             <div class="col-md-4 form-group">
                                 <label>{{ __('Born Place') }}</label>
-                                <input name="birthplace" type="text" class="form-control" value="{{ $doctor->birthplace }}" required>
+                                <input name="birthplace" type="text" class="form-control" value="{{ $doctor->user->birthplace }}" required>
                             </div>
                             <div class="col-md-4 form-group">
                                 <label>{{ __('Birthday') }}</label>
-                                <input name="birthdate" type="text" class="form-control datepicker" data-alt-format="d MM yy" data-max-date="-15y" data-change-month="true" data-change-year="true" value="{{ $doctor->birthdate }}" required>
+                                <input name="birthdate" type="text" class="form-control datepicker" data-alt-format="d MM yy" data-max-date="-15y" data-change-month="true" data-change-year="true" value="{{ $doctor->user->birthdate }}" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label>{{ __('Address') }}</label>
-                            <textarea name="address" rows="3" class="form-control" required>{{ $doctor->address }}</textarea>
+                            <textarea name="address" rows="3" class="form-control" required>{{ $doctor->user->address }}</textarea>
                         </div>
                         <div class="row">
                             <div class="col-md-6 form-group">
                                 <label>{{ __('Phone') }}</label>
-                                <input name="phone" type="tel" class="form-control" value="{{ $doctor->phone }}">
+                                <input name="phone" type="tel" class="form-control" value="{{ $doctor->user->phone }}">
                             </div>
                             <div class="col-md-6 form-group">
                                 <label>{{ __('Polyclinic') }}</label>
@@ -97,7 +97,7 @@
                         </div>
                         <div class="form-group">
                             <label>{{ __('Password') }}</label>
-                            <input name="password" type="password" class="form-control">
+                            <input name="password" type="password" class="form-control" placeholder="{{ __('Change Password') }}">
                         </div>
                         <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
                         <a href="{{ route('doctor.index') }}" role="button" class="btn btn-secondary ml-2">{{ __('Back') }}</a>

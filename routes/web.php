@@ -37,17 +37,23 @@ Route::middleware('auth')->group( function() {
 
     Route::get('ajax', 'AjaxController@index')->name('ajax');
 
+    // Resource Route Role
+    Route::resource(__('role'), 'RoleController', ['names' => 'role']);
+
+    // Resource Route User
+    Route::resource(__('user'), 'UserController', ['names' => 'user']);
+
     // Resource Route Patient
-    Route::resource(__('patient'), 'PatientController', ['names' => 'patient'])->except(['show']);
+    Route::resource(__('patient'), 'PatientController', ['names' => 'patient']);
 
     // Resource Route Doctor
-    Route::resource(__('doctor'), 'DoctorController', ['names' => 'doctor'])->except(['show']);
+    Route::resource(__('doctor'), 'DoctorController', ['names' => 'doctor']);
     Route::get(__('doctor').'/'.__('schedule').'/{id}', 'DoctorController@schedule')->name('schedule.index');
     Route::post(__('doctor').'/'.__('schedule').'/{id}', 'DoctorController@updateSchedule')->name('schedule.edit');
 
-    Route::resource(__('polyclinic'), 'PolyclinicController', ['names' => 'polyclinic'])->except(['create', 'show', 'edit']);
+    Route::resource(__('polyclinic'), 'PolyclinicController', ['names' => 'polyclinic']);
 
-    Route::resource(__('qualification'), 'QualificationController', ['names' => 'qualification'])->except(['create', 'show', 'edit']);
+    Route::resource(__('qualification'), 'QualificationController', ['names' => 'qualification']);
 
     // Resource Route Checkup
     Route::resource(__('checkup'), 'CheckupController', ['names' => 'checkup']);

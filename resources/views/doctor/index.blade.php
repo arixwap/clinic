@@ -22,12 +22,12 @@
                                 @foreach( $doctors as $i => $doctor )
                                     <tr>
                                         <th class="align-middle" scope="row">{{ $i + 1 }}</th>
-                                        <td class="align-middle">{{ $doctor->full_name }}</td>
+                                        <td class="align-middle">{{ $doctor->user->name }}</td>
                                         <td class="align-middle">{{ __($doctor->qualification) }}</td>
                                         <td class="align-middle">{{ $doctor->polyclinic }}</td>
                                         <td class="align-middle text-center">
                                             <a href="{{ route('doctor.edit', $doctor->id) }}" role="button" class="btn btn-link text-secondary shadow-none"><i class="fa fa-pencil"></i></a>
-                                            <button type="button" class="btn btn-link text-danger shadow-none" data-toggle="modal" data-target="#modal-form-delete" data-name="{{ $doctor->full_name }}" data-url="{{ route('doctor.destroy', $doctor->id) }}"><i class="fa fa-times"></i></button>
+                                            <button type="button" class="btn btn-link text-danger shadow-none" data-toggle="modal" data-target="#modal-form-delete" data-name="{{ $doctor->user->name }}" data-url="{{ route('doctor.destroy', $doctor->id) }}"><i class="fa fa-times"></i></button>
                                             <br>
                                             <a href="{{ route('schedule.index', $doctor->id) }}" role="button" role="button" class="btn btn-info btn-sm btn-block">{{ __('Set Schedule') }}</a>
                                         </td>
