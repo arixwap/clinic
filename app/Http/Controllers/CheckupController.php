@@ -22,35 +22,34 @@ class CheckupController extends Controller
     {
         $checkup = Checkup::select();
 
-        // Filter checkup by search string
-        if ( $search = $request->input('search') ) {
-
-            $checkup->where( function ($query) use ($search) {
-
-                // Search checkup by patient name - relation Checkup to Patient
-                $query->orWhereHas('patient', function ($query) use ($search) {
-                    $query->where("full_name", "LIKE", "%$search%");
-                });
-
-                // Search checkup by doctor name or polyclinic - relation Checkup to Doctor
-                $query->orWhereHas('doctor', function ($query) use ($search) {
-                    $query->where("full_name", "LIKE", "%$search%")
-                        ->orWhere("polyclinic", "LIKE", "%$search%");
-                });
-
+        // Filter by polyclinic inside doctor table
+        if ( $polyclinic = $request->input('polyclinic') ) {
+            $checkup->whereHas('doctor', function ($query) use ($polyclinic) {
+                $query->where("polyclinic", "$polyclinic");
             });
-
         }
 
-        // Filter checkup by doctor_id
-        if ( $doctorId = $request->input('doctor') ) {
-            $checkup->where('doctor_id', $doctorId);
+        // Filter checkup by search string
+        if ( $search = $request->input('search') ) {
+            $checkup->where( function ($query) use ($search) {
+                // Search checkup by bpjs number
+                $query->orWhere("bpjs", "LIKE", "%$search%");
+                // Search checkup by patient name. Checkups -> Patient
+                $query->orWhereHas('patient', function ($query) use ($search) {
+                    $query->where("name", "LIKE", "%$search%");
+                });
+                // Search checkup by doctor name. Checkups -> Doctors -> User
+                $query->orWhereHas('doctor', function ($query) use ($search) {
+                    $query->whereHas('user', function ($query) use ($search) {
+                        $query->where("name", "LIKE", "%$search%");
+                    });
+                });
+            });
         }
 
         // Filter checkup by date
         $now = Carbon::now();
         $view = $request->input('view') ?: 'incoming';
-
         switch ($view) {
             case 'done':
                 $checkup->whereRaw("TIMESTAMP(`date`, `time_end`) <= '$now'")
@@ -72,10 +71,10 @@ class CheckupController extends Controller
         }
 
         $data['search'] = $search;
-        $data['selectedDoctor'] = $doctorId;
         $data['view'] = $view;
+        $data['selectedPolyclinic'] = $polyclinic;
         $data['checkups'] = $checkup->get();
-        $data['doctors'] = Doctor::all();
+        $data['polyclinics'] = Option::where('name', 'polyclinic')->get();
 
         return view('checkup.index', $data);
     }
@@ -101,25 +100,16 @@ class CheckupController extends Controller
      */
     public function store(Request $request)
     {
-        $patientId = $request->input('patient_id');
+        $schedule = Schedule::findOrFail($request->input('checkup_time'));
         $checkupDate = $request->input('checkup_date');
-        $scheduleId = $request->input('checkup_time');
-
-        // Get schedule data by id
-        $schedule = Schedule::findOrFail($scheduleId);
 
         // Check if data is new patient
-        if ( $patientId == null ) {
-            // store into patient table
-            $patient = Patient::create($request->all());
-            $patientId = $patient->id;
-
-            $isNewPatient = true;
+        $patient = Patient::find($request->input('patient_id'));
+        if ( $patient ) {
+            $isNewPatient = false; // Patient is exist
         } else {
-            // Find patient by id
-            $patient = Patient::findOrFail($patientId);
-
-            $isNewPatient = false;
+            $patient = Patient::create($request->all()); // create new patient and store
+            $isNewPatient = true;
         }
 
         // Get last line number by selected schedule
@@ -129,11 +119,8 @@ class CheckupController extends Controller
                             ->orderBy('number', 'DESC')->first();
         if ( $lastCheckup ) $number = $lastCheckup->number + 1;
 
-        // Store checkup data
-        $patient->checkups()->create([
-            'schedule_id' => $schedule->id,
-            'doctor_id' => $schedule->doctor_id,
-            'user_id' => Auth::id(),
+        // Create new checkup object
+        $checkup = new Checkup([
             'number' => $number,
             'date' => $checkupDate,
             'time_start' => $schedule->time_start,
@@ -142,6 +129,14 @@ class CheckupController extends Controller
             'description' => $request->input('description'),
             'new_patient' => $isNewPatient
         ]);
+
+        // Associate checkup relation
+        $checkup->schedule()->associate($schedule);
+        $checkup->doctor()->associate($schedule->doctor);
+        $checkup->user()->associate(Auth::user());
+
+        // Store checkup data
+        $patient->checkups()->save($checkup);
 
         return redirect()->route('checkup.index');
     }

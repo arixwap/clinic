@@ -12,15 +12,15 @@
                         </div>
                         <div class="row mt-4">
                             <div class="col-lg-4 form-group">
-                                <select name="doctor" class="form-control">
-                                    <option value="">{{ __('All Doctor') }}</option>
-                                    @foreach ( $doctors as $doctor )
-                                        <option value="{{ $doctor->id }}" {{ ($doctor->id == $selectedDoctor) ? 'selected' : '' }}>{{ $doctor->full_name }}</option>
+                                <select name="polyclinic" class="form-control">
+                                    <option value="">{{ __('All Polyclinic') }}</option>
+                                    @foreach ( $polyclinics as $polyclinic )
+                                        <option {{ ($polyclinic->value == $selectedPolyclinic) ? 'selected' : '' }}>{{ $polyclinic->value }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="col form-group">
-                                <input type="text" name="search" class="form-control" value="{{ $search }}" placeholder="{{ __('Search by patient name, polyclinic or doctor') }}">
+                                <input type="text" name="search" class="form-control" value="{{ $search }}" placeholder="{{ __('Search by patient name, bpjs or doctor') }}">
                             </div>
                             <div class="col-4 col-lg-2 form-group">
                                 <button type="submit" class="btn btn-secondary btn-block">{{ __('Search') }}</button>
@@ -74,9 +74,17 @@
                                             <small>{{ $checkup->time_range }}</small>
                                         </td>
                                         <td class="align-middle">{{ $checkup->line_number }}</td>
-                                        <td class="align-middle">{{ $checkup->patient->full_name }}</td>
+                                        <td class="align-middle">
+                                            {{ $checkup->patient->name }}
+                                            @if ( $checkup->bpjs )
+                                                &nbsp;
+                                                <span class="badge badge-primary p-2">{{ __('BPJS') }}</span>
+                                                <br>
+                                                {{ $checkup->bpjs }}
+                                            @endif
+                                        </td>
                                         <td class="align-middle">{{ $checkup->doctor->polyclinic }}</td>
-                                        <td class="align-middle">{{ $checkup->doctor->full_name }}</td>
+                                        <td class="align-middle">{{ $checkup->doctor->user->name }}</td>
                                         <td class="align-middle text-center">
                                             <a href="{{ route('checkup.show', $checkup->id) }}" role="button" class="btn btn-info btn-block btn-sm">{{ __('View') }}</a>
                                         </td>

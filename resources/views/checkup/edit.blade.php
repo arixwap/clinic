@@ -29,7 +29,7 @@
 
                         <div class="form-group">
                             <label>{{ __('Full Name') }}</label>
-                            <input name="full_name" type="text" class="form-control" value="{{ $checkup->patient->full_name }}" required>
+                            <input name="name" type="text" class="form-control" value="{{ $checkup->patient->name }}" required>
                             <input name="patient_id" type="hidden" value="{{ $checkup->patient_id }}" required>
                         </div>
                         <div class="row">
@@ -63,7 +63,7 @@
 
                         <div class="form-group">
                             <label>{{ __('Complaints') }}</label>
-                            <textarea name="description" rows="3" class="form-control" required>{{ $checkup->description }}"</textarea>
+                            <textarea name="description" rows="3" class="form-control" required>{{ $checkup->description }}</textarea>
                         </div>
                         <div class="row">
                             <div class="col-md-6 form-group">
@@ -81,7 +81,7 @@
                                 <select name="doctor" class="form-control" required>
                                     <option value="">{{ __('Select Doctor') }}</option>
                                     @foreach ( $doctors as $doctor )
-                                        <option value="{{ $doctor->id }}" class="has-value" data-polyclinic="{{ $doctor->polyclinic }}" {{ $checkup->doctor_id == $doctor->id ? 'selected' : '' }}>{{ $doctor->full_name }}</option>
+                                        <option value="{{ $doctor->id }}" class="has-value" data-polyclinic="{{ $doctor->polyclinic }}" {{ $checkup->doctor_id == $doctor->id ? 'selected' : '' }}>{{ $doctor->user->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -101,10 +101,10 @@
                                 </select>
                             </div>
                         </div>
-                        @if ( Auth::user()->isDoctor() )
+                        @if ( Auth::user()->isRole('doctor') )
                             <div class="form-group">
                                 <label>{{ __('Doctor Note') }}</label>
-                                <textarea name="doctor_note" rows="3" class="form-control" required></textarea>
+                                <textarea name="doctor_note" rows="3" class="form-control" required>{{ $checkup->doctor_note }}</textarea>
                             </div>
                         @endif
 

@@ -43,7 +43,7 @@
                         <div class="new-patient-form" style="display: none">
                             <div class="form-group">
                                 <label>{{ __('Full Name') }}</label>
-                                <input name="full_name" type="text" class="form-control" required disabled>
+                                <input name="name" type="text" class="form-control" required disabled>
                             </div>
                             <div class="row">
                                 <div class="col-md-4 form-group">
@@ -69,7 +69,7 @@
                             </div>
                             <div class="form-group">
                                 <label>{{ __('Phone') }}</label>
-                                <input name="phone" type="tel" class="form-control" required disabled>
+                                <input name="phone" type="text" class="form-control" disabled>
                             </div>
                         </div>
 
@@ -95,7 +95,7 @@
                                 <select name="doctor" class="form-control" required>
                                     <option value="">{{ __('Select Doctor') }}</option>
                                     @foreach ( $doctors as $doctor )
-                                        <option value="{{ $doctor->id }}" class="has-value" data-polyclinic="{{ $doctor->polyclinic }}" style="display: none">{{ $doctor->full_name }}</option>
+                                        <option value="{{ $doctor->id }}" class="has-value" data-polyclinic="{{ $doctor->polyclinic }}" style="display: none">{{ $doctor->user->name }}</option>
                                     @endforeach
                                 </select>
                             </div>

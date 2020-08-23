@@ -39,7 +39,7 @@
                     <div class="new-patient-form">
                         <div class="form-group">
                             <label class="font-weight-bold">{{ __('Full Name') }}</label>
-                            <input class="form-readonly" value="{{ $checkup->patient->full_name }}">
+                            <input class="form-readonly" value="{{ $checkup->patient->name }}">
                         </div>
                         <div class="row">
                             <div class="col-md-4 form-group">
@@ -57,7 +57,7 @@
                         </div>
                         <div class="form-group">
                             <label class="font-weight-bold">{{ __('Address') }}</label>
-                            <textarea class="form-readonly">{{ $checkup->patient->address }}</textarea>
+                            <p class="form-readonly">{!! nl2br($checkup->patient->address) !!}</p>
                         </div>
                         <div class="form-group">
                             <label class="font-weight-bold">{{ __('Phone') }}</label>
@@ -66,7 +66,7 @@
                     </div>
                     <div class="form-group">
                         <label class="font-weight-bold">{{ __('Complaints') }}</label>
-                        <textarea class="form-readonly">{{ $checkup->description }}</textarea>
+                        <p class="form-readonly">{!! nl2br($checkup->description) !!}</p>
                     </div>
                     <div class="row">
                         <div class="col-md-6 form-group">
@@ -75,7 +75,7 @@
                         </div>
                         <div class="col-md-6 form-group">
                             <label class="font-weight-bold">{{ __('Doctor') }}</label>
-                            <input class="form-readonly" value="{{ $checkup->doctor->full_name }}">
+                            <input class="form-readonly" value="{{ $checkup->doctor->user->name }}">
                         </div>
                     </div>
                     <div class="row">
@@ -91,7 +91,7 @@
                     @if ( $checkup->doctor_note )
                         <div class="form-group">
                             <label class="font-weight-bold">{{ __('Doctor Notes') }}</label>
-                            <textarea class="form-readonly">{{ $checkup->doctor_note }}</textarea>
+                            <p class="form-readonly">{!! nl2br($checkup->doctor_note) !!}</p>
                         </div>
                     @endif
                     <hr class="mt-5">
