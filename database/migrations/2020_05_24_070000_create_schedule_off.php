@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class SetForeignKeyToSchedulesTable extends Migration
+class CreateScheduleOff extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,15 @@ class SetForeignKeyToSchedulesTable extends Migration
      */
     public function up()
     {
-        Schema::table('schedules', function (Blueprint $table) {
+        Schema::create('schedule_off', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('doctor_id');
+            $table->datetime('start_date');
+            $table->datetime('end_date');
+            $table->boolean('all_day')->default(false);
+            $table->string('description');
+            $table->timestamps();
+
             $table->foreign('doctor_id')->references('id')->on('doctors');
         });
     }
@@ -25,8 +33,6 @@ class SetForeignKeyToSchedulesTable extends Migration
      */
     public function down()
     {
-        Schema::table('schedules', function (Blueprint $table) {
-            $table->dropForeign('schedules_doctor_id_foreign');
-        });
+        Schema::dropIfExists('schedule_off');
     }
 }

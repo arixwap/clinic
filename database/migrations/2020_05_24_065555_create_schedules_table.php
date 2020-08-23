@@ -22,6 +22,8 @@ class CreateSchedulesTable extends Migration
             $table->tinyInteger('limit')->nullable();
             $table->boolean('off')->default(false);
             $table->timestamps();
+
+            $table->foreign('doctor_id')->references('id')->on('doctors');
         });
     }
 

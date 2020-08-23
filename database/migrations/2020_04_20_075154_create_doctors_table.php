@@ -15,7 +15,7 @@ class CreateDoctorsTable extends Migration
     {
         Schema::create('doctors', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');                   // Foreign key ke tabel Users
+            $table->foreignId('user_id');                   // Foreign key tabel Users
             $table->string('full_name');
             $table->string('gender');
             $table->string('birthplace')->nullable();
@@ -31,6 +31,8 @@ class CreateDoctorsTable extends Migration
             $table->text('photo_url')->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

@@ -27,9 +27,14 @@ class CreateCheckupsTable extends Migration
             $table->text('description')->nullable();
             $table->text('doctor_note')->nullable();
             $table->boolean('new_patient')->default(false);
-            $table->boolean('is_done')->default(false)->comment('Is patient already done checkup or not');
+            $table->boolean('is_done')->default(false);
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('schedule_id')->references('id')->on('schedules');
+            $table->foreign('patient_id')->references('id')->on('patients');
+            $table->foreign('doctor_id')->references('id')->on('doctors');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
