@@ -43,7 +43,7 @@ class Role extends Model
      */
     public function isDeletable()
     {
-        $protectedRoles = ['superadmin', 'doctor'];
+        $protectedRoles = ['superadmin', 'owner', 'doctor'];
 
         return ( ! in_array($this->slug, $protectedRoles) );
     }

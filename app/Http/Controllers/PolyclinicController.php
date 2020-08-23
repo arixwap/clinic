@@ -37,11 +37,11 @@ class PolyclinicController extends Controller
      */
     public function store(Request $request)
     {
-        Option::create(array(
+        Option::create([
             'name' => 'polyclinic',
             'value' => $request->input('polyclinic'),
             'order' => 0
-        ));
+        ]);
 
         return response('success', 200);
     }

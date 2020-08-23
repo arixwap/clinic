@@ -19,12 +19,11 @@
                             <tbody>
                                 @foreach( $qualifications as $i => $item )
                                     <tr>
-                                        <th scope="row">{{ $i + 1 }}</th>
-                                        <td>{{ $item->value }}</td>
-                                        <td class="text-center">
+                                        <th class="align-middle" scope="row">{{ $i + 1 }}</th>
+                                        <td class="align-middle">{{ $item->value }}</td>
+                                        <td class="align-middle text-center">
                                             <button type="button" class="btn-edit btn btn-link text-secondary shadow-none" data-toggle="modal" data-target="#modal-form-edit" data-name="{{ $item->value }}" data-url="{{ route('qualification.update', $item->id) }}"><i class="fa fa-pencil"></i></a>
                                             <button type="button" class="btn btn-link text-danger shadow-none" data-toggle="modal" data-target="#modal-form-delete" data-name="{{ $item->value }}" data-url="{{ route('qualification.destroy', $item->id) }}"><i class="fa fa-times"></i></button>
-                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -55,7 +54,7 @@
                         {{ method_field('POST') }}
                         {{-- End of - CSRF Method Form Laravel --}}
                         <div class="form-group">
-                            <input type="text" name="qualification" class="form-control" placeholder="{{ __('Name') }}" autocomplete="off" required>
+                            <input type="text" name="qualification" class="form-control" placeholder="{{ __('Name') }}" required>
                         </div>
                         <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
                     </form>
@@ -83,7 +82,7 @@
                         {{ method_field('PATCH') }}
                         {{-- End of - CSRF Method Form Laravel --}}
                         <div class="form-group">
-                            <input type="text" name="qualification" class="form-control" placeholder="{{ __('Name') }}" autocomplete="off" required>
+                            <input type="text" name="qualification" class="form-control" placeholder="{{ __('Name') }}" required>
                         </div>
                         <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
                     </form>

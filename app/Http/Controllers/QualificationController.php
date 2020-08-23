@@ -37,11 +37,11 @@ class QualificationController extends Controller
      */
     public function store(Request $request)
     {
-        Option::create(array(
+        Option::create([
             'name' => 'qualification',
             'value' => $request->input('qualification'),
             'order' => 0
-        ));
+        ]);
 
         return response('success', 200);
     }

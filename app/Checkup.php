@@ -3,7 +3,6 @@
 namespace App;
 
 use Date;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -132,8 +131,8 @@ class Checkup extends Model
      */
     public function getTimeRangeAttribute()
     {
-        $time_start = Carbon::parse($this->time_start)->format('h:i A');
-        $time_end = Carbon::parse($this->time_end)->format('h:i A');
+        $time_start = Date::parse($this->time_start)->format('h:i A');
+        $time_end = Date::parse($this->time_end)->format('h:i A');
 
         return "{$time_start} - {$time_end}";
     }
