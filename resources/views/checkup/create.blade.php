@@ -235,17 +235,27 @@
             // targetInput.closest('.form-group').addClass('disabled');
             targetInput.find('option.has-value').remove();
 
+            let now = new Date();
             let indexDay = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
-            let selectedDate = new Date( $('input[name="checkup_date"]').val() );
+            let inputDate = $('input[name="checkup_date"]').val();
+            let selectedDate = new Date(inputDate);
             let selectedDay = indexDay[ selectedDate.getDay() ];
             let schedule = schedules.weekdays[selectedDay];
 
             schedule.times.forEach( function(item, index) {
                 let option = $('<option></option>');
+                let optionHtml = item.time_range;
 
                 option.addClass('has-value');
                 option.attr('value', item.id);
-                option.html(item.time_range);
+                // Disabled schedule if selected date is today and schedule time is past time now
+                let scheduleTime = new Date(inputDate + ' ' + item.time_end);
+                if ( now > scheduleTime ) {
+                    option.addClass('text-danger');
+                    option.prop('disabled', true);
+                    optionHtml = optionHtml + ' - ' + '{{ __("Hour Passed") }}';
+                }
+                option.html(optionHtml);
 
                 targetInput.append(option);
             });
