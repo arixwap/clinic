@@ -100,7 +100,7 @@ class CheckupController extends Controller
      */
     public function store(Request $request)
     {
-        $schedule = Schedule::findOrFail($request->input('checkup_time'));
+        $schedule = Schedule::findOrFail($request->input('schedule'));
         $checkupDate = $request->input('checkup_date');
 
         // Check if data is new patient
@@ -149,7 +149,7 @@ class CheckupController extends Controller
      */
     public function show($id)
     {
-        $data['checkup'] = Checkup::findOrFail($id);
+        $data['checkup'] = Checkup::where('id', $id)->withTrashed()->firstOrFail();
 
         return view('checkup.show', $data);
     }
@@ -183,9 +183,55 @@ class CheckupController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($request->input());
+        $checkup = Checkup::findOrFail($id);
 
-        return redirect()->route('checkup.show', $id);
+        if ($request->has(['checkup_date', 'schedule'])) {
+
+            $newSchedule = Schedule::find($request->input('schedule'));
+            $newCheckupDate = $request->input('checkup_date');
+
+            // Update checkup schedule if date or checkup time is change
+            if ($checkup->date != $newCheckupDate || $checkup->schedule_id != $newSchedule->id) {
+
+                // Update line number to newly selected schedule
+                $number = 1;
+                $lastCheckup = Checkup::where('schedule_id', $newSchedule->id)
+                                    ->where('date', $newCheckupDate)
+                                    ->orderBy('number', 'DESC')->first();
+                if ($lastCheckup)
+                    $number = $lastCheckup->number + 1;
+
+                // Update checkup schedule data
+                $checkup->number = $number;
+                $checkup->date = $newCheckupDate;
+                $checkup->time_start = $newSchedule->time_start;
+                $checkup->time_end = $newSchedule->time_end;
+
+                // Redo associate checkup relation
+                $checkup->schedule()->associate($newSchedule);
+                $checkup->doctor()->associate($newSchedule->doctor);
+                $checkup->user()->associate(Auth::user());
+            }
+        }
+
+        // Update checkup patient data
+        $data = $request->only(['name', 'gender', 'birthplace', 'birthdate', 'address', 'phone']);
+        $checkup->patient()->update($data);
+
+        // Update is done
+        if ($request->has('is_done'))
+            $checkup->is_done = $request->input('is_done');
+
+        // update checkup data
+        $checkup->bpjs = $request->input('bpjs');
+        $checkup->description = $request->input('description');
+        $checkup->doctor_note = $request->input('doctor_note');
+        $checkup->new_patient = 0;
+        $checkup->save();
+
+        $redirect = $request->input('redirect') ?: route('checkup.show', $id);
+
+        return redirect($redirect);
     }
 
     /**
@@ -194,8 +240,38 @@ class CheckupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $checkup = Checkup::where('id', $id)->withTrashed()->firstOrFail();
+
+        if ( $checkup->trashed() ) {
+            // Permanent delete if data already soft delete before
+            $checkup->forceDelete();
+            $url = route('checkup.index', ['view' => 'cancel']);
+        } else if ( $checkup ) {
+            // Just soft delete
+            $checkup->delete();
+            $url = route('checkup.index');
+        }
+
+        if ($request->has('redirect')) $url = $request->input('redirect');
+
+        return redirect($url);
+    }
+
+    /**
+     * Restore the specified resource from soft delete.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function restore(Request $request, $id)
+    {
+        Checkup::where('id', $id)->withTrashed()->restore();
+
+        $url = route('checkup.index', ['view' => 'cancel']);
+        if ($request->has('redirect')) $url = $request->input('redirect');
+
+        return redirect($url);
     }
 }

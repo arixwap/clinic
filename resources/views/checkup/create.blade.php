@@ -13,10 +13,10 @@
                         {{-- End of - CSRF Method Form Laravel --}}
                         <div class="form-group">
                             <div class="btn-group-toggle" data-toggle="buttons">
-                                <label class="btn btn-outline-primary font-weight-bold active">
+                                <label class="btn btn-outline-primary rounded-0 font-weight-bold active">
                                     <input type="radio" name="patient_type" value="general" checked> {{ __('General') }}
                                 </label>
-                                <label class="btn btn-outline-primary font-weight-bold ml-2">
+                                <label class="btn btn-outline-primary rounded-0 font-weight-bold ml-2">
                                     <input type="radio" name="patient_type" value="bpjs"> {{ __('BPJS') }}
                                 </label>
                             </div>
@@ -107,7 +107,7 @@
                             </div>
                             <div class="col-md-6 form-group disabled">
                                 <label>{{ __('Checkup Time') }}</label>
-                                <select name="checkup_time" class="form-control" required>
+                                <select name="schedule" class="form-control" required>
                                     <option value="">{{ __('Select Time') }}</option>
                                 </select>
                             </div>
@@ -186,7 +186,7 @@
         // Display matched doctor list on match with selected polyclinic
         $(document).on('change', 'select[name="polyclinic"]', function() {
             let polyclinic = $(this).val();
-            let resetInputs = $('select[name="doctor"], input[name="checkup_date"], input.checkup-date, select[name="checkup_time"]');
+            let resetInputs = $('select[name="doctor"], input[name="checkup_date"], input.checkup-date, select[name="schedule"]');
 
             // Reset and hide related input
             resetInputs.val('');
@@ -205,7 +205,7 @@
 
         // Display checkup date on selected doctor
         $(document).on('change', 'select[name="doctor"]', function() {
-            let resetInputs = $('input[name="checkup_date"], input.checkup-date, select[name="checkup_time"]');
+            let resetInputs = $('input[name="checkup_date"], input.checkup-date, select[name="schedule"]');
             resetInputs.val('');
             resetInputs.closest('.form-group').addClass('disabled');
             resetInputs.find('option.has-value').hide();
@@ -230,7 +230,7 @@
 
         // Display checkup time on selected date
         $(document).on('change', 'input.checkup-date', function() {
-            let targetInput = $('select[name="checkup_time"]');
+            let targetInput = $('select[name="schedule"]');
             targetInput.val('');
             // targetInput.closest('.form-group').addClass('disabled');
             targetInput.find('option.has-value').remove();

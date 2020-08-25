@@ -89,10 +89,17 @@
                                             <a href="{{ route('checkup.show', $checkup->id) }}" role="button" class="btn btn-info btn-block btn-sm">{{ __('View') }}</a>
                                         </td>
                                         <td class="align-middle text-center">
-                                            @unless ( $checkup->is_done )
-                                                <button type="button" class="btn btn-link text-success shadow-none" title="{{ __('Done') }}"><i class="fa fa-check"></i></button>
-                                                <button type="button" class="btn btn-link text-danger shadow-none" title="{{ __('Cancel') }}"><i class="fa fa-times"></i></button>
-                                            @endunless
+                                            @if ( $checkup->isStatus('incoming') )
+                                                <button type="button" class="btn btn-link text-success shadow-none" title="{{ __('Done') }}" data-toggle="modal" data-target="#modal-form-done" data-name="{{ __('Set done this checkup?') }}" data-is-done="1" data-url="{{ route('checkup.update', $checkup->id) }}"><i class="fa fa-check"></i></button>
+                                                <!--//-->
+                                                <button type="button" class="btn btn-link text-danger shadow-none" title="{{ __('Cancel') }}" data-toggle="modal" data-target="#modal-form-delete" data-name="{{ $checkup->patient->name }}" data-url="{{ route('checkup.destroy', $checkup->id) }}"><i class="fa fa-times"></i></button>
+                                            @elseif ( $checkup->isStatus('done-undoable') )
+                                                <button type="button" class="btn btn-link text-danger shadow-none" title="{{ __('Undo Done') }}" data-toggle="modal" data-target="#modal-form-done" data-name="{{ __('Undo done this checkup?') }}" data-is-done="0" data-url="{{ route('checkup.update', $checkup->id) }}"><i class="fa fa-minus"></i></button>
+                                            @elseif ( $checkup->isStatus('cancel-undoable') )
+                                                <button type="button" class="btn btn-link text-success shadow-none" title="{{ __('Restore') }}" data-toggle="modal" data-target="#modal-form-restore" data-name="{{ $checkup->patient->name }}" data-url="{{ route('checkup.restore', $checkup->id) }}"><i class="fa fa-undo"></i></button>
+                                            @elseif ( $checkup->isStatus('cancel') )
+                                                {{-- <button type="button" class="btn btn-link text-danger shadow-none" title="{{ __('Delete') }}" data-toggle="modal" data-target="#modal-form-delete" data-name="{{ $checkup->patient->name }}" data-url="{{ route('checkup.destroy', $checkup->id) }}"><i class="fa fa-times"></i></button> --}}
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
@@ -105,11 +112,94 @@
     </div>
 @endsection
 
+{{-- Modal Form Done --}}
+@push('footer-before-script')
+    <div class="modal fade" id="modal-form-done" tabindex="-1" role="dialog" aria-labelledby="modal-done-title" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <p class="h5 modal-title text-center" id="modal-done-title"><span class="name"></span></p>
+                </div>
+                <div class="modal-body">
+                    <form action="#" method="POST" autocomplete="off">
+                        {{ csrf_field() }}
+                        {{ method_field('PATCH') }}
+                        <input type="hidden" name="is_done">
+                        <input type="hidden" name="redirect" value="{{ url()->full() }}">
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" class="btn btn-success btn-block">{{ __('Yes') }}</button>
+                            </div>
+                            <div class="col">
+                                <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">{{ __('No') }}</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+@endpush
+
+{{-- Modal Form Delete --}}
+@push('footer-before-script')
+    <div class="modal fade" id="modal-form-delete" tabindex="-1" role="dialog" aria-labelledby="modal-delete-title" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <p class="h5 modal-title text-center" id="modal-delete-title">{{ __('Canceling Checkup') }} <span class="name"></span>?</p>
+                </div>
+                <div class="modal-body">
+                    <form action="#" method="POST" autocomplete="off">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" class="btn btn-danger btn-block">{{ __('Yes') }}</button>
+                            </div>
+                            <div class="col">
+                                <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">{{ __('No') }}</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+@endpush
+
+{{-- Modal Form Restore --}}
+@push('footer-before-script')
+    <div class="modal fade" id="modal-form-restore" tabindex="-1" role="dialog" aria-labelledby="modal-restore-title" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <p class="h5 modal-title text-center" id="modal-restore-title">{{ __('Restore Checkup') }} <span class="name"></span>?</p>
+                </div>
+                <div class="modal-body">
+                    <form action="#" method="POST" autocomplete="off">
+                        {{ csrf_field() }}
+                        {{ method_field('PUT') }}
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" class="btn btn-success btn-block">{{ __('Yes') }}</button>
+                            </div>
+                            <div class="col">
+                                <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">{{ __('No') }}</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+@endpush
+
 @push('footer-after-script')
     <script>
 
         // Autosubmit filter on click input view checkup
-        $('input[name=view]').on('change', function() {
+        $('input[name=view], select[name=polyclinic]').on('change', function() {
             $(this).closest('form').trigger('submit');
         })
 
@@ -119,6 +209,18 @@
             form.find('input[name=search]').val('');
             form.find('select[name=doctor]').val('');
             form.trigger('submit');
+        })
+
+        // Delete Polyclinic Modal Function
+        $('#modal-form-done, #modal-form-delete, #modal-form-restore').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            let name = button.data('name');
+            let url = button.data('url');
+            let isDone = button.data('is-done');
+
+            $(this).find('form').attr('action', url);
+            $(this).find('form input[name="is_done"]').val(isDone);
+            $(this).find('.name').html(name);
         })
 
     </script>

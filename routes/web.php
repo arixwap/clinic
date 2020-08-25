@@ -48,6 +48,8 @@ Route::middleware('auth')->group( function() {
 
     // Resource Route Doctor
     Route::resource(__('doctor'), 'DoctorController', ['names' => 'doctor']);
+
+    // Route schedule inside DoctorController
     Route::get(__('doctor').'/'.__('schedule').'/{id}', 'DoctorController@schedule')->name('schedule.index');
     Route::post(__('doctor').'/'.__('schedule').'/{id}', 'DoctorController@updateSchedule')->name('schedule.edit');
 
@@ -57,4 +59,5 @@ Route::middleware('auth')->group( function() {
 
     // Resource Route Checkup
     Route::resource(__('checkup'), 'CheckupController', ['names' => 'checkup']);
+    Route::put(__('checkup').'/restore/{id}', 'CheckupController@restore')->name('checkup.restore');
 });

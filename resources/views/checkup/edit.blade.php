@@ -13,10 +13,10 @@
                         {{-- End of - CSRF Method Form Laravel --}}
                         <div class="form-group">
                             <div class="btn-group-toggle" data-toggle="buttons">
-                                <label class="btn btn-outline-primary font-weight-bold {{ ! $checkup->bpjs ? 'active' : '' }}">
+                                <label class="btn btn-outline-primary rounded-0 font-weight-bold {{ ! $checkup->bpjs ? 'active' : '' }}">
                                 <input type="radio" name="patient_type" value="general" {{ ! $checkup->bpjs ? 'checked' : '' }}> {{ __('General') }}
                                 </label>
-                                <label class="btn btn-outline-primary font-weight-bold ml-2 {{ $checkup->bpjs ? 'active' : '' }}">
+                                <label class="btn btn-outline-primary rounded-0 font-weight-bold ml-2 {{ $checkup->bpjs ? 'active' : '' }}">
                                     <input type="radio" name="patient_type" value="bpjs" {{ $checkup->bpjs ? 'checked' : '' }}> {{ __('BPJS') }}
                                 </label>
                             </div>
@@ -30,7 +30,6 @@
                         <div class="form-group">
                             <label>{{ __('Full Name') }}</label>
                             <input name="name" type="text" class="form-control" value="{{ $checkup->patient->name }}" required>
-                            <input name="patient_id" type="hidden" value="{{ $checkup->patient_id }}" required>
                         </div>
                         <div class="row">
                             <div class="col-md-4 form-group">
@@ -56,7 +55,7 @@
                         </div>
                         <div class="form-group">
                             <label>{{ __('Phone') }}</label>
-                            <input name="phone" type="tel" class="form-control" value="{{ $checkup->patient->phone }}" required>
+                            <input name="phone" type="tel" class="form-control" value="{{ $checkup->patient->phone }}">
                         </div>
 
                         <hr class="my-4">
@@ -93,7 +92,7 @@
                             </div>
                             <div class="col-md-6 form-group">
                                 <label>{{ __('Checkup Time') }}</label>
-                                <select name="checkup_time" class="form-control" required>
+                                <select name="schedule" class="form-control" required>
                                     <option value="">{{ __('Select Time') }}</option>
                                     @foreach ( $schedules as $schedule )
                                         <option value="{{ $schedule->id }}" class="has-value" {{ $checkup->schedule_id == $schedule->id ? 'selected' : '' }}>{{ $schedule->time_range }}</option>
@@ -109,7 +108,7 @@
                         @endif
 
                         <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
-                        <a href="{{ route('home') }}" type="button" class="btn btn-secondary ml-2">{{ __('Back') }}</a>
+                        <a href="{{ route('checkup.index') }}" type="button" class="btn btn-secondary ml-2">{{ __('Back') }}</a>
                     </form>
                 </div>
             </div>
@@ -136,14 +135,6 @@
                 }
             });
         }
-
-        // Prevent submit form on non new patient and empty input patient_id
-        $('form.form-checkup').on('submit', function(event) {
-            let isNewPatient = $('#checkbox-new-patient').prop('checked');
-            let patientId = $('input[name="patient_id"]').val();
-
-            if ( ! isNewPatient && ! patientId ) event.preventDefault();
-        })
 
         // Toggle patient type
         $('input[name="patient_type"]').change(function(){
@@ -196,7 +187,7 @@
         // Display matched doctor list on match with selected polyclinic
         $(document).on('change', 'select[name="polyclinic"]', function() {
             let polyclinic = $(this).val();
-            let resetInputs = $('select[name="doctor"], input[name="checkup_date"], input.checkup-date, select[name="checkup_time"]');
+            let resetInputs = $('select[name="doctor"], input[name="checkup_date"], input.checkup-date, select[name="schedule"]');
 
             // Reset and hide related input
             resetInputs.val('');
@@ -215,7 +206,7 @@
 
         // Display checkup date on selected doctor
         $(document).on('change', 'select[name="doctor"]', function() {
-            let resetInputs = $('input[name="checkup_date"], input.checkup-date, select[name="checkup_time"]');
+            let resetInputs = $('input[name="checkup_date"], input.checkup-date, select[name="schedule"]');
             resetInputs.val('');
             resetInputs.closest('.form-group').addClass('disabled');
             resetInputs.find('option.has-value').hide();
@@ -240,22 +231,32 @@
 
         // Display checkup time on selected date
         $(document).on('change', 'input.checkup-date', function() {
-            let targetInput = $('select[name="checkup_time"]');
+            let targetInput = $('select[name="schedule"]');
             targetInput.val('');
             // targetInput.closest('.form-group').addClass('disabled');
             targetInput.find('option.has-value').remove();
 
+            let now = new Date();
             let indexDay = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
-            let selectedDate = new Date( $('input[name="checkup_date"]').val() );
+            let inputDate = $('input[name="checkup_date"]').val();
+            let selectedDate = new Date(inputDate);
             let selectedDay = indexDay[ selectedDate.getDay() ];
             let schedule = schedules.weekdays[selectedDay];
 
             schedule.times.forEach( function(item, index) {
                 let option = $('<option></option>');
+                let optionHtml = item.time_range;
 
                 option.addClass('has-value');
                 option.attr('value', item.id);
-                option.html(item.time_range);
+                // Disabled schedule if selected date is today and schedule time is past time now
+                let scheduleTime = new Date(inputDate + ' ' + item.time_end);
+                if ( now > scheduleTime ) {
+                    option.addClass('text-danger');
+                    option.prop('disabled', true);
+                    optionHtml = optionHtml + ' - ' + '{{ __("Hour Passed") }}';
+                }
+                option.html(optionHtml);
 
                 targetInput.append(option);
             });

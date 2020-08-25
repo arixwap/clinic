@@ -132,4 +132,45 @@ class Checkup extends Model
 
         return "{$time_start} - {$time_end}";
     }
+
+    /**
+     * Get checkup status
+     *
+     * @return boolean
+     */
+    public function isStatus($type)
+    {
+        // Check if checkup datetime is passed today
+        $now = Carbon::now();
+        $checkupDate = Carbon::parse($this->date . ' ' . $this->time_end);
+        $isPassed = ( $now->diffInDays($checkupDate, false) < 0 );
+
+        switch($type) {
+            case 'incoming':
+                // Incoming fresh checkup with no cancelation
+                $result = ( $this->is_done == 0 && ! $this->trashed() );
+                break;
+            case 'done-undoable':
+                // Checkup is done, but can be undo before checkup time passed
+                $result = ( $this->is_done == 1 && ! $isPassed && ! $this->trashed() );
+                break;
+            case 'done':
+                // Checkup is done yet
+                $result = ( $this->is_done == 1 && ! $this->trashed() );
+                break;
+            case 'cancel-undoable':
+                // Canceled checkup, but can be undo before checkup time passed
+                $result = ( $this->trashed() && ! $isPassed );
+                break;
+            case 'cancel':
+                // Fixed canceled checkup
+                $result = $this->trashed();
+                break;
+            default:
+                $result = false;
+                break;
+        }
+
+        return $result;
+    }
 }
