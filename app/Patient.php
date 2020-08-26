@@ -48,6 +48,6 @@ class Patient extends Model
      */
     public function getFormattedBirthdateAttribute()
     {
-        return Date::parse($this->attributes['birthdate'])->format('l, d F Y');
+        return Date::parse($this->attributes['birthdate'])->format('d F Y');
     }
 }

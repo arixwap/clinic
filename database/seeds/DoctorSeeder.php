@@ -1,7 +1,10 @@
 <?php
 
+use App\Option;
 use App\Role;
 use App\User;
+use Carbon\Carbon;
+use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 
 class DoctorSeeder extends Seeder
@@ -14,111 +17,68 @@ class DoctorSeeder extends Seeder
     public function run()
     {
         $role = Role::where('slug', 'doctor')->first();
+        $locale = config('app.faker_locale');
+        $faker = Faker::create($locale);
 
-        // Seeding - Dokter Umum
-        $user = $role->users()->create([
-            'name' => 'Dr. Tirta Mandira Hudhi',
-            'email' => 'tirta@clinic.test',
-            'password' => Hash::make('12345678'),
-            'gender' => 'Male',
-            'birthplace' => 'Surakarta',
-            'birthdate' => '1991-07-30',
-            'address' => 'Surakarta, Jawa Tengah'
-        ]);
+        // Create array policlinic and qualification
+        $polyclinics = Option::where('name', 'polyclinic')->get()->toArray();
+        $qualifications = Option::where('name', 'qualification')->get()->toArray();
+        $doctorList = array();
+        foreach ( $polyclinics as $i => $polyclinic ) {
+            $doctorList[$i] = [
+                'polyclinic' => $polyclinic['value'],
+                'qualification' => $qualifications[$i]['value']
+            ];
+        }
 
-        // Create data doctor dengan sync relation user
-        $user->doctor()->create([
-            'qualification' => 'Dokter Umum',
-            'polyclinic' => 'Poliklinik Umum'
-        ]);
+        $loop = $faker->numberBetween(3, 10);
+        for ( $i = 1; $i <= $loop; $i++ ) {
 
-        // Create data schedule dengan sync relation user doctor
-        $user->doctor->schedules()->createMany([
-            [
-                'weekday' => 'mon',
-                'time_start' => '09:00',
-                'time_end' => '11:00'
-            ],
-            [
-                'weekday' => 'mon',
-                'time_start' => '19:00',
-                'time_end' => '21:00'
-            ],
-            [
-                'weekday' => 'tue',
-                'time_start' => '09:00',
-                'time_end' => '11:00'
-            ],
-            [
-                'weekday' => 'tue',
-                'time_start' => '19:00',
-                'time_end' => '21:00'
-            ],
-            [
-                'weekday' => 'wed',
-                'time_start' => '09:00',
-                'time_end' => '11:00'
-            ],
-            [
-                'weekday' => 'wed',
-                'time_start' => '19:00',
-                'time_end' => '21:00'
-            ],
-            [
-                'weekday' => 'thu',
-                'time_start' => '09:00',
-                'time_end' => '11:00'
-            ],
-            [
-                'weekday' => 'thu',
-                'time_start' => '19:00',
-                'time_end' => '21:00'
-            ],
-            [
-                'weekday' => 'fri',
-                'time_start' => '09:00',
-                'time_end' => '11:00'
-            ],
-            [
-                'weekday' => 'fri',
-                'time_start' => '19:00',
-                'time_end' => '21:00'
-            ]
-        ]);
-        // --
+            // Insert user role doctor
+            $gender = $faker->randomElement(['Male', 'Female']);
+            $user = $role->users()->create([
+                'name' => 'Dr. '.$faker->name(strtolower($gender)),
+                'email' => $faker->email,
+                'password' => Hash::make('12345678'),
+                'gender' => $gender,
+                'birthplace' => $faker->city,
+                'birthdate' => $faker->date('Y-m-d', '- 20 year'),
+                'address' => $faker->address,
+                'phone' => $faker->phoneNumber
+            ]);
 
-        // Seeding - Dokter Gigi
-        $user = $role->users()->create([
-            'name' => 'Dr. Kadek Agus Kurniawan',
-            'email' => 'agus@clinic.test',
-            'password' => Hash::make('12345678'),
-            'gender' => 'Male',
-            'birthplace' => 'Denpasar',
-            'birthdate' => '1987-01-30',
-            'address' => 'Denpasar, Bali'
-        ]);
+            // Create doctor with sync relation user
+            $selectedDoctor = $faker->randomElement($doctorList);
+            $user->doctor()->create([
+                'qualification' => $selectedDoctor['qualification'],
+                'polyclinic' => $selectedDoctor['polyclinic']
+            ]);
 
-        // Create data doctor dengan sync relation user
-        $user->doctor()->create([
-            'qualification' => 'Dokter Gigi',
-            'polyclinic' => 'Poliklinik Gigi'
-        ]);
+            // Set working day and working times for schedule
+            $workdays = $faker->randomElements(['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'], $faker->numberBetween(1, 7));
+            $worktimes = array();
+            for ( $x = 1; $x <= $faker->numberBetween(1, 2); $x++ ) {
+                $date = $faker->dateTimeBetween('2020-01-01 08:00:00', '2020-01-01 20:00:00');
+                $worktimes[] = [
+                    'start' => Carbon::parse($date)->format('H:00:00'),
+                    'end' => Carbon::parse($date)->addHours(3)->format('H:00:00')
+                ];
+            }
 
-        // Create data schedule dengan sync relation user doctor
-        $user->doctor->schedules()->createMany([
-            [
-                'weekday' => 'fri',
-                'time_start' => '18:00',
-                'time_end' => '21:00',
-                'limit' => '2'
-            ],
-            [
-                'weekday' => 'sat',
-                'time_start' => '18:00',
-                'time_end' => '21:00',
-                'limit' => '2'
-            ]
-        ]);
-        // --
+            // Create data schedules array
+            $schedules = array();
+            foreach ( $workdays as $day ) {
+                foreach ( $worktimes as $time ) {
+                    $schedules[] = [
+                        'weekday' => $day,
+                        'time_start' => $time['start'],
+                        'time_end' => $time['end']
+                    ];
+                }
+            }
+
+            // Create doctor schedule with sync relation doctor
+            $user->doctor->schedules()->createMany($schedules);
+        }
     }
 }

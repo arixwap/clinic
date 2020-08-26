@@ -28,7 +28,7 @@ class OptionSeeder extends Seeder
             ],
             [
                 'name' => 'qualification',
-                'value' => 'Dokter Spesialis Anak',
+                'value' => 'Dokter Kandungan',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
@@ -46,7 +46,7 @@ class OptionSeeder extends Seeder
             ],
             [
                 'name' => 'polyclinic',
-                'value' => 'Poliklinik Anak',
+                'value' => 'Poliklinik Kandungan',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ]
