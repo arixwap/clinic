@@ -31,7 +31,7 @@
                         </div>
                         <div class="col-md-auto text-right">
                             <a href="{{ route('checkup.index') }}" role="button" class="btn btn-secondary"><i class="fa fa-chevron-left"></i> {{ __('Back') }}</a>
-                            <a href="#" role="button" class="btn btn-info ml-2"><i class="fa fa-file-text-o"></i> {{ __('Medical Record') }}</a>
+                            <a href="{{ route('checkup.record', $checkup->user_id) }}" role="button" class="btn btn-info ml-2"><i class="fa fa-file-text-o"></i> {{ __('Medical Record') }}</a>
                             @if ( $checkup->isStatus('incoming') )
                                 <a href="{{ route('checkup.edit', $checkup->id) }}" role="button" class="btn btn-secondary ml-2"><i class="fa fa-pencil"></i> {{ __('Edit') }}</a>
                                 <a href="#" role="button" class="btn btn-success ml-2" data-toggle="modal" data-target="#modal-form-done" data-name="{{ __('Set done this checkup?') }}" data-is-done="1"><i class="fa fa-check"></i> {{ __('Done') }}</a>

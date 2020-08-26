@@ -60,4 +60,5 @@ Route::middleware('auth')->group( function() {
     // Resource Route Checkup
     Route::resource(__('checkup'), 'CheckupController', ['names' => 'checkup']);
     Route::put(__('checkup').'/restore/{id}', 'CheckupController@restore')->name('checkup.restore');
+    Route::get(__('medical-record').'/{id}', 'CheckupController@record')->name('checkup.record');
 });

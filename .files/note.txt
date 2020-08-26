@@ -1,5 +1,11 @@
 TASK
-- Checkup Update Database
+- Rekam Medis:
+  Data User,
+  Tanggal Checkup, Poliklinik, Doctor, Keluhan, Diagnosa, Tombol detail
+- User Role
+  - Doctor
+  - User
+- Clinic Logo
 - Checkup List : Filter Date
 - Patient & Doctor List: Search Filter
 

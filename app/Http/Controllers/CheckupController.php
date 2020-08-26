@@ -274,4 +274,20 @@ class CheckupController extends Controller
 
         return redirect($url);
     }
+
+    /**
+     * Display checkup record of selected $id user.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function record($id)
+    {
+        $patient = Patient::findOrFail($id);
+
+        $data['patient'] = $patient;
+        $data['checkups'] = $patient->checkups()->withTrashed()->get();
+
+        return view('checkup.record', $data);
+    }
 }
