@@ -31,8 +31,7 @@ class DoctorSeeder extends Seeder
             ];
         }
 
-        $loop = $faker->numberBetween(3, 10);
-        for ( $i = 1; $i <= $loop; $i++ ) {
+        for ( $i = 1; $i <= 5; $i++ ) {
 
             // Insert user role doctor
             $gender = $faker->randomElement(['Male', 'Female']);

@@ -1,5 +1,4 @@
 TASK
-- Clinic Logo
 - Dashboard (UI Admin)
   - Incoming Checkup Today (Limit 10)
     - List CTA View       : Checkup Detail

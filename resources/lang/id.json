@@ -12,6 +12,7 @@
     "polyclinic": "poliklinik",
     "qualification": "kualifikasi",
     "medical-record": "rekam-medis",
+    "setting": "pengaturan",
 
     "Login": "Masuk",
     "Register": "Daftar",
@@ -151,5 +152,9 @@
     "Birthday": "Tanggal Lahir",
     "Phone": "Telepon",
     "Search": "Cari",
-    "Search by patient name, bpjs or doctor": "Cari nama pasien, bpjs atau dokter"
+    "Search by patient name, bpjs or doctor": "Cari nama pasien, bpjs atau dokter",
+
+    "Setting": "Pengaturan",
+    "Upload Logo": "Unggah Logo",
+    "Change Logo": "Ganti Logo"
 }

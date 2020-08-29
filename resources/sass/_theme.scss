@@ -55,6 +55,13 @@ body {
     padding: spacer(2) spacer(3);
 }
 
+.btn-delete-corner {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(-25%, -25%);
+}
+
 
 /**
  * Form Group Disabled

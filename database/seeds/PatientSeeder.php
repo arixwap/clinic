@@ -17,9 +17,8 @@ class PatientSeeder extends Seeder
         $data = array();
         $locale = config('app.faker_locale');
         $faker = Faker::create($locale);
-        $loop = $faker->numberBetween(3, 10);
 
-        for ( $i = 1; $i <= $loop; $i++ ) {
+        for ( $i = 1; $i <= 10; $i++ ) {
             $gender = $faker->randomElement(['Male', 'Female']);
             $data[] = [
                 'name' => $faker->name(strtolower($gender)),

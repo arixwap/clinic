@@ -16,8 +16,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'HomeController@index')->name('home');
-
 // Authentication Route
 Auth::routes([
     'register' => false, // Remove route register from public
@@ -35,7 +33,12 @@ Route::post(__('logout'), 'Auth\LoginController@logout')->name('logout');
  */
 Route::middleware('auth')->group( function() {
 
+    Route::get('/', 'HomeController@index')->name('home');
+
     Route::get('ajax', 'AjaxController@index')->name('ajax');
+
+    // Resource Route Setting
+    Route::resource(__('setting'), 'SettingController', ['names' => 'setting'])->only(['index', 'store']);
 
     // Resource Route Role
     Route::resource(__('role'), 'RoleController', ['names' => 'role']);
