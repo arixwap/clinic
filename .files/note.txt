@@ -1,28 +1,5 @@
 TASK
-- Rekam Medis:
-  Data User,
-  Tanggal Checkup, Poliklinik, Doctor, Keluhan, Diagnosa, Tombol detail
-- User Role
-  - Doctor
-  - User
 - Clinic Logo
-- Checkup List : Filter Date
-- Patient & Doctor List: Search Filter
-
-- Edit Checkup (Admin UI)
-  - Edit BPJS Number
-  - Edit Data Patient
-  - Change Selected Doctor / Schedule
-  - Only can view doctor note after inputed
-  - Button is_done checkup
-  - Button Cancel Checkup => Delete
-
-- Medical Record (Admin & Doctor UI)
-  - Patient Data
-  - List of preview checkup history
-  - Button See detail checkup
-- Rekam Medis Patient : Patient List & Detail, Checkup List & Detail
-
 - Dashboard (UI Admin)
   - Incoming Checkup Today (Limit 10)
     - List CTA View       : Checkup Detail
@@ -32,12 +9,11 @@ TASK
     - Bottom CTA View     : Popup full weekday schedule all doctor
   - Graphic: Patient Checkup Last Week / Last Month
   - Popup Weekdays All Doctor Schedule
-- Dashboard (UI Doctor)
-  - Personal Incoming Checkup
-  - Doctor Schedule Today (Uneditable)
-    - Edit My Schedule
-  - Graphic: Patient Checkup Last Week / Last Month
-  - Popup Weekdays All Doctor Schedule
+- User Role
+  - Doctor
+  - User
+- Checkup List : Filter Date
+- Patient & Doctor List: Search Filter
 
 - CRUD User & Role
   - Superadmin (Owner)
@@ -55,22 +31,28 @@ TASK
     - View All Checkup & Medical Record
     - Edit ownselft patient data checkup
 
-- Checkup List (Doctor UI)
-  - Form Filter by Doctor : Autoset this doctor
-  - List same as Admin UI
-  - CTA is_done : Popup input doctor note
-  - If Checkup is done by admin and doctor note is empty, doctor can only input this note once!
-  - Can View another doctor checkup
-  - Unable | Edit another doctor checkup
-
-- Edit Checkup (Doctor UI)
-  - Edit Data Patient
-  - Edit BPJS Number
-  - Button is_done checkup
-  - Input Doctor Note
-  - Unable | Change Selected Doctor / Schedule
-  - Unable | Button Cancel Checkup => Delete
-  - Unable | Edit another doctor checkup data
+- Doctor UI
+  - Dashboard (UI Doctor)
+    - Personal Incoming Checkup
+    - Doctor Schedule Today (Uneditable)
+      - Edit My Schedule
+    - Graphic: Patient Checkup Last Week / Last Month
+    - Popup Weekdays All Doctor Schedule
+  - Checkup List (Doctor UI)
+    - Form Filter by Doctor : Autoset this doctor
+    - List same as Admin UI
+    - CTA is_done : Popup input doctor note
+    - If Checkup is done by admin and doctor note is empty, doctor can only input this note once!
+    - Can View another doctor checkup
+    - Unable | Edit another doctor checkup
+  - Edit Checkup (Doctor UI)
+    - Edit Data Patient
+    - Edit BPJS Number
+    - Button is_done checkup
+    - Input Doctor Note
+    - Unable | Change Selected Doctor / Schedule
+    - Unable | Button Cancel Checkup => Delete
+    - Unable | Edit another doctor checkup data
 
 - Form Checkup Patient
   - Popup information doctor schedule

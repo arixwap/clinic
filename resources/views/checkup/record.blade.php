@@ -34,17 +34,32 @@
                         <label class="font-weight-bold">{{ __('Address') }}</label>
                         <p class="form-readonly">{!! nl2br($patient->address) !!}</p>
                     </div>
-                    <hr>
-                    <div class="medical-records">
-                        @foreach ( $checkups as $checkup )
-                            <div class="item">
-                                {{ $checkup->date }}
-                                {{ $checkup->time_start }}
-                                {{ $checkup->doctor->user->name }}
-                                {{ $checkup->doctor->polyclinic }}
+                    @foreach ( $checkups as $checkup )
+                        <div class="card border-primary my-4">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md h5 text-primary font-weight-bold">
+                                        {{ $checkup->formatted_date }} | {{ $checkup->time_range }}
+                                    </div>
+                                    <div class="col-md h5 text-primary font-weight-bold">
+                                        {{ $checkup->doctor->polyclinic }} | {{ $checkup->doctor->user->name }}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md">
+                                        <div class="font-weight-bold">{{ __('Complaints') }}</div>
+                                        <div>{{ $checkup->description ?? '-' }}</div>
+                                    </div>
+                                    <div class="col-md">
+                                        <div class="font-weight-bold">{{ __('Diagnosis') }}</div>
+                                        <div>{{ $checkup->doctor_note ?? '-' }}</div>
+                                    </div>
+                                </div>
+                                <a href="{{ route('checkup.show', $checkup->id) }}" role="button" class="btn btn-primary rounded-0 mt-3">{{ __('View') }}</a>
                             </div>
-                        @endforeach
-                    </div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>

@@ -108,7 +108,7 @@
                         @endif
 
                         <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
-                        <a href="{{ route('checkup.index') }}" type="button" class="btn btn-secondary ml-2">{{ __('Back') }}</a>
+                        <a href="{{ route('checkup.show', $checkup->id) }}" type="button" class="btn btn-secondary ml-2">{{ __('Back') }}</a>
                     </form>
                 </div>
             </div>

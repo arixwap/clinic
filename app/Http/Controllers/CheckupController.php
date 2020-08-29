@@ -116,7 +116,8 @@ class CheckupController extends Controller
         $number = 1;
         $lastCheckup = Checkup::where('schedule_id', $schedule->id)
                             ->where('date', $checkupDate)
-                            ->orderBy('number', 'DESC')->first();
+                            ->orderBy('number', 'DESC')
+                            ->first();
         if ( $lastCheckup ) $number = $lastCheckup->number + 1;
 
         // Create new checkup object
@@ -149,7 +150,7 @@ class CheckupController extends Controller
      */
     public function show($id)
     {
-        $data['checkup'] = Checkup::where('id', $id)->withTrashed()->firstOrFail();
+        $data['checkup'] = Checkup::withTrashed()->findOrFail($id);
 
         return view('checkup.show', $data);
     }
@@ -197,7 +198,8 @@ class CheckupController extends Controller
                 $number = 1;
                 $lastCheckup = Checkup::where('schedule_id', $newSchedule->id)
                                     ->where('date', $newCheckupDate)
-                                    ->orderBy('number', 'DESC')->first();
+                                    ->orderBy('number', 'DESC')
+                                    ->first();
                 if ($lastCheckup)
                     $number = $lastCheckup->number + 1;
 
@@ -242,7 +244,7 @@ class CheckupController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $checkup = Checkup::where('id', $id)->withTrashed()->firstOrFail();
+        $checkup = Checkup::withTrashed()->findOrFail($id);
 
         if ( $checkup->trashed() ) {
             // Permanent delete if data already soft delete before
@@ -267,7 +269,7 @@ class CheckupController extends Controller
      */
     public function restore(Request $request, $id)
     {
-        Checkup::where('id', $id)->withTrashed()->restore();
+        Checkup::withTrashed()->findOrFail($id)->restore();
 
         $url = route('checkup.index', ['view' => 'cancel']);
         if ($request->has('redirect')) $url = $request->input('redirect');
@@ -286,7 +288,10 @@ class CheckupController extends Controller
         $patient = Patient::findOrFail($id);
 
         $data['patient'] = $patient;
-        $data['checkups'] = $patient->checkups()->withTrashed()->get();
+        $data['checkups'] = $patient->checkups()->withTrashed()
+                                    ->where('is_done', 1)
+                                    ->orderBy('date', 'DESC')
+                                    ->get();
 
         return view('checkup.record', $data);
     }

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Date;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -77,7 +78,7 @@ class Checkup extends Model
      */
     public function getFormattedDateAttribute()
     {
-        return Carbon::parse($this->attributes['date'])->format('l, d F Y');
+        return Date::parse($this->attributes['date'])->format('l, d F Y');
     }
 
     /**

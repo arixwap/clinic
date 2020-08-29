@@ -30,7 +30,7 @@
                             @endif
                         </div>
                         <div class="col-md-auto text-right">
-                            <a href="{{ route('checkup.index') }}" role="button" class="btn btn-secondary"><i class="fa fa-chevron-left"></i> {{ __('Back') }}</a>
+                            <a href="{{ route('checkup.index') }}" role="button" class="btn btn-secondary"><i class="fa fa-chevron-left"></i> {{ __('Checkup List') }}</a>
                             <a href="{{ route('checkup.record', $checkup->user_id) }}" role="button" class="btn btn-info ml-2"><i class="fa fa-file-text-o"></i> {{ __('Medical Record') }}</a>
                             @if ( $checkup->isStatus('incoming') )
                                 <a href="{{ route('checkup.edit', $checkup->id) }}" role="button" class="btn btn-secondary ml-2"><i class="fa fa-pencil"></i> {{ __('Edit') }}</a>
@@ -99,7 +99,7 @@
                     </div>
                     @if ( $checkup->doctor_note )
                         <div class="form-group">
-                            <label class="font-weight-bold">{{ __('Doctor Notes') }}</label>
+                            <label class="font-weight-bold">{{ __('Diagnosis') }}</label>
                             <p class="form-readonly">{!! nl2br($checkup->doctor_note) !!}</p>
                         </div>
                     @endif
