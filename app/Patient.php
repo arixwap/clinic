@@ -31,6 +31,7 @@ class Patient extends Model
      */
     protected $appends = [
         'formatted_birthdate',
+        'basic_info',
     ];
 
     /**
@@ -49,5 +50,21 @@ class Patient extends Model
     public function getFormattedBirthdateAttribute()
     {
         return Date::parse($this->attributes['birthdate'])->format('d F Y');
+    }
+
+    /**
+     * Get patient basic information with format `$name ($gender) $ages`
+     *
+     * @return string
+     */
+    public function getBasicInfoAttribute()
+    {
+        $gender = [
+            'Male' => __('M_gender'),
+            'Female' => __('F_gender')
+        ];
+        $age = intval(date('Y')) - intval(date('Y', strtotime($this->birthdate)));
+
+        return sprintf("%s (%s) %s", $this->name, $gender[$this->gender], $age.__('yr'));
     }
 }

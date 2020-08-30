@@ -160,7 +160,7 @@ class Checkup extends Model
      */
     public function getLineNumberAttribute()
     {
-        $lineDigit = 4;
+        $lineDigit = 3;
 
         $loop = $lineDigit - intval( strlen($this->number) );
         $prefix = '';
