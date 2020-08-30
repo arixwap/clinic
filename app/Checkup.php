@@ -40,6 +40,57 @@ class Checkup extends Model
     ];
 
     /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::creating( function($checkup) {
+            // Auto assign line number on create new checkup
+            $checkup->number = $checkup->generateNumber($checkup);
+        });
+
+        static::updating( function($checkup) {
+            // Auto assign line number on update checkup
+            $checkup->number = $checkup->generateNumber($checkup);
+        });
+
+        static::saving( function($checkup) {
+            // Auto assign line number on saving checkup
+            $checkup->number = $checkup->generateNumber($checkup);
+        });
+    }
+
+    /**
+     * Generate line number by check last checkup line number
+     *
+     * @return int
+     */
+    public function generateNumber($checkup)
+    {
+        $number = 1;
+        // Get previous data of this checkup
+        $prevData = Checkup::where('schedule_id', $checkup->schedule_id)
+                        ->whereDate('date', $checkup->date)
+                        ->find($checkup->id);
+
+        if ( $prevData ) {
+            // Keep number if schedule id not change
+            $number = $prevData->number;
+        } else {
+            // Get new number by last checkup entry
+            $lastNumber = Checkup::where('schedule_id', $checkup->schedule_id)
+                                ->whereDate('date', $checkup->date)
+                                ->max('number');
+
+            if ( $lastNumber ) $number = $lastNumber + 1;
+        }
+
+        return $number;
+    }
+
+    /**
      * Relationship to Schedule - many to 1
      */
     public function schedule()

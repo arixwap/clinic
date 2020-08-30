@@ -53,13 +53,11 @@ TASK
     - Unable | Button Cancel Checkup => Delete
     - Unable | Edit another doctor checkup data
 
+- My Account Setting: Change Name, Basic Information, Etc
 - Form Checkup Patient
   - Popup information doctor schedule
   - Alert on Limit Patient reach
-
 - Riwayat : Jumlah pasien checkup / minggu / bulan / tahun
-
-
 
 
 

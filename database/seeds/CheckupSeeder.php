@@ -30,9 +30,11 @@ class CheckupSeeder extends Seeder
             // Create random checkup data
             for ( $i = 1; $i <= $loop; $i++ ) {
 
+                $date = $faker->dateTimeBetween('-1 years', '+ 3 month');
+                if ( $i == 1 ) $date = Carbon::now();
+
                 $checkup = new Checkup([
-                    'number' => 1,
-                    'date' => $faker->dateTimeBetween('-1 years', '+ 3 month'),
+                    'date' => $date->format('Y-m-d'),
                     'description' => $faker->sentence()
                 ]);
 
@@ -40,7 +42,7 @@ class CheckupSeeder extends Seeder
                 if ( $faker->boolean(3) ) $checkup->bpjs = $faker->ean13();
 
                 // Get random schedule data
-                $schedule = Schedule::all()->random();
+                $schedule = Schedule::where('weekday', strtolower($date->format('D')))->get()->random();
 
                 // Associate relationship
                 $checkup->schedule()->associate($schedule);

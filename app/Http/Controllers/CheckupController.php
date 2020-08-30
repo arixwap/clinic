@@ -54,26 +54,30 @@ class CheckupController extends Controller
             case 'done':
                 $checkup->whereRaw("TIMESTAMP(`date`, `time_end`) <= '$now'")
                         ->orWhere("is_done", true)
-                        ->orderBy('date', 'DESC');
+                        ->orderBy('date', 'DESC')
+                        ->orderBy('time_start', 'DESC');
                 break;
             case 'incoming':
-                $checkup->whereRaw("TIMESTAMP(`date`, `time_start`) >= '$now'")
+                $checkup->whereRaw("TIMESTAMP(`date`, `time_end`) >= '$now'")
                         ->where('is_done', false)
-                        ->orderBy('date', 'ASC');
+                        ->orderBy('date', 'ASC')
+                        ->orderBy('time_start', 'ASC');
                 break;
             case 'cancel':
                 $checkup->onlyTrashed()
-                        ->orderBy('date', 'DESC');
+                        ->orderBy('date', 'DESC')
+                        ->orderBy('time_start', 'DESC');
                 break;
             default :
-                $checkup->orderBy('date', 'DESC');
+                $checkup->orderBy('date', 'DESC')
+                        ->orderBy('time_start', 'DESC');
                 break;
         }
 
         $data['search'] = $search;
         $data['view'] = $view;
         $data['selectedPolyclinic'] = $polyclinic;
-        $data['checkups'] = $checkup->get();
+        $data['checkups'] = $checkup->orderBy('number', 'ASC')->get();
         $data['polyclinics'] = Option::where('name', 'polyclinic')->get();
 
         return view('checkup.index', $data);
@@ -112,17 +116,8 @@ class CheckupController extends Controller
             $isNewPatient = true;
         }
 
-        // Get last line number by selected schedule
-        $number = 1;
-        $lastCheckup = Checkup::where('schedule_id', $schedule->id)
-                            ->where('date', $checkupDate)
-                            ->orderBy('number', 'DESC')
-                            ->first();
-        if ( $lastCheckup ) $number = $lastCheckup->number + 1;
-
         // Create new checkup object
         $checkup = new Checkup([
-            'number' => $number,
             'date' => $checkupDate,
             'time_start' => $schedule->time_start,
             'time_end' => $schedule->time_end,
@@ -194,17 +189,7 @@ class CheckupController extends Controller
             // Update checkup schedule if date or checkup time is change
             if ($checkup->date != $newCheckupDate || $checkup->schedule_id != $newSchedule->id) {
 
-                // Update line number to newly selected schedule
-                $number = 1;
-                $lastCheckup = Checkup::where('schedule_id', $newSchedule->id)
-                                    ->where('date', $newCheckupDate)
-                                    ->orderBy('number', 'DESC')
-                                    ->first();
-                if ($lastCheckup)
-                    $number = $lastCheckup->number + 1;
-
                 // Update checkup schedule data
-                $checkup->number = $number;
                 $checkup->date = $newCheckupDate;
                 $checkup->time_start = $newSchedule->time_start;
                 $checkup->time_end = $newSchedule->time_end;

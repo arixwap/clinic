@@ -19,7 +19,7 @@ class CreateCheckupsTable extends Migration
             $table->foreignId('patient_id');
             $table->foreignId('doctor_id');
             $table->foreignId('user_id');
-            $table->tinyInteger('number');
+            $table->integer('number');
             $table->date('date');
             $table->time('time_start', 0);
             $table->time('time_end', 0);
