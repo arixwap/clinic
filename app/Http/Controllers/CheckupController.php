@@ -74,6 +74,11 @@ class CheckupController extends Controller
                 break;
         }
 
+        // If current user is doctor, only get their checkup data
+        if ( Auth::User()->isRole('doctor') ) {
+            $checkup->where('doctor_id', Auth::User()->doctor->id);
+        }
+
         $data['search'] = $search;
         $data['view'] = $view;
         $data['selectedPolyclinic'] = $polyclinic;

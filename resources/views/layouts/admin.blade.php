@@ -65,32 +65,42 @@
                     <div class="col-md-2">
                         <ul class="admin-side-menu">
                             <li><a href="{{ route('home') }}">{{ __('Dashboard') }}</a></li>
-                            <li>
-                                <a href="{{ route('patient.index') }}">{{ __('Patient') }}</a>
-                                <ul>
-                                    <li><a href="{{ route('checkup.index') }}">{{ __('Checkup List') }}</a></li>
-                                    <li><a href="{{ route('patient.index') }}">{{ __('Patient List') }}</a></li>
-                                    {{-- <li><a href="{{ route('patient.create') }}">{{ __('Add Patient') }}</a></li> --}}
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="{{ route('doctor.index') }}">{{ __('Doctor') }}</a>
-                                <ul>
-                                    <li><a href="{{ route('doctor.index') }}">{{ __('Doctor List') }}</a></li>
-                                    <li><a href="{{ route('doctor.create') }}">{{ __('Add Doctor') }}</a></li>
-                                    <li><a href="{{ route('qualification.index') }}">{{ __('Qualification') }}</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="{{ route('polyclinic.index') }}">{{ __('Polyclinics') }}</a></li>
-                            <li>
-                                <a href="{{ route('user.index') }}">{{ __('User') }}</a>
-                                <ul>
-                                    <li><a href="{{ route('user.index') }}">{{ __('User List') }}</a></li>
-                                    <li><a href="{{ route('user.create') }}">{{ __('Add User') }}</a></li>
-                                    <li><a href="{{ route('role.index') }}">{{ __('Role') }}</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="{{ route('setting.index') }}">{{ __('Setting') }}</a></li>
+                            @if ( Auth::user()->isRole('doctor') )
+                                <li><a href="{{ route('checkup.index') }}">{{ __('Checkup') }}</a></li>
+                            @else
+                                <li>
+                                    <a href="{{ route('patient.index') }}">{{ __('Patient') }}</a>
+                                    <ul>
+                                        <li><a href="{{ route('checkup.index') }}">{{ __('Checkup List') }}</a></li>
+                                        <li><a href="{{ route('patient.index') }}">{{ __('Patient List') }}</a></li>
+                                        {{-- <li><a href="{{ route('patient.create') }}">{{ __('Add Patient') }}</a></li> --}}
+                                    </ul>
+                                </li>
+                            @endif
+                            @if ( Auth::user()->isRole('doctor') )
+                                <li><a href="{{ route('schedule.index', Auth::user()->doctor->id) }}">{{ __('Set Schedule') }}</a></li>
+                                <li><a href="{{ route('doctor.edit', Auth::user()->doctor->id) }}">{{ __('Doctor Data') }}</a></li>
+                                <li><a href="{{ route('user.edit', Auth::id()) }}">{{ __('Account') }}</a></li>
+                            @else
+                                <li>
+                                    <a href="{{ route('doctor.index') }}">{{ __('Doctor') }}</a>
+                                    <ul>
+                                        <li><a href="{{ route('doctor.index') }}">{{ __('Doctor List') }}</a></li>
+                                        <li><a href="{{ route('doctor.create') }}">{{ __('Add Doctor') }}</a></li>
+                                        <li><a href="{{ route('qualification.index') }}">{{ __('Qualification') }}</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="{{ route('polyclinic.index') }}">{{ __('Polyclinics') }}</a></li>
+                                <li>
+                                    <a href="{{ route('user.index') }}">{{ __('User') }}</a>
+                                    <ul>
+                                        <li><a href="{{ route('user.index') }}">{{ __('User List') }}</a></li>
+                                        <li><a href="{{ route('user.create') }}">{{ __('Add User') }}</a></li>
+                                        <li><a href="{{ route('role.index') }}">{{ __('Role') }}</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="{{ route('setting.index') }}">{{ __('Setting') }}</a></li>
+                            @endif
                         </ul>
                     </div>
                     <div class="col-md">

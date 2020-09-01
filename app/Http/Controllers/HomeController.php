@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Checkup;
 use App\Option;
 use App\Schedule;
@@ -36,33 +37,39 @@ class HomeController extends Controller
         $polyCheckups = Checkup::where('date', $now->format('Y-m-d'))
                                     ->where('is_done', 0)
                                     ->orderBy('time_start', 'ASC')
-                                    ->orderBy('number', 'ASC')
-                                    ->get()
-                                    ->groupBy('doctor.polyclinic');
+                                    ->orderBy('number', 'ASC');
 
-        $checkups = array();
-        foreach ( $polyclinics as $poly ) {
-            if ( isset($polyCheckups[$poly]) ) {
-                // Loop group by schedule
-                $scheduleId = null;
-                foreach ( $polyCheckups[$poly]->groupBy('schedule_id') as $i => $scheduleCheckups ) {
-                    if ( $i != null ) {
-                        foreach ( $scheduleCheckups as $checkup ) {
-                            if ( $scheduleId != $i ) {
-                                $scheduleId = $i;
-                                $checkupCollection = collect();
-                                $checkupCollection->doctor = $checkup->doctor->user->name;
-                                $checkupCollection->time_range = $checkup->schedule->time_range;
-                                $checkupCollection->checkups = collect(array());
+        if ( Auth::user()->isRole('doctor') ) {
+            // If current user is doctor role, only get his/her checkup data
+            $checkups = $polyCheckups->where('doctor_id', Auth::user()->doctor->id)->get();
+        } else {
+            // If current user is non doctor role, get all checkup data
+            $polyCheckups = $polyCheckups->get()->groupBy('doctor.polyclinic');
+
+            $checkups = array();
+            foreach ( $polyclinics as $poly ) {
+                if ( isset($polyCheckups[$poly]) ) {
+                    // Loop group by schedule
+                    $scheduleId = null;
+                    foreach ( $polyCheckups[$poly]->groupBy('schedule_id') as $i => $scheduleCheckups ) {
+                        if ( $i != null ) {
+                            foreach ( $scheduleCheckups as $checkup ) {
+                                if ( $scheduleId != $i ) {
+                                    $scheduleId = $i;
+                                    $checkupCollection = collect();
+                                    $checkupCollection->doctor = $checkup->doctor->user->name;
+                                    $checkupCollection->time_range = $checkup->schedule->time_range;
+                                    $checkupCollection->checkups = collect(array());
+                                }
+                                $checkupCollection->checkups->push($checkup);
                             }
-                            $checkupCollection->checkups->push($checkup);
+                            $checkups[$poly][$i] = $checkupCollection;
                         }
-                        $checkups[$poly][$i] = $checkupCollection;
                     }
+                } else {
+                    // Create empty checkup by polyclinic
+                    $checkups[$poly] = collect([]);
                 }
-            } else {
-                // Create empty checkup by polyclinic
-                $checkups[$poly] = collect([]);
             }
         }
 

@@ -7,18 +7,22 @@
                 <div class="card-header">{{ __('Checkup List') }}</div>
                 <div class="card-body">
                     <form action="{{ route('checkup.index') }}" method="get" autocomplete="off">
-                        <div class="form-group">
-                            <a href="{{ route('checkup.create') }}" class="btn btn-primary">{{ __('New Checkup') }}</a>
-                        </div>
-                        <div class="row mt-4">
-                            <div class="col-lg-4 form-group">
-                                <select name="polyclinic" class="form-control">
-                                    <option value="">{{ __('All Polyclinic') }}</option>
-                                    @foreach ( $polyclinics as $polyclinic )
-                                        <option {{ ($polyclinic->value == $selectedPolyclinic) ? 'selected' : '' }}>{{ $polyclinic->value }}</option>
-                                    @endforeach
-                                </select>
+                        @unless ( Auth::user()->isRole('doctor') )
+                            <div class="form-group">
+                                <a href="{{ route('checkup.create') }}" class="btn btn-primary">{{ __('New Checkup') }}</a>
                             </div>
+                        @endunless
+                        <div class="row mt-4">
+                            @unless ( Auth::user()->isRole('doctor') )
+                                <div class="col-lg-4 form-group">
+                                    <select name="polyclinic" class="form-control">
+                                        <option value="">{{ __('All Polyclinic') }}</option>
+                                        @foreach ( $polyclinics as $polyclinic )
+                                            <option {{ ($polyclinic->value == $selectedPolyclinic) ? 'selected' : '' }}>{{ $polyclinic->value }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            @endunless
                             <div class="col form-group">
                                 <input type="text" name="search" class="form-control" value="{{ $search }}" placeholder="{{ __('Search by patient name, bpjs or doctor') }}">
                             </div>

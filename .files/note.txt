@@ -1,52 +1,7 @@
 TASK
-- User Role
-  - Doctor
-  - User
-- Doctor Diagnosa
 - Dashboard : Graphic Patient Checkup Last Week / Last Month
 - Checkup List : Filter Date
 - Patient & Doctor List: Search Filter
-
-- CRUD User & Role
-  - Superadmin (Owner)
-    - CRUD User
-    - Edit / Undone Checkup even status is_done
-      - Edit autoset is_done in Checkup Model
-    - Bisa Semua
-  - User :
-    - CRUD Pasien
-    - CRUD Patient Checkup
-    - CRUD Doctor
-    - CRUD Option Data
-  - Dokter
-    - Edit Basic Information & Schedule ownself Doctor
-    - View All Checkup & Medical Record
-    - Edit ownselft patient data checkup
-
-- Doctor UI
-  - Dashboard (UI Doctor)
-    - Personal Incoming Checkup
-    - Doctor Schedule Today (Uneditable)
-      - Edit My Schedule
-    - Graphic: Patient Checkup Last Week / Last Month
-    - Popup Weekdays All Doctor Schedule
-  - Checkup List (Doctor UI)
-    - Form Filter by Doctor : Autoset this doctor
-    - List same as Admin UI
-    - CTA is_done : Popup input doctor note
-    - If Checkup is done by admin and doctor note is empty, doctor can only input this note once!
-    - Can View another doctor checkup
-    - Unable | Edit another doctor checkup
-  - Edit Checkup (Doctor UI)
-    - Edit Data Patient
-    - Edit BPJS Number
-    - Button is_done checkup
-    - Input Doctor Note
-    - Unable | Change Selected Doctor / Schedule
-    - Unable | Button Cancel Checkup => Delete
-    - Unable | Edit another doctor checkup data
-
-- My Account Setting: Change Name, Basic Information, Etc
 - Form Checkup Patient
   - Popup information doctor schedule
   - Alert on Limit Patient reach
@@ -54,9 +9,9 @@ TASK
 - Riwayat : Jumlah pasien checkup / minggu / bulan / tahun
 
 
-
 ---------------------------------------------------------------------------
 FUTURE IMPROVEMENT
+- Backend Role Permission - https://spatie.be/docs/laravel-permission/v3/introduction
 - Backend Validation
 - TUI Calendar - https://github.com/nhn/tui.calendar
 - Migrate to Vue
