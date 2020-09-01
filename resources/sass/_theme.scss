@@ -244,6 +244,34 @@ body {
 
 
 /**
+ * Modify Bootstrap Nav Tabs
+ * -------------------------------------------------------------------------------
+*/
+.nav-tabs {
+    $border-color: lighten($primary, 40%);
+    border-bottom: none;
+
+    .nav-link {
+        border-bottom: 1px solid $border-color;
+    }
+
+    .nav-link:hover,
+    .nav-link:focus {
+        border-top-color: $border-color;
+        border-left-color: $border-color;
+        border-right-color: $border-color;
+    }
+
+    .nav-link.active,
+    .nav-item.show .nav-link {
+        background-color: transparent;
+        border-color: $border-color;
+        border-bottom-color: transparent;
+    }
+}
+
+
+/**
  * Admin Menu Side Bar
  * -------------------------------------------------------------------------------
 */

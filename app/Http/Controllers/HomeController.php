@@ -16,9 +16,21 @@ class HomeController extends Controller
     public function index()
     {
         $now = Carbon::now();
+        $weekdaySchedules = [
+            'mon' => array(),
+            'tue' => array(),
+            'wed' => array(),
+            'thu' => array(),
+            'fri' => array(),
+            'sat' => array(),
+            'sun' => array()
+        ];
 
         // Get polyclinic list
         $polyclinics = Option::where('name', 'polyclinic')->pluck('value');
+
+        // Get all schedules
+        $schedules = Schedule::where('off', false)->orderBy('time_start')->get();
 
         // Get data checkup group by polyclinic
         $polyCheckups = Checkup::where('date', $now->format('Y-m-d'))
@@ -34,30 +46,36 @@ class HomeController extends Controller
                 // Loop group by schedule
                 $scheduleId = null;
                 foreach ( $polyCheckups[$poly]->groupBy('schedule_id') as $i => $scheduleCheckups ) {
-                    foreach ( $scheduleCheckups as $checkup ) {
-                        if ( $scheduleId != $i ) {
-                            $scheduleId = $i;
-                            $checkupCollection = collect();
-                            $checkupCollection->doctor = $checkup->doctor->user->name;
-                            $checkupCollection->time_range = $checkup->schedule->time_range;
-                            $checkupCollection->checkups = collect(array());
+                    if ( $i != null ) {
+                        foreach ( $scheduleCheckups as $checkup ) {
+                            if ( $scheduleId != $i ) {
+                                $scheduleId = $i;
+                                $checkupCollection = collect();
+                                $checkupCollection->doctor = $checkup->doctor->user->name;
+                                $checkupCollection->time_range = $checkup->schedule->time_range;
+                                $checkupCollection->checkups = collect(array());
+                            }
+                            $checkupCollection->checkups->push($checkup);
                         }
-                        $checkupCollection->checkups->push($checkup);
+                        $checkups[$poly][$i] = $checkupCollection;
                     }
-                    $checkups[$poly][$i] = $checkupCollection;
                 }
             } else {
                 // Create empty checkup by polyclinic
-                $checkups[$poly] = collect(array());
+                $checkups[$poly] = collect([]);
             }
         }
 
-        // Get data schedules
-        $schedules = Schedule::orderBy('time_start')->get();
-        $data['weekSchedules'] = $schedules->groupBy('weekday');
+        // Create weekdays schedules
+        foreach ( $schedules->groupBy('weekday') as $day => $daySchedules ) {
+            foreach ( $daySchedules->groupBy('doctor.polyclinic') as $poly => $schedule ) {
+                $weekdaySchedules[$day][$poly] = $schedule;
+            }
+        }
+
         $data['todaySchedules'] = $schedules->where('weekday', strtolower($now->format('D')))
                                             ->groupBy('doctor.polyclinic');
-
+        $data['weekdaySchedules'] = $weekdaySchedules;
         $data['polyclinics'] = $polyclinics;
         $data['checkups'] = $checkups;
 

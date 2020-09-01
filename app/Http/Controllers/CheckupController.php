@@ -159,12 +159,13 @@ class CheckupController extends Controller
     public function edit($id)
     {
         $checkup = Checkup::findOrFail($id);
+        $day = strtolower(Carbon::parse($checkup->date)->format('D'));
 
         $data['checkup'] = $checkup;
         $data['polyclinics'] = Option::where('name', 'polyclinic')->get();
         $data['doctors'] = Doctor::all();
         $data['schedules'] = Schedule::where('doctor_id', $checkup->doctor_id)
-                                    ->where('weekday', $checkup->schedule->weekday)
+                                    ->where('weekday', $day)
                                     ->get();
 
         return view('checkup.edit', $data);

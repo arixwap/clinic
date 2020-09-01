@@ -17326,6 +17326,33 @@ body {
 }
 
 /**
+ * Modify Bootstrap Nav Tabs
+ * -------------------------------------------------------------------------------
+*/
+
+.nav-tabs {
+  border-bottom: none;
+}
+
+.nav-tabs .nav-link {
+  border-bottom: 1px solid #d0e5d9;
+}
+
+.nav-tabs .nav-link:hover,
+.nav-tabs .nav-link:focus {
+  border-top-color: #d0e5d9;
+  border-left-color: #d0e5d9;
+  border-right-color: #d0e5d9;
+}
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+  background-color: transparent;
+  border-color: #d0e5d9;
+  border-bottom-color: transparent;
+}
+
+/**
  * Admin Menu Side Bar
  * -------------------------------------------------------------------------------
 */

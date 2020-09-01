@@ -13,7 +13,7 @@
                     @endif
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="alert alert-primary">{{ __('Today Patients') }}</div>
+                            <div class="h5 font-weight-bold bg-primary text-white p-3 mb-3">{{ __('Today Patients') }}</div>
                             <ul class="nav nav-tabs" id="nav-patient" role="tablist">
                                 @foreach ( $polyclinics as $i => $polyclinic )
                                     <li class="nav-item" role="presentation">
@@ -45,7 +45,7 @@
                             <a href="{{ route('checkup.index') }}" class="btn btn-info ml-2">{{ __('See All') }}</a>
                         </div>
                         <div class="col-md-6">
-                            <div class="alert alert-primary">{{ __('Today Doctor Schedules') }}</div>
+                            <div class="h5 font-weight-bold bg-primary text-white p-3 mb-3">{{ __('Today Doctor Schedules') }}</div>
                             @foreach ( $polyclinics as $poly )
                                 <div class="font-weight-bold mb-2">{{ $poly }}</div>
                                 @if ( isset($todaySchedules[$poly]) )
@@ -64,7 +64,7 @@
                                 @endif
                                 <hr>
                             @endforeach
-                            <button class="btn btn-primary">{{ __('See All Schedules') }}</button>
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#modal-weekday-schedule">{{ __('See All Schedules') }}</button>
                         </div>
                     </div>
                     {{-- <div class="mt-5">
@@ -77,3 +77,40 @@
         </div>
     </div>
 @endsection
+
+{{-- Modal Weekday Schedule --}}
+@push('footer-before-script')
+    <div class="modal fade" id="modal-weekday-schedule" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row justify-content-center">
+                        @foreach ($weekdaySchedules as $day => $daySchedules)
+                            <div class="col-md-6 my-3">
+                                <div class="h5 font-weight-bold bg-primary text-white text-uppercase text-center py-2">{{ Date::parse($day)->format('l') }}</div>
+                                @foreach ($daySchedules as $poly => $schedules)
+                                    <div class="h5 font-weight-bold text-center">{{ $poly }}</div>
+                                    <ul class="list-unstyled">
+                                        @foreach ($schedules as $schedule)
+                                            <li>
+                                                <div class="row">
+                                                    <div class="col text-right">{{ $schedule->time_range }}</div>
+                                                    <div class="col text-left">{{ $schedule->doctor->name }}</div>
+                                                </div>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                @endforeach
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endpush

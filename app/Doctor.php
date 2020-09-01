@@ -30,6 +30,7 @@ class Doctor extends Model
      * @var array
      */
     protected $appends = [
+        'name',
         'formatted_birthdate',
     ];
 
@@ -58,6 +59,16 @@ class Doctor extends Model
     public function checkups()
     {
         return $this->hasMany('App\Checkup');
+    }
+
+    /**
+     * Get doctor name from user relation
+     *
+     * @return string
+     */
+    public function getNameAttribute()
+    {
+        return $this->user->name;
     }
 
     /**
