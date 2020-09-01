@@ -1,11 +1,9 @@
 TASK
-- Dashboard (UI Admin)
-  - Popup Weekdays All Doctor Schedule
-  - CTA
-  - Graphic: Patient Checkup Last Week / Last Month
 - User Role
   - Doctor
   - User
+- Doctor Diagnosa
+- Dashboard : Graphic Patient Checkup Last Week / Last Month
 - Checkup List : Filter Date
 - Patient & Doctor List: Search Filter
 

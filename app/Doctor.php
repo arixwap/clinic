@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Auth;
 use Date;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -79,6 +80,28 @@ class Doctor extends Model
     public function getFormattedBirthdateAttribute()
     {
         return Date::parse($this->user->birthdate)->format('d F Y');
+    }
+
+    /**
+     * Check if doctor is current logged user
+     *
+     * @return boolean
+     */
+    public function isMe()
+    {
+        return ( $this->user_id == Auth::id() );
+    }
+
+    /**
+     * Get doctor name with suffix string if isMe() return true
+     *
+     * @return string
+     */
+    public function nameIsMe($suffix = null)
+    {
+        if ( $suffix == null ) $suffix = sprintf(' (%s)', __('Me'));
+
+        return ( $this->isMe() ) ? $this->name.$suffix : $this->name;
     }
 
     /**

@@ -211,7 +211,7 @@
             form.trigger('submit');
         })
 
-        // Delete Polyclinic Modal Function
+        // Checkup Done & Delete Modal Function
         $('#modal-form-done, #modal-form-delete, #modal-form-restore').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget);
             let name = button.data('name');

@@ -17390,6 +17390,21 @@ ul.admin-side-menu ul li > a {
 }
 
 /**
+ * Call to Action (CTA) show on hover
+ * -------------------------------------------------------------------------------
+*/
+
+.cta-hover .cta {
+  opacity: 0;
+}
+
+.cta-hover:hover .cta,
+.cta-hover:focus .cta,
+.cta-hover:active .cta {
+  opacity: 1;
+}
+
+/**
  * Form Readonly Style
  * -------------------------------------------------------------------------------
 */

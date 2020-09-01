@@ -31,7 +31,15 @@
                                             </div>
                                             <ul class="list-unstyled">
                                                 @foreach ($scheduleCheckups->checkups as $checkup)
-                                                    <li>{{ $checkup->line_number }} - {{ $checkup->patient->basic_info }}</li>
+                                                    <li class="">
+                                                        <div class="row">
+                                                            <div class="col"><a href="{{ route('checkup.show', $checkup->id) }}" class="text-primary"><span class="fa fa-external-link-square"></span></a>&emsp;{{ $checkup->line_number }} - {{ $checkup->patient->basic_info }}</div>
+                                                            <div class="col-auto text-right">
+                                                                <a href="#" role="button" class="cta text-success mx-1" data-toggle="modal" data-target="#modal-form-done" data-name="{{ __('Set done this checkup?') }}" data-is-done="1" data-url="{{ route('checkup.update', $checkup->id) }}"><span class="fa fa-check"></span></a>
+                                                                <a href="#" role="button" class="cta text-danger mx-1" data-toggle="modal" data-target="#modal-form-delete" data-name="{{ $checkup->patient->name }}" data-url="{{ route('checkup.destroy', $checkup->id) }}"><span class="fa fa-times"></span></a>
+                                                            </div>
+                                                        </div>
+                                                    </li>
                                                 @endforeach
                                             </ul>
                                             <hr>
@@ -51,10 +59,11 @@
                                 @if ( isset($todaySchedules[$poly]) )
                                     <ul class="list-unstyled">
                                         @foreach ( $todaySchedules[$poly] as $schedule )
-                                            <li>
+                                            <li class="cta-hover">
                                                 <div class="row">
                                                     <div class="col-4">{{ $schedule->time_range }}</div>
-                                                    <div class="col font-weight-bold">|&emsp;{{ $schedule->doctor->user->name }}</div>
+                                                    <div class="col font-weight-bold">|&emsp;{{ $schedule->doctor->nameIsMe() }}</div>
+                                                    <div class="col-auto"><a href="{{ route('schedule.index', $schedule->doctor_id) }}" class="cta text-secondary"><span class="fa fa-pencil-square"></span></a></div>
                                                 </div>
                                             </li>
                                         @endforeach
@@ -84,8 +93,8 @@
         <div class="modal-dialog modal-xl modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header border-0">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                    <button type="button" class="close btn btn-link text-secondary shadow-none" data-dismiss="modal" aria-label="Close">
+                        <span class="fa fa-times" aria-hidden="true"></span>
                     </button>
                 </div>
                 <div class="modal-body">
@@ -100,7 +109,7 @@
                                             <li>
                                                 <div class="row">
                                                     <div class="col text-right">{{ $schedule->time_range }}</div>
-                                                    <div class="col text-left">{{ $schedule->doctor->name }}</div>
+                                                    <div class="col text-left">{{ $schedule->doctor->nameIsMe() }}</div>
                                                 </div>
                                             </li>
                                         @endforeach
@@ -113,4 +122,77 @@
             </div>
         </div>
     </div>
+@endpush
+
+{{-- Modal Form Done --}}
+@push('footer-before-script')
+    <div class="modal fade" id="modal-form-done" tabindex="-1" role="dialog" aria-labelledby="modal-done-title" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <p class="h5 modal-title text-center" id="modal-done-title"><span class="name"></span></p>
+                </div>
+                <div class="modal-body">
+                    <form action="#" method="POST" autocomplete="off">
+                        {{ csrf_field() }}
+                        {{ method_field('PATCH') }}
+                        <input type="hidden" name="is_done">
+                        <input type="hidden" name="redirect" value="{{ url()->full() }}">
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" class="btn btn-success btn-block">{{ __('Yes') }}</button>
+                            </div>
+                            <div class="col">
+                                <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">{{ __('No') }}</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+@endpush
+
+{{-- Modal Form Delete --}}
+@push('footer-before-script')
+    <div class="modal fade" id="modal-form-delete" tabindex="-1" role="dialog" aria-labelledby="modal-delete-title" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <p class="h5 modal-title text-center" id="modal-delete-title">{{ __('Canceling Checkup') }} <span class="name"></span>?</p>
+                </div>
+                <div class="modal-body">
+                    <form action="#" method="POST" autocomplete="off">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
+                        <input type="hidden" name="redirect" value="{{ url()->full() }}">
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" class="btn btn-danger btn-block">{{ __('Yes') }}</button>
+                            </div>
+                            <div class="col">
+                                <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">{{ __('No') }}</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+@endpush
+
+@push('footer-after-script')
+    <script>
+        // Checkup Done & Delete Modal Function
+        $('#modal-form-done, #modal-form-delete, #modal-form-restore').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            let name = button.data('name');
+            let url = button.data('url');
+            let isDone = button.data('is-done');
+
+            $(this).find('form').attr('action', url);
+            $(this).find('form input[name="is_done"]').val(isDone);
+            $(this).find('.name').html(name);
+        })
+    </script>
 @endpush
