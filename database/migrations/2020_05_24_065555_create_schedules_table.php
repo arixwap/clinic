@@ -23,7 +23,7 @@ class CreateSchedulesTable extends Migration
             $table->boolean('off')->default(false);
             $table->timestamps();
 
-            $table->foreign('doctor_id')->references('id')->on('doctors');
+            $table->foreign('doctor_id')->references('id')->on('doctors')->onDelete('CASCADE');;
         });
     }
 

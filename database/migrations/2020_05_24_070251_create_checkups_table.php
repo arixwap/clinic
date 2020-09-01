@@ -15,7 +15,7 @@ class CreateCheckupsTable extends Migration
     {
         Schema::create('checkups', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('schedule_id');
+            $table->foreignId('schedule_id')->unsigned()->nullable();
             $table->foreignId('patient_id');
             $table->foreignId('doctor_id');
             $table->foreignId('user_id');
@@ -31,10 +31,10 @@ class CreateCheckupsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('schedule_id')->references('id')->on('schedules');
-            $table->foreign('patient_id')->references('id')->on('patients');
-            $table->foreign('doctor_id')->references('id')->on('doctors');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('schedule_id')->references('id')->on('schedules')->onDelete('SET NULL');
+            $table->foreign('patient_id')->references('id')->on('patients')->onDelete('CASCADE');
+            $table->foreign('doctor_id')->references('id')->on('doctors')->onDelete('CASCADE');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE');
         });
     }
 
