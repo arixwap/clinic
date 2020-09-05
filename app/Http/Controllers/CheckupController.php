@@ -52,8 +52,10 @@ class CheckupController extends Controller
         $view = $request->input('view') ?: 'incoming';
         switch ($view) {
             case 'done':
-                $checkup->whereRaw("TIMESTAMP(`date`, `time_end`) <= '$now'")
-                        ->orWhere("is_done", true)
+                $checkup->where( function($query) use($now) {
+                            $query->whereRaw("TIMESTAMP(`date`, `time_end`) <= '$now'")
+                                ->orWhere("is_done", true);
+                        })
                         ->orderBy('date', 'DESC')
                         ->orderBy('time_start', 'DESC');
                 break;
