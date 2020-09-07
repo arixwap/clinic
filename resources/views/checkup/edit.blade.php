@@ -102,7 +102,7 @@
                         </div>
                         @if ( Auth::user()->isRole('doctor') )
                             <div class="form-group">
-                                <label>{{ __('Doctor Note') }}</label>
+                                <label>{{ __('Diagnosis') }}</label>
                                 <textarea name="doctor_note" rows="3" class="form-control" required>{{ $checkup->doctor_note }}</textarea>
                             </div>
                         @endif
