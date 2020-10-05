@@ -53,8 +53,10 @@ class Schedule extends Model
      */
     public function getTimeRangeAttribute()
     {
-        $time_start = Carbon::parse($this->time_start)->format('h:i A');
-        $time_end = Carbon::parse($this->time_end)->format('h:i A');
+        // $time_start = Carbon::parse($this->time_start)->format('h:i A');
+        // $time_end = Carbon::parse($this->time_end)->format('h:i A');
+        $time_start = Carbon::parse($this->time_start)->format('H:i');
+        $time_end = Carbon::parse($this->time_end)->format('H:i');
 
         return "{$time_start} - {$time_end}";
     }
