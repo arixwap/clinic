@@ -87,10 +87,10 @@
                                     <ul>
                                         <li><a href="{{ route('doctor.index') }}">{{ __('Doctor List') }}</a></li>
                                         <li><a href="{{ route('doctor.create') }}">{{ __('Add Doctor') }}</a></li>
-                                        <li><a href="{{ route('qualification.index') }}">{{ __('Qualification') }}</a></li>
+                                        <li><a href="{{ route('polyclinic.index') }}">{{ __('Polyclinics') }}</a></li>
+                                        {{-- <li><a href="{{ route('qualification.index') }}">{{ __('Qualification') }}</a></li> --}}
                                     </ul>
                                 </li>
-                                <li><a href="{{ route('polyclinic.index') }}">{{ __('Polyclinics') }}</a></li>
                                 <li>
                                     <a href="{{ route('user.index') }}">{{ __('User') }}</a>
                                     <ul>

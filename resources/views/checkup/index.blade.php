@@ -13,8 +13,14 @@
                             </div>
                         @endunless
                         <div class="row mt-4">
+                            <div class="col form-group">
+                                <input name="start_date" type="text" class="form-control datepicker" placeholder="{{ __('Date From') }}" value="{{ $startDate }}" data-alt-format="DD, dd MM yy">
+                            </div>
+                            <div class="col form-group">
+                                <input name="end_date" type="text" class="form-control datepicker" placeholder="{{ __('Date To') }}" value="{{ $endDate }}" data-alt-format="DD, dd MM yy">
+                            </div>
                             @unless ( Auth::user()->isRole('doctor') )
-                                <div class="col-lg-4 form-group">
+                                <div class="col-lg-5 form-group">
                                     <select name="polyclinic" class="form-control">
                                         <option value="">{{ __('All Polyclinic') }}</option>
                                         @foreach ( $polyclinics as $polyclinic )
@@ -23,10 +29,12 @@
                                     </select>
                                 </div>
                             @endunless
-                            <div class="col form-group">
+                        </div>
+                        <div class="row">
+                            <div class="col-8 col-lg-10 form-group">
                                 <input type="text" name="search" class="form-control" value="{{ $search }}" placeholder="{{ __('Search by patient name, bpjs or doctor') }}">
                             </div>
-                            <div class="col-4 col-lg-2 form-group">
+                            <div class="col form-group">
                                 <button type="submit" class="btn btn-secondary btn-block">{{ __('Search') }}</button>
                                 <div class="text-center">
                                     <small role="button" class="btn-reset text-danger ">{{ __('Reset') }}</small>
@@ -210,6 +218,8 @@
         // Reset filter
         $('.btn-reset').click( function() {
             let form = $(this).closest('form');
+            form.find('input[name=start_date]').val('');
+            form.find('input[name=end_date]').val('');
             form.find('input[name=search]').val('');
             form.find('select[name=doctor]').val('');
             form.trigger('submit');

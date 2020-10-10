@@ -12,9 +12,28 @@ class PatientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data['patients'] = Patient::all();
+        $patient = Patient::select();
+
+        // Filter by search
+        if ( $search = $request->input('search') ) {
+            $patient->where( function ($query) use ($search) {
+                // Search patient by id
+                $query->orWhere("id", $search);
+                // Search patient by name
+                $query->orWhere("name", "LIKE", "%$search%");
+                // Search patient by birthplace
+                $query->orWhere("birthplace", "LIKE", "%$search%");
+                // Search patient by address
+                $query->orWhere("address", "LIKE", "%$search%");
+                // Search patient by phone
+                $query->orWhere("phone", "LIKE", "%$search%");
+            });
+        }
+
+        $data['patients'] = $patient->orderBy('name', 'ASC')->get();
+        $data['search'] = $search;
 
         return view('patient.index', $data);
     }

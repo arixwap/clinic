@@ -7,6 +7,16 @@
                 <div class="card-header">{{ __('Patient List') }}</div>
                 <div class="card-body">
                     {{-- <a href="{{ route('patient.create') }}" role="button" class="btn btn-primary mb-3">{{ __('Add') }}</a> --}}
+                    <form action="{{ route('patient.index') }}" method="get" autocomplete="off">
+                        <div class="row">
+                            <div class="col-9 form-group">
+                                <input type="text" name="search" class="form-control" value="{{ $search }}" placeholder="{{ __('Search') }}">
+                            </div>
+                            <div class="col form-group">
+                                <button type="submit" class="btn btn-secondary btn-block">{{ __('Search') }}</button>
+                            </div>
+                        </div>
+                    </form>
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
@@ -20,9 +30,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach( $patients as $i => $patient )
+                                @foreach( $patients as $patient )
                                     <tr>
-                                        <th class="align-middle" scope="row">{{ $i + 1 }}</th>
+                                        <th class="align-middle" scope="row">{{ $loop->iteration }}</th>
                                         <td class="align-middle">{{ $patient->name }}</td>
                                         <td class="align-middle">{{ $patient->formatted_birthdate }}</td>
                                         <td class="align-middle">{{ __($patient->gender) }}</td>

@@ -1,11 +1,12 @@
 TASK
-- Checkup List : Filter Date
+- Login Doctor
+  - Popup Checkup Input Diagnosa & Keluhan
+  - Hide tombol ubah patient
+- BUG, rekam medis list, input diagnosa & keluhan kosong
 - Export Excel : List Patient, List Checkup, List Doctor
 - User Access
 - Graphic Kunjungan (Only Success, not included cancel c)
 
-- Patient & Doctor List: Search Filter
-- Input Doctor Diagnosa from View Checkup
 - Dashboard : Graphic Patient Checkup Last Week / Last Month
 - Form Checkup Patient
   - Popup information doctor schedule

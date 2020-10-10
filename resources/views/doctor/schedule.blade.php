@@ -24,40 +24,44 @@
                                     </div>
                                     <div class="weekday-toggle">
                                         <div class="row mb-1">
-                                            <div class="col-4">{{ __('Start Time') }}</div>
-                                            <div class="col-4">{{ __('End Time') }}</div>
-                                            <div class="col">{{ __('Patient Limit') }}</div>
+                                            <div class="col-5">{{ __('Start Time') }}</div>
+                                            <div class="col-5">{{ __('End Time') }}</div>
+                                            {{-- <div class="col">{{ __('Patient Limit') }}</div> --}}
                                         </div>
                                         @forelse ( $schedule['times'] as $time )
                                             <div class="time-group row">
-                                                <div class="form-group col-4">
+                                                <div class="form-group col-5">
                                                     <input type="hidden" name="id_schedule[{{ $index }}][]" value="{{ $time->id }}">
                                                     <input type="time" name="time_start[{{ $index }}][]" class="form-control" value="{{ $time->time_start }}" autocomplete="off" required>
                                                 </div>
-                                                <div class="form-group col-4">
+                                                <div class="form-group col-5">
                                                     <input type="time" name="time_end[{{ $index }}][]" class="form-control" value="{{ $time->time_end }}" autocomplete="off" required>
                                                 </div>
-                                                <div class="form-group col">
+                                                {{-- Hide input limit - d-none --}}
+                                                <div class="form-group col d-none">
                                                     <input type="number" name="limit[{{ $index }}][]" class="form-control" autocomplete="off" value="{{ $time->limit }}" placeholder="-" min="0">
                                                 </div>
+                                                {{-- End of - Hide input limit - d-none --}}
                                                 <div class="form-group col-auto">
-                                                    <button class="btn-delete-time btn btn-link text-danger shadow-none" title="{{ __('Delete') }}" tabindex="-1"><span class="fa fa-times"></span></button>
+                                                    <button class="btn-delete-time btn btn-outline-danger border-0" title="{{ __('Delete') }}"><span class="fa fa-times"></span></button>
                                                 </div>
                                             </div>
                                         @empty
                                             <div class="time-group row">
-                                                <div class="form-group col-4">
+                                                <div class="form-group col-5">
                                                     <input type="hidden" name="id_schedule[{{ $index }}][]">
                                                     <input type="time" name="time_start[{{ $index }}][]" class="form-control" autocomplete="off" required>
                                                 </div>
-                                                <div class="form-group col-4">
+                                                <div class="form-group col-5">
                                                     <input type="time" name="time_end[{{ $index }}][]" class="form-control" autocomplete="off" required>
                                                 </div>
-                                                <div class="form-group col">
+                                                {{-- Hide input limit - d-none --}}
+                                                <div class="form-group col d-none">
                                                     <input type="number" name="limit[{{ $index }}][]" class="form-control" autocomplete="off" placeholder="-" min="0">
                                                 </div>
+                                                {{-- End of - Hide input limit - d-none --}}
                                                 <div class="form-group col-auto">
-                                                    <button class="btn-delete-time btn btn-link text-danger shadow-none" title="{{ __('Delete') }}" tabindex="-1"><span class="fa fa-times"></span></button>
+                                                    <button class="btn-delete-time btn btn-outline-danger border-0" title="{{ __('Delete') }}"><span class="fa fa-times"></span></button>
                                                 </div>
                                             </div>
                                         @endforelse

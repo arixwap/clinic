@@ -7,23 +7,33 @@
                 <div class="card-header">{{ __('Doctor List') }}</div>
                 <div class="card-body">
                     <a href="{{ route('doctor.create') }}" role="button" class="btn btn-primary mb-3">{{ __('Add') }}</a>
+                    <form action="{{ route('doctor.index') }}" method="get" autocomplete="off">
+                        <div class="row">
+                            <div class="col-9 form-group">
+                                <input type="text" name="search" class="form-control" value="{{ $search }}" placeholder="{{ __('Search') }}">
+                            </div>
+                            <div class="col form-group">
+                                <button type="submit" class="btn btn-secondary btn-block">{{ __('Search') }}</button>
+                            </div>
+                        </div>
+                    </form>
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">{{ __('Name') }}</th>
-                                    <th scope="col">{{ __('Qualification') }}</th>
+                                    {{-- <th scope="col">{{ __('Qualification') }}</th> --}}
                                     <th scope="col">{{ __("Polyclinic") }}</th>
                                     <th scope="col" class="text-center">{{ __('Action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach( $doctors as $i => $doctor )
+                                @foreach( $doctors as $doctor )
                                     <tr>
-                                        <th class="align-middle" scope="row">{{ $i + 1 }}</th>
+                                        <th class="align-middle" scope="row">{{ $loop->iteration }}</th>
                                         <td class="align-middle">{{ $doctor->user->name }}</td>
-                                        <td class="align-middle">{{ __($doctor->qualification) }}</td>
+                                        {{-- <td class="align-middle">{{ __($doctor->qualification) }}</td> --}}
                                         <td class="align-middle">{{ $doctor->polyclinic }}</td>
                                         <td class="align-middle text-center">
                                             <a href="{{ route('doctor.edit', $doctor->id) }}" role="button" class="btn btn-link text-secondary shadow-none"><i class="fa fa-pencil"></i></a>

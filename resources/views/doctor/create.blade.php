@@ -56,7 +56,7 @@
                         </div>
                         <br>
 
-                        <div class="h5">{{ __('Doctor Data') }}</div>
+                        {{-- <div class="h5">{{ __('Doctor Data') }}</div>
                         <hr>
                         <div class="row">
                             <div class="col-md-6 form-group">
@@ -86,7 +86,7 @@
                                 <input name="str_end_date" type="text" class="form-control datepicker" data-alt-format="d MM yy" data-change-month="true" data-change-year="true">
                             </div>
                         </div>
-                        <br>
+                        <br> --}}
 
                         <div class="h5">{{ __('Account Data') }}</div>
                         <small>{{ __('Data for login to system') }}</small>

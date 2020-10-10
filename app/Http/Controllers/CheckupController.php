@@ -47,7 +47,15 @@ class CheckupController extends Controller
             });
         }
 
-        // Filter checkup by date
+        // Filter checkup by start - end date
+        if ( $startDate = $request->input('start_date') ) {
+            $checkup->where("date", ">=", $startDate);
+        }
+        if ( $endDate = $request->input('end_date') ) {
+            $checkup->where("date", "<=", $endDate);
+        }
+
+        // Filter checkup by status date
         $now = Carbon::now();
         $view = $request->input('view') ?: 'incoming';
         switch ($view) {
@@ -81,6 +89,8 @@ class CheckupController extends Controller
             $checkup->where('doctor_id', Auth::User()->doctor->id);
         }
 
+        $data['startDate'] = $startDate;
+        $data['endDate'] = $endDate;
         $data['search'] = $search;
         $data['view'] = $view;
         $data['selectedPolyclinic'] = $polyclinic;

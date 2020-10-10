@@ -17,9 +17,26 @@ class DoctorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data['doctors'] = Doctor::all();
+        $doctor = Doctor::select();
+
+        // Filter by search
+        if ( $search = $request->input('search') ) {
+            $doctor->where( function ($query) use ($search) {
+                // Search doctor by id
+                $query->orWhere("id", $search);
+                // Search doctor by polyclinic
+                $query->orWhere("polyclinic", "LIKE", "%$search%");
+                // Search doctor by name. Doctors -> User
+                $query->orWhereHas('user', function ($query) use ($search) {
+                    $query->where("name", "LIKE", "%$search%");
+                });
+            });
+        }
+
+        $data['doctors'] = $doctor->get()->sortBy('name');
+        $data['search'] = $search;
 
         return view('doctor.index', $data);
     }
