@@ -138,7 +138,9 @@
     "Undo done this checkup?": "Batalkan selesai checkup ini?",
     "Number": "Nomor",
     "Medical Record": "Rekam Medis",
+    "No Medical Record Data": "Tidak Ada Data Rekam Medis",
     "Diagnosis": "Diagnosa",
+    "Write Diagnosis": "Tulis Diagnosa",
 
     "Polyclinic": "Poliklinik",
     "Polyclinics": "Poliklinik",
@@ -165,6 +167,7 @@
     "Search": "Cari",
     "No Patient": "Tidak Ada Pasien",
     "Search by patient name, bpjs or doctor": "Cari nama pasien, bpjs atau dokter",
+    "Once submited, it can`t edited. Please make sure your data is correct!": "Data yang sudah dikirim tidak akan dapat diubah kembali. Pastikan data yang anda masukan benar!",
 
     "Setting": "Pengaturan",
     "Upload Logo": "Unggah Logo",

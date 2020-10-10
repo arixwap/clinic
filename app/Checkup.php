@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Auth;
 use Date;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -197,7 +198,7 @@ class Checkup extends Model
         // Check if checkup datetime is passed today
         $now = Carbon::now();
         $checkupDate = Carbon::parse($this->date . ' ' . $this->time_end);
-        $isPassed = ( $now->diffInDays($checkupDate, false) < 0 );
+        $isPassed = ( $now->diffInSeconds($checkupDate, false) < 0 );
 
         switch($type) {
             case 'incoming':
@@ -224,6 +225,30 @@ class Checkup extends Model
                 $result = false;
                 break;
         }
+
+        return $result;
+    }
+
+    /**
+     * Check if diagnosis (doctor_note) is enable to inputed
+     *
+     * @return boolean
+     */
+    public function enableInputDiagnosis()
+    {
+        $result = true;
+        $user = Auth::user();
+
+        // Current login user role should doctor & has same doctor_id with checkup data
+        if ( ! $user->isRole('doctor') ) {
+            $result = false;
+        } else if ( $user->doctor->id != $this->doctor_id ) {
+            $result = false;
+        }
+
+        // If checkup is done (date passed), only can input diagnosis if value is empty
+        if ( $this->is_done && $this->doctor_note )
+            $result = false;
 
         return $result;
     }

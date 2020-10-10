@@ -34,7 +34,7 @@
                         <label class="font-weight-bold">{{ __('Address') }}</label>
                         <p class="form-readonly">{!! nl2br($patient->address) !!}</p>
                     </div>
-                    @foreach ( $checkups as $checkup )
+                    @forelse ( $checkups as $checkup )
                         <div class="card border-primary my-4">
                             <div class="card-body">
                                 <div class="row">
@@ -59,7 +59,9 @@
                                 <a href="{{ route('checkup.show', $checkup->id) }}" role="button" class="btn btn-primary rounded-0 mt-3">{{ __('View') }}</a>
                             </div>
                         </div>
-                    @endforeach
+                    @empty
+                        <p class="h4 font-weight-bold text-center py-5">{{ __('No Medical Record Data') }}</p>
+                    @endforelse
                 </div>
             </div>
         </div>

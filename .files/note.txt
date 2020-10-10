@@ -1,18 +1,23 @@
 TASK
-- Login Doctor
-  - Popup Checkup Input Diagnosa & Keluhan
-  - Hide tombol ubah patient
-- BUG, rekam medis list, input diagnosa & keluhan kosong
-- Export Excel : List Patient, List Checkup, List Doctor
-- User Access
-- Graphic Kunjungan (Only Success, not included cancel c)
-
+- Menu - Visitor Report (Laporan Kunjungan)
+  - Chart Visitor Checkup per day dengan google Chart
+  - Filter : Daily, Monthly, Yearly, Polyclinic
+  - Dibawah ada tabel dengan title nama date / bulan / year dan row polyclinic
+  - Only Success Checkup, DON'T include cancel checkup
 - Dashboard : Graphic Patient Checkup Last Week / Last Month
+- Role Standar User
+  - No CRUD User
+  - No CRUD Doctor
+  - Can Set Doctor Schedule
+  - Can CRUD Patient & Checkup
+  - Can View Report
+- Export
+  PDF : Checkup Detail, Rekam Medis
+  Excel : Checkup List, Patient List, Doctor List
 - Form Checkup Patient
   - Popup information doctor schedule
   - Alert on Limit Patient reach
 - Javascript Jam
-- Riwayat : Jumlah pasien checkup / minggu / bulan / tahun
 
 
 ---------------------------------------------------------------------------

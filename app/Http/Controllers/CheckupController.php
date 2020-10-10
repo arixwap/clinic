@@ -223,15 +223,12 @@ class CheckupController extends Controller
         $data = $request->only(['name', 'gender', 'birthplace', 'birthdate', 'address', 'phone']);
         $checkup->patient()->update($data);
 
-        // Update is done
-        if ($request->has('is_done'))
-            $checkup->is_done = $request->input('is_done');
+        // Update checkup data
+        if ( $request->has('is_done') ) $checkup->is_done = $request->input('is_done');
+        if ( $request->has('bpjs') ) $checkup->bpjs = $request->input('bpjs');
+        if ( $request->has('description') ) $checkup->description = $request->input('description');
+        if ( $request->has('doctor_note') ) $checkup->doctor_note = $request->input('doctor_note');
 
-        // update checkup data
-        $checkup->bpjs = $request->input('bpjs');
-        $checkup->description = $request->input('description');
-        $checkup->doctor_note = $request->input('doctor_note');
-        $checkup->new_patient = 0;
         $checkup->save();
 
         $redirect = $request->input('redirect') ?: route('checkup.show', $id);
