@@ -142,10 +142,11 @@ class Checkup extends Model
     public function getIsDoneAttribute()
     {
         $now = Carbon::now();
-        $checkupDate = $this->date;
+        $now = Carbon::parse('12 October 2020 14:00:01');
+        $checkupDate = Carbon::parse($this->date . ' ' . $this->time_end);
 
         // Set is_done if date passed 1 day
-        if ( $now->diffInDays($checkupDate, false) < 0 ) {
+        if ( $now->diffInSeconds($checkupDate, false) < 0 ) {
             $this->is_done = 1;
             $this->save();
         }
@@ -189,66 +190,102 @@ class Checkup extends Model
     }
 
     /**
-     * Get checkup status
+     * Check if this checkup is enable for do the following action
      *
      * @return boolean
      */
-    public function isStatus($type)
+    public function enable($action)
     {
+        $result = true;
+        $user = Auth::User();
+
         // Check if checkup datetime is passed today
         $now = Carbon::now();
         $checkupDate = Carbon::parse($this->date . ' ' . $this->time_end);
         $isPassed = ( $now->diffInSeconds($checkupDate, false) < 0 );
 
-        switch($type) {
-            case 'incoming':
-                // Incoming fresh checkup with no cancelation
-                $result = ( $this->is_done == 0 && ! $this->trashed() );
+        switch ($action) {
+
+            case 'edit' :
+                // Unless superadmin always can edit forever
+                if ( ! $user->isRole('superadmin') ) {
+                    // Cannot edit after checkup is done
+                    if ( ! $this->is_done )
+                        $result = false;
+                    // Cannot edit if checkup is cancelled
+                    if ( $this->trashed() )
+                        $result = false;
+                    // Doctor cannot edit
+                    if ( $user->isRole('doctor') )
+                        $result = false;
+                }
                 break;
-            case 'done-undoable':
-                // Checkup is done, but can be undo before checkup time passed
-                $result = ( $this->is_done == 1 && ! $isPassed && ! $this->trashed() );
+
+            case 'done' :
+                // Cannot set done if checkup already done
+                if ( $this->is_done )
+                    $result = false;
+                // Cannot set done if checkup is cancelled
+                if ( $this->trashed() )
+                    $result = false;
                 break;
-            case 'done':
-                // Checkup is done yet
-                $result = ( $this->is_done == 1 && ! $this->trashed() );
+
+            case 'cancel' :
+                // Cannot cancel if checkup already done
+                if ( $this->is_done )
+                    $result = false;
+                // Cannot cancel if checkup already cancelled
+                if ( $this->trashed() )
+                    $result = false;
                 break;
-            case 'cancel-undoable':
-                // Canceled checkup, but can be undo before checkup time passed
-                $result = ( $this->trashed() && ! $isPassed );
+
+            case 'undone' :
+                // Unable undo done if checkup status is not done
+                if ( ! $this->is_done )
+                    $result = false;
+                // Cannot set done if checkup is cancelled
+                if ( $this->trashed() )
+                    $result = false;
+                // Unable undo done if checkup date passed
+                if ( $isPassed )
+                    $result = false;
                 break;
-            case 'cancel':
-                // Fixed canceled checkup
-                $result = $this->trashed();
+
+            case 'restore' :
+                // Cannot undo cancel if checkup status is not deleted
+                if ( ! $this->trashed() )
+                    $result = false;
+                // Cannot undo cancel if checkup date passed
+                if ( $isPassed )
+                    $result = false;
                 break;
-            default:
-                $result = false;
+
+            case 'delete' :
+                // Only can permanent delete if checkup status is cancelled
+                if ( ! $this->trashed() )
+                    $result = false;
+                // Only superadmin can permanent delete
+                if ( ! $user->isRole('superadmin') )
+                    $result = false;
                 break;
+
+            case 'diagnosis' :
+                // Cannot input diagnosis if checkup is cancelled
+                if ( $this->trashed() )
+                    $result = false;
+                // Current login user role should doctor & has same doctor_id with checkup data
+                if ( ! $user->isRole('doctor') ) {
+                    $result = false;
+                } else if ( $user->doctor->id != $this->doctor_id ) {
+                    $result = false;
+                }
+                // Still can input diagnosis only if value is empty after checkup is done
+                if ( $this->is_done && $this->doctor_note )
+                    $result = false;
+                break;
+
+            default : break;
         }
-
-        return $result;
-    }
-
-    /**
-     * Check if diagnosis (doctor_note) is enable to inputed
-     *
-     * @return boolean
-     */
-    public function enableInputDiagnosis()
-    {
-        $result = true;
-        $user = Auth::user();
-
-        // Current login user role should doctor & has same doctor_id with checkup data
-        if ( ! $user->isRole('doctor') ) {
-            $result = false;
-        } else if ( $user->doctor->id != $this->doctor_id ) {
-            $result = false;
-        }
-
-        // If checkup is done (date passed), only can input diagnosis if value is empty
-        if ( $this->is_done && $this->doctor_note )
-            $result = false;
 
         return $result;
     }

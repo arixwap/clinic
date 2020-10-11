@@ -31,20 +31,23 @@
                         </div>
                         <div class="col-md-auto text-right">
                             <a href="{{ route('checkup.index') }}" role="button" class="btn btn-secondary"><i class="fa fa-chevron-left"></i> {{ __('Checkup List') }}</a>
-                            @if ( $checkup->enableInputDiagnosis() )
+                            @if ( $checkup->enable('diagnosis') )
                                 <button class="btn btn-primary ml-2" data-toggle="modal" data-target="#modal-form-diagnosis"><i class="fa fa-pencil"></i> {{ __('Diagnosis') }}</button>
                             @endif
                             <a href="{{ route('checkup.record', $checkup->patient_id) }}" role="button" class="btn btn-info ml-2"><i class="fa fa-file-text-o"></i> {{ __('Medical Record') }}</a>
-                            @if ( $checkup->isStatus('incoming') )
-                                @unless ( Auth::user()->isRole('doctor') )
-                                    <a href="{{ route('checkup.edit', $checkup->id) }}" role="button" class="btn btn-secondary ml-2"><i class="fa fa-pencil"></i> {{ __('Edit') }}</a>
-                                @endunless
+                            @if ( $checkup->enable('edit') )
+                                <a href="{{ route('checkup.edit', $checkup->id) }}" role="button" class="btn btn-secondary ml-2"><i class="fa fa-pencil"></i> {{ __('Edit') }}</a>
+                            @endif
+                            @if ( $checkup->enable('done') )
                                 <button class="btn btn-success ml-2" data-toggle="modal" data-target="#modal-form-done" data-name="{{ __('Set done this checkup?') }}" data-is-done="1"><i class="fa fa-check"></i> {{ __('Done') }}</button>
-                                <!--//-->
+                            @endif
+                            @if ( $checkup->enable('cancel') )
                                 <button class="btn btn-danger ml-2" data-toggle="modal" data-target="#modal-form-delete" data-name="{{ $checkup->patient->name }}"><i class="fa fa-times"></i> {{ __('Cancel') }}</button>
-                            @elseif ( $checkup->isStatus('done-undoable') )
+                            @endif
+                            @if ( $checkup->enable('undone') )
                                 <button class="btn btn-danger ml-2" data-toggle="modal" data-target="#modal-form-done" data-name="{{ __('Undo done this checkup?') }}" data-is-done="0" ><i class="fa fa-minus"></i> {{ __('Undo Done') }}</button>
-                            @elseif ( $checkup->isStatus('cancel-undoable') )
+                            @endif
+                            @if ( $checkup->enable('restore') )
                                 <button class="btn btn-success ml-2" data-toggle="modal" data-target="#modal-form-restore" data-name="{{ $checkup->patient->name }}"><i class="fa fa-undo"></i> {{ __('Restore') }}</button>
                             @endif
                         </div>
@@ -131,6 +134,9 @@
                         @if ( Auth::User()->isRole('doctor') )
                             <div class="form-only-doctor">
                                 <div class="form-group">
+                                    <p class="h5 font-weight-bold">{{ __('Input Patient Data') }}</p>
+                                </div>
+                                <div class="form-group">
                                     <label class="font-weight-bold">{{ __('Complaints') }}</label>
                                     <textarea name="description" rows="5" class="form-control">{{ $checkup->description }}</textarea>
                                 </div>
@@ -145,10 +151,10 @@
                         @endif
                         <div class="row">
                             <div class="col">
-                                <button type="submit" class="btn btn-success btn-block">{{ __('Yes') }}</button>
+                                <button type="submit" class="btn btn-success btn-block">{{ __('Done') }}</button>
                             </div>
                             <div class="col">
-                                <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">{{ __('No') }}</button>
+                                <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">{{ __('Cancel') }}</button>
                             </div>
                         </div>
                     </form>
