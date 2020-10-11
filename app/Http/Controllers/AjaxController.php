@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Option;
-use App\User;
-use App\Patient;
+use App\Checkup;
 use App\Doctor;
+use App\Option;
+use App\Patient;
+use App\User;
+use Carbon\Carbon;
 
 class AjaxController extends Controller
 {
@@ -75,5 +77,31 @@ class AjaxController extends Controller
         $doctor = Doctor::find($request->input('doctor'));
 
         if ($doctor) return $doctor->formatSchedules();
+    }
+
+    /**
+     * Get Visitor Data
+     *
+     * @return array(
+     *      date => [polyclinic_name => integer count, ...]
+     *      , ...
+     * )
+     */
+    public function getVisitor($request)
+    {
+        $now = Carbon::now();
+        $startDate = $request->input('start_date') ?: $now->sub('1 month')->format('Y-m-d');
+        $endDate = $request->input('end_date') ?: $now->format('Y-m-d');
+        $view = $request->input('view') ?: 'day';
+        $polyclinics = Option::where('name', 'polyclinic')->get();
+
+        $visitors = Checkup::with('doctor')
+                        ->whereBetween('date', [$startDate, $endDate])
+                        ->get()
+                        ->groupBy(['date', 'doctor.polyclinic']);
+
+        // WIP
+
+        return $visitors;
     }
 }

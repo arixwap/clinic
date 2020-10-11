@@ -99,9 +99,8 @@
                         </div>
                     </div>
                     {{-- <div class="mt-5">
-                        <div class="alert alert-primary">
-                            Riwayat Kunjungan 1 Minggu Terakhir / 1 Bulan Terakhir
-                        </div>
+                        <div class="h5 font-weight-bold bg-primary text-white p-3 mb-3">{{ __('Riwayat Kunjungan 1 Minggu Terakhir / 1 Bulan Terakhir') }}</div>
+                        <div id="chart-visitor"></div>
                     </div> --}}
                 </div>
             </div>
@@ -205,6 +204,7 @@
 
 @push('footer-after-script')
     <script>
+
         // Checkup Done & Delete Modal Function
         $('#modal-form-done, #modal-form-delete, #modal-form-restore').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget);
@@ -216,5 +216,32 @@
             $(this).find('form input[name="is_done"]').val(isDone);
             $(this).find('.name').html(name);
         })
+
+        $.get('{{ route("ajax") }}',
+            {
+                ajax : 'getVisitor',
+                start_date : '2020-09-01',
+                end_date : '2020-09-30'
+            },
+            function(response) {
+                console.log(response);
+            }
+        );
+
+        // WIP
+        //Load the charts library with a callback
+        // GoogleCharts.load(drawChart);
+        // function drawChart() {
+        //     // Standard google charts functionality is available as GoogleCharts.api after load
+        //     const data = GoogleCharts.api.visualization.arrayToDataTable([
+        //         ['Chart thing', 'Chart amount'],
+        //         ['Lorem ipsum', 60],
+        //         ['Dolor sit', 22],
+        //         ['Sit amet', 18]
+        //     ]);
+        //     const pie_1_chart = new GoogleCharts.api.visualization.AreaChart(document.getElementById('chart-visitor'));
+        //     pie_1_chart.draw(data);
+        // }
+
     </script>
 @endpush

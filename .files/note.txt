@@ -1,10 +1,10 @@
 TASK
+- Dashboard : Graphic Patient Checkup Last Week / Last Month
 - Menu - Visitor Report (Laporan Kunjungan)
   - Chart Visitor Checkup per day dengan google Chart
-  - Filter : Daily, Monthly, Yearly, Polyclinic
+  - Filter : Daily, Monthly, Yearly, Polyclinic (Multi Chart per Polyclinic / Single Chart / Total All )
   - Dibawah ada tabel dengan title nama date / bulan / year dan row polyclinic
   - Only Success Checkup, DON'T include cancel checkup
-- Dashboard : Graphic Patient Checkup Last Week / Last Month
 - Role Standar User
   - No CRUD User
   - No CRUD Doctor

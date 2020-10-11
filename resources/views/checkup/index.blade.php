@@ -102,19 +102,19 @@
                                         </td>
                                         <td class="align-middle text-center">
                                             @if ( $checkup->enable('done') )
-                                                <button type="button" class="btn btn-link text-success shadow-none" title="{{ __('Done') }}" data-toggle="modal" data-target="#modal-form-done" data-name="{{ __('Set done this checkup?') }}" data-is-done="1" data-description="{{ $checkup->description }}" data-diagnosis="{{ $checkup->doctor_note }}" data-url="{{ route('checkup.update', $checkup->id) }}"><i class="fa fa-check"></i></button>
+                                                <button type="button" class="btn btn-link text-success border-0 rounded" title="{{ __('Done') }}" data-toggle="modal" data-target="#modal-form-done" data-name="{{ __('Set done this checkup?') }}" data-is-done="1" data-description="{{ $checkup->description }}" data-diagnosis="{{ $checkup->doctor_note }}" data-url="{{ route('checkup.update', $checkup->id) }}"><i class="fa fa-check"></i></button>
                                             @endif
                                             @if ( $checkup->enable('cancel') )
-                                                <button type="button" class="btn btn-link text-danger shadow-none" title="{{ __('Cancel') }}" data-toggle="modal" data-target="#modal-form-delete" data-name="{{ $checkup->patient->name }}" data-url="{{ route('checkup.destroy', $checkup->id) }}"><i class="fa fa-times"></i></button>
+                                                <button type="button" class="btn btn-link text-danger border-0 rounded" title="{{ __('Cancel') }}" data-toggle="modal" data-target="#modal-form-delete" data-name="{{ $checkup->patient->name }}" data-url="{{ route('checkup.destroy', $checkup->id) }}"><i class="fa fa-times"></i></button>
                                             @endif
                                             @if ( $checkup->enable('undone') )
-                                                <button type="button" class="btn btn-link text-danger shadow-none" title="{{ __('Undo Done') }}" data-toggle="modal" data-target="#modal-form-done" data-name="{{ __('Undo done this checkup?') }}" data-is-done="0" data-url="{{ route('checkup.update', $checkup->id) }}"><i class="fa fa-minus"></i></button>
+                                                <button type="button" class="btn btn-link text-danger border-0 rounded" title="{{ __('Undo Done') }}" data-toggle="modal" data-target="#modal-form-done" data-name="{{ __('Undo done this checkup?') }}" data-is-done="0" data-url="{{ route('checkup.update', $checkup->id) }}"><i class="fa fa-minus"></i></button>
                                             @endif
                                             @if ( $checkup->enable('restore') )
-                                                <button type="button" class="btn btn-link text-success shadow-none" title="{{ __('Restore') }}" data-toggle="modal" data-target="#modal-form-restore" data-name="{{ $checkup->patient->name }}" data-url="{{ route('checkup.restore', $checkup->id) }}"><i class="fa fa-undo"></i></button>
+                                                <button type="button" class="btn btn-link text-success border-0 rounded" title="{{ __('Restore') }}" data-toggle="modal" data-target="#modal-form-restore" data-name="{{ $checkup->patient->name }}" data-url="{{ route('checkup.restore', $checkup->id) }}"><i class="fa fa-undo"></i></button>
                                             @endif
                                             @if ( $checkup->enable('delete') )
-                                                <button type="button" class="btn btn-link text-danger shadow-none" title="{{ __('Delete') }}" data-toggle="modal" data-target="#modal-form-delete" data-name="{{ $checkup->patient->name }}" data-url="{{ route('checkup.destroy', $checkup->id) }}"><i class="fa fa-trash"></i></button>
+                                                <button type="button" class="btn btn-link text-danger border-0 rounded" title="{{ __('Delete') }}" data-toggle="modal" data-target="#modal-form-delete" data-name="{{ $checkup->patient->name }}" data-url="{{ route('checkup.destroy', $checkup->id) }}"><i class="fa fa-trash"></i></button>
                                             @endif
                                         </td>
                                     </tr>

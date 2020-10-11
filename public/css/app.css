@@ -4033,11 +4033,6 @@ pre code {
   box-shadow: 0 0 0 0.2rem rgba(82, 151, 113, 0.25);
 }
 
-.form-control::-webkit-input-placeholder, .form-readonly::-webkit-input-placeholder {
-  color: #6c757d;
-  opacity: 1;
-}
-
 .form-control::-moz-placeholder, .form-readonly::-moz-placeholder {
   color: #6c757d;
   opacity: 1;

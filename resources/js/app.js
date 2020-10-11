@@ -8,6 +8,12 @@ require('./bootstrap');
 require('./jquery-ui');
 // require('./tui-calendar'); //-------------------WIP
 
+// Google Chart
+import {
+    GoogleCharts
+} from 'google-charts';
+window.GoogleCharts = GoogleCharts;
+
 // window.Vue = require('vue');
 
 /**
