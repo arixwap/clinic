@@ -69,7 +69,9 @@
                                     @endforeach
                                 @endif
                             </div>
-                            <a href="{{ route('checkup.create') }}" class="btn btn-primary">{{ __('New Checkup') }}</a>
+                            @unless ( Auth::User()->isRole('doctor') )
+                                <a href="{{ route('checkup.create') }}" class="btn btn-primary">{{ __('New Checkup') }}</a>
+                            @endunless
                             <a href="{{ route('checkup.index') }}" class="btn btn-info ml-2">{{ __('See All') }}</a>
                         </div>
                         <div class="col-md-6">

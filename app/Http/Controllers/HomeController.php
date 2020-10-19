@@ -31,13 +31,15 @@ class HomeController extends Controller
         $polyclinics = Option::where('name', 'polyclinic')->pluck('value');
 
         // Get all schedules
-        $schedules = Schedule::where('off', false)->orderBy('time_start')->get();
+        $schedules = Schedule::where('off', false)
+                            ->orderBy('time_start')
+                            ->get();
 
         // Get data checkup group by polyclinic
         $polyCheckups = Checkup::where('date', $now->format('Y-m-d'))
-                                    ->where('is_done', 0)
-                                    ->orderBy('time_start', 'ASC')
-                                    ->orderBy('number', 'ASC');
+                                ->where('is_done', 0)
+                                ->orderBy('time_start', 'ASC')
+                                ->orderBy('number', 'ASC');
 
         if ( Auth::user()->isRole('doctor') ) {
             // If current user is doctor role, only get his/her checkup data

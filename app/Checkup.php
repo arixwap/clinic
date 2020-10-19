@@ -5,6 +5,7 @@ namespace App;
 use Auth;
 use Date;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -47,18 +48,23 @@ class Checkup extends Model
      */
     protected static function booted()
     {
+        // Global scope get all checkup where has relation with existing doctor & patient
+        static::addGlobalScope('doctor', function (Builder $builder) {
+            $builder->whereHas('doctor')->whereHas('patient');
+        });
+
+        // Auto assign line number on create new checkup
         static::creating( function($checkup) {
-            // Auto assign line number on create new checkup
             $checkup->number = $checkup->generateNumber($checkup);
         });
 
+        // Auto assign line number on update checkup
         static::updating( function($checkup) {
-            // Auto assign line number on update checkup
             $checkup->number = $checkup->generateNumber($checkup);
         });
 
+        // Auto assign line number on saving checkup
         static::saving( function($checkup) {
-            // Auto assign line number on saving checkup
             $checkup->number = $checkup->generateNumber($checkup);
         });
     }
