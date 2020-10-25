@@ -48,9 +48,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function bootViews()
     {
-        // Share logo url to all views
-        $logo = Option::where('name', 'logo')->first('value');
-        $logo = $logo->value ?? null;
-        View::share('logo', $logo);
+        View::composer('*', function ($view) {
+            // Share logo url to all views
+            $logo = Option::where('name', 'logo')->first('value');
+            $logo = $logo->value ?? null;
+            $view->with('logo', $logo);
+        });
     }
 }
