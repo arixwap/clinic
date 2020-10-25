@@ -100,6 +100,7 @@
                             <button class="btn btn-primary" data-toggle="modal" data-target="#modal-weekday-schedule">{{ __('See All Schedules') }}</button>
                         </div>
                     </div>
+                    {{-- WIP --}}
                     {{-- <div class="mt-5">
                         <div class="h5 font-weight-bold bg-primary text-white p-3 mb-3">{{ __('Riwayat Kunjungan 1 Minggu Terakhir / 1 Bulan Terakhir') }}</div>
                         <div id="chart-visitor"></div>
@@ -219,19 +220,21 @@
             $(this).find('.name').html(name);
         })
 
+        // WIP-----------------------------------------------------------------------------------------
         $.get('{{ route("ajax") }}',
             {
                 ajax : 'getVisitor',
-                start_date : '2020-09-01',
-                end_date : '2020-09-30'
+                view : 'month',
+                start_date : '2018-01-01',
+                end_date : '2022-01-01'
             },
             function(response) {
                 console.log(response);
             }
         );
 
-        // WIP
-        //Load the charts library with a callback
+        // WIP-----------------------------------------------------------------------------------------
+        // Load the charts library with a callback
         // GoogleCharts.load(drawChart);
         // function drawChart() {
         //     // Standard google charts functionality is available as GoogleCharts.api after load
