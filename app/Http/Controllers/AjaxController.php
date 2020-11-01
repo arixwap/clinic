@@ -41,10 +41,7 @@ class AjaxController extends Controller
         if ( $search = $request->input("term") ) {
 
             $data = array();
-            $gender = [
-                'Male' => __('M_gender'),
-                'Female' => __('F_gender')
-            ];
+            $gender = ['Male' => __('M_gender'), 'Female' => __('F_gender')];
             $patients = Patient::where("name", "LIKE", "%$search%")
                             ->orWhere("id", "LIKE", "%$search%")
                             ->orWhere("number", "LIKE", "%$search%")
@@ -65,6 +62,46 @@ class AjaxController extends Controller
                     'value' => $label,
                     'label' => $label
                 ];
+            }
+
+            return $data;
+        }
+    }
+
+    /**
+     * Search BPJS number in checkup data
+     */
+    public function searchBPJS($request)
+    {
+        if ( $search = $request->input("term") ) {
+
+            $data = $existBPJS = array();
+            $gender = ['Male' => __('M_gender'), 'Female' => __('F_gender')];
+            $checkups = Checkup::where("bpjs", "LIKE", "$search%")->get();
+
+            foreach ( $checkups as $checkup ) {
+
+                if ( ! in_array($checkup->bpjs, $existBPJS) ) {
+                    $data[] = [
+                        'id' => $checkup->bpjs,
+                        'id_patient' => $checkup->patient_id,
+                        'value' => sprintf("%s (%s) %sth - %s",
+                            $checkup->patient->name,
+                            $gender[$checkup->patient->gender],
+                            intval(date('Y')) - intval(date('Y', strtotime($checkup->patient->birthdate))),
+                            $checkup->patient->address
+                        ),
+                        'label' => sprintf("BPJS No. %s - %s (%s) %sth",
+                            $checkup->bpjs,
+                            $checkup->patient->name,
+                            $gender[$checkup->patient->gender],
+                            intval(date('Y')) - intval(date('Y', strtotime($checkup->patient->birthdate)))
+                        )
+                    ];
+
+                    $existBPJS[] = $checkup->bpjs;
+                }
+
             }
 
             return $data;

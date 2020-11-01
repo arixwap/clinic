@@ -161,6 +161,18 @@
             }
         })
 
+        // Autocomplete search bpjs
+        $('input[name="bpjs"]').autocomplete({
+            minLength: 1,
+            source: "{{ route('ajax') }}?ajax=searchBPJS",
+            select: function(event, ui) {
+                event.preventDefault();
+                $(this).val(ui.item.id);
+                $('input.search-patient').val(ui.item.value);
+                $('input[name="patient_id"]').val(ui.item.id_patient);
+            }
+        });
+
         // Autocomplete search patient
         $('input.search-patient').autocomplete({
             minLength: 1,
