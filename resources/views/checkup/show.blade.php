@@ -54,9 +54,15 @@
                     </div>
                     <hr>
                     <div class="new-patient-form">
-                        <div class="form-group">
-                            <label class="font-weight-bold">{{ __('Full Name') }}</label>
-                            <input class="form-readonly" value="{{ $checkup->patient->name }}">
+                        <div class="row">
+                            <div class="col-md form-group">
+                                <label class="font-weight-bold">{{ __('Full Name') }}</label>
+                                <input class="form-readonly" value="{{ $checkup->patient->name }}">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="font-weight-bold">{{ __('ID Number') }}</label>
+                                <input class="form-readonly" value="{{ $checkup->patient->number }}">
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4 form-group">

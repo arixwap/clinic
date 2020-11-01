@@ -23,6 +23,8 @@ class PatientController extends Controller
                 $query->orWhere("id", $search);
                 // Search patient by name
                 $query->orWhere("name", "LIKE", "%$search%");
+                // Search patient by ID Number
+                $query->orWhere("number", "LIKE", "%$search%");
                 // Search patient by birthplace
                 $query->orWhere("birthplace", "LIKE", "%$search%");
                 // Search patient by address

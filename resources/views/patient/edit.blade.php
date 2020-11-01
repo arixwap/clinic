@@ -11,9 +11,15 @@
                         {{ csrf_field() }}
                         {{ method_field('PATCH') }}
                         {{-- End of - CSRF Method Form Laravel --}}
-                        <div class="form-group">
-                            <label>{{ __('Full Name') }}</label>
-                            <input name="name" type="text" class="form-control" value="{{ $patient->name }}" required>
+                        <div class="row">
+                            <div class="col-md form-group">
+                                <label>{{ __('Full Name') }}</label>
+                                <input name="name" type="text" class="form-control" value="{{ $patient->name }}" required>
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label>{{ __('ID Number') }}</label>
+                                <input class="form-control" value="{{ $patient->number }}" tabindex="-1" readonly>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4 form-group">

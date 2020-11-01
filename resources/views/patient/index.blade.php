@@ -22,10 +22,11 @@
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
+                                    <th scope="col">{{ __('ID Number') }}</th>
                                     <th scope="col">{{ __('Name') }}</th>
                                     <th scope="col">{{ __('Birthday') }}</th>
                                     <th scope="col" width="120">{{ __('Gender') }}</th>
-                                    <th scope="col">{{ __("Address") }}</th>
+                                    <th scope="col" width="250">{{ __("Address") }}</th>
                                     <th scope="col" class="text-center" width="150">{{ __('Action') }}</th>
                                 </tr>
                             </thead>
@@ -33,6 +34,7 @@
                                 @foreach( $patients as $patient )
                                     <tr>
                                         <th class="align-middle" scope="row">{{ $loop->iteration }}</th>
+                                        <td class="align-middle">{{ $patient->number }}</td>
                                         <td class="align-middle">{{ $patient->name }}</td>
                                         <td class="align-middle">{{ $patient->formatted_birthdate }}</td>
                                         <td class="align-middle">{{ __($patient->gender) }}</td>
