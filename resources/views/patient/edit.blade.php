@@ -16,7 +16,7 @@
                                 <label>{{ __('Full Name') }}</label>
                                 <input name="name" type="text" class="form-control" value="{{ $patient->name }}" required>
                             </div>
-                            <div class="col-md-auto form-group">
+                            <div class="col-md-4 form-group">
                                 <label>{{ __('ID Number') }}</label>
                                 <input class="form-control" value="{{ $patient->number }}" tabindex="-1" readonly>
                             </div>
