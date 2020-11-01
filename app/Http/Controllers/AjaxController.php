@@ -46,6 +46,8 @@ class AjaxController extends Controller
                 'Female' => __('F_gender')
             ];
             $patients = Patient::where("name", "LIKE", "%$search%")
+                            ->orWhere("id", "LIKE", "%$search%")
+                            ->orWhere("number", "LIKE", "%$search%")
                             ->orWhere("birthplace", "LIKE", "%$search%")
                             ->orWhere("address", "LIKE", "%$search%")
                             ->orWhere("phone", "LIKE", "%$search%")

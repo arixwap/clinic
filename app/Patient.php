@@ -43,6 +43,35 @@ class Patient extends Model
     }
 
     /**
+     * Get patient number
+     *
+     * @return string
+     */
+    public function getNumberAttribute()
+    {
+        // Auto generate and save number if not exist
+        if ( ! $this->attributes['number'] ) {
+
+            $digit = 3;
+            $numberDate = Date::parse($this->created_at)->format('Ymd');
+            $numberPatient = Patient::where('number', 'LIKE', "%$numberDate%")->count() + 1;
+
+            // Create number prefix digit. Exp : 001, 012
+            $loop = $digit - intval( strlen($numberPatient) );
+            $prefixNumberPatient = '';
+            for ( $i = 1; $i <= $loop; $i++ ) {
+                $prefixNumberPatient = $prefixNumberPatient . '0';
+            }
+
+            // Save patient ID Number
+            $this->number = $numberDate . $prefixNumberPatient . $numberPatient;
+            $this->save();
+        }
+
+        return $this->attributes['number'];
+    }
+
+    /**
      * Get birthdate in human readable format
      *
      * @return string

@@ -37,6 +37,8 @@ class CheckupController extends Controller
                 // Search checkup by patient name. Checkups -> Patient
                 $query->orWhereHas('patient', function ($query) use ($search) {
                     $query->where("name", "LIKE", "%$search%");
+                    $query->orWhere("id", "LIKE", "%$search%");
+                    $query->orWhere("number", "LIKE", "%$search%");
                 });
                 // Search checkup by doctor name. Checkups -> Doctors -> User
                 $query->orWhereHas('doctor', function ($query) use ($search) {
