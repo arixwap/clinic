@@ -40,9 +40,11 @@
                                         <td class="align-middle">{{ __($patient->gender) }}</td>
                                         <td class="align-middle">{{ $patient->address }}</td>
                                         <td class="align-middle text-center">
-                                            <a href="{{ route('patient.edit', $patient->id) }}" role="button" class="btn btn-link text-secondary shadow-none"><i class="fa fa-pencil"></i></a>
-                                            <button type="button" class="btn btn-link text-danger shadow-none" data-toggle="modal" data-target="#modal-form-delete" data-name="{{ $patient->name }}" data-url="{{ route('patient.destroy', $patient->id) }}"><i class="fa fa-times"></i></button>
-                                            <br>
+                                            @unless ( Auth::user()->isRole('doctor') )
+                                                <a href="{{ route('patient.edit', $patient->id) }}" role="button" class="btn btn-link text-secondary shadow-none"><i class="fa fa-pencil"></i></a>
+                                                <button type="button" class="btn btn-link text-danger shadow-none" data-toggle="modal" data-target="#modal-form-delete" data-name="{{ $patient->name }}" data-url="{{ route('patient.destroy', $patient->id) }}"><i class="fa fa-times"></i></button>
+                                                <br>
+                                            @endunless
                                             <a href="{{ route('checkup.record', $patient->id) }}" role="button" class="btn btn-info btn-sm btn-block">{{ __('Medical Record') }}</a>
                                         </td>
                                     </tr>

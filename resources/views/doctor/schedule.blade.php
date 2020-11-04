@@ -75,7 +75,9 @@
                         <hr>
                         <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
                         <a href="{{ route('doctor.index') }}" role="button" class="btn btn-secondary ml-2">{{ __('Back') }}</a>
-                        <a href="{{ route('doctor.edit', $doctor->id) }}" role="button" class="btn btn-info ml-2">{{ __('Edit Data') }}</a>
+                        @if ( Auth::user()->isRole('superadmin') )
+                            <a href="{{ route('doctor.edit', $doctor->id) }}" role="button" class="btn btn-info ml-2">{{ __('Edit Data') }}</a>
+                        @endif
                     </form>
                 </div>
             </div>

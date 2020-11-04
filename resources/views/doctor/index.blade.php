@@ -6,7 +6,9 @@
             <div class="card">
                 <div class="card-header">{{ __('Doctor List') }}</div>
                 <div class="card-body">
-                    <a href="{{ route('doctor.create') }}" role="button" class="btn btn-primary mb-3">{{ __('Add') }}</a>
+                    @if ( Auth::user()->isRole('superadmin') )
+                        <a href="{{ route('doctor.create') }}" role="button" class="btn btn-primary mb-3">{{ __('Add') }}</a>
+                    @endif
                     <form action="{{ route('doctor.index') }}" method="get" autocomplete="off">
                         <div class="row">
                             <div class="col-9 form-group">
@@ -36,9 +38,11 @@
                                         {{-- <td class="align-middle">{{ __($doctor->qualification) }}</td> --}}
                                         <td class="align-middle">{{ $doctor->polyclinic }}</td>
                                         <td class="align-middle text-center">
-                                            <a href="{{ route('doctor.edit', $doctor->id) }}" role="button" class="btn btn-link text-secondary shadow-none"><i class="fa fa-pencil"></i></a>
-                                            <button type="button" class="btn btn-link text-danger shadow-none" data-toggle="modal" data-target="#modal-form-delete" data-name="{{ $doctor->user->name }}" data-url="{{ route('doctor.destroy', $doctor->id) }}"><i class="fa fa-times"></i></button>
-                                            <br>
+                                            @if ( Auth::user()->isRole('superadmin') )
+                                                <a href="{{ route('doctor.edit', $doctor->id) }}" role="button" class="btn btn-link text-secondary shadow-none"><i class="fa fa-pencil"></i></a>
+                                                <button type="button" class="btn btn-link text-danger shadow-none" data-toggle="modal" data-target="#modal-form-delete" data-name="{{ $doctor->user->name }}" data-url="{{ route('doctor.destroy', $doctor->id) }}"><i class="fa fa-times"></i></button>
+                                                <br>
+                                            @endif
                                             <a href="{{ route('schedule.index', $doctor->id) }}" role="button" role="button" class="btn btn-info btn-sm btn-block">{{ __('Set Schedule') }}</a>
                                         </td>
                                     </tr>
