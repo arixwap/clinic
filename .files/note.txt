@@ -1,17 +1,10 @@
 TASK
-- Checkup Pasien : BPJS Number Autosearch & Fill
 - Dashboard : Graphic Patient Checkup Last Week / Last Month
 - Menu - Visitor Report (Laporan Kunjungan)
   - Chart Visitor Checkup per day dengan google Chart
   - Filter : Daily, Monthly, Yearly, Polyclinic (Multi Chart per Polyclinic / Single Chart / Total All )
   - Dibawah ada tabel dengan title nama date / bulan / year dan row polyclinic
   - Only Success Checkup, DON'T include cancel checkup
-- Role Standar User
-  - No CRUD User
-  - No CRUD Doctor
-  - Can Set Doctor Schedule
-  - Can CRUD Patient & Checkup
-  - Can View Report
 - Export
   PDF : Checkup Detail, Rekam Medis
   Excel : Checkup List, Patient List, Doctor List
