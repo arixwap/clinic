@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Checkup;
 use App\Doctor;
 use App\Option;
 use App\Patient;
 use App\User;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class AjaxController extends Controller
 {
@@ -118,81 +118,80 @@ class AjaxController extends Controller
         if ($doctor) return $doctor->formatSchedules();
     }
 
-    /**
-     * Get Visitor Data
-     *
-     * @return array(
-     *      date => [polyclinic_name => integer count, ...],
-     *      date => [...],
-     *      ...,
-     * )
-     */
-    public function getVisitor($request)
-    {
-        $now = Carbon::now();
+    // /**
+    //  * WIP-----------------------------------------------------------------------------------------
+    //  * Get Visitor Data for Google Chart
+    //  *
+    //  * @return array
+    //  */
+    // public function getChartVisitor($request)
+    // {
+    //     $now = Carbon::now();
 
-        // Set carbon output format based on selected input view
-        $view = $request->input('view');
-        switch ( $view ) {
-            case 'year' :
-                $format = 'Y';
-                $addition = 'addYears';
-                break;
-            case 'month' :
-                $format = 'Y F';
-                $addition = 'addMonths';
-                break;
-            default :
-                $format = 'Y-m-d';
-                $addition = 'addDays';
-                break;
-        }
+    //     // Set carbon output format based on selected input view
+    //     $view = $request->input('view');
+    //     switch ( $view ) {
+    //         case 'year' :
+    //             $format = 'Y';
+    //             $addition = 'addYears';
+    //             break;
+    //         case 'month' :
+    //             $format = 'F';
+    //             $addition = 'addMonths';
+    //             break;
+    //         default :
+    //             $format = 'd';
+    //             $addition = 'addDays';
+    //             break;
+    //     }
 
-        // Get input start_date. Default last month
-        $startDate = $request->input('start_date') ?: $now->sub('1 month')->format($format);
-        // Get input end_date. Default today
-        $endDate = $request->input('end_date') ?: $now->format($format);
+    //     // Get input start_date. Default last month
+    //     $startDate = $request->input('start_date') ?: $now->sub('1 month')->format($format);
+    //     // Get input end_date. Default today
+    //     $endDate = $request->input('end_date') ?: $now->format($format);
 
-        // Create data polyclinic with default count 0
-        $polyclinics = array();
-        $optionPolyclinic = Option::where('name', 'polyclinic')->get()->pluck('value');
-        foreach ( $optionPolyclinic as $polyclinic ) {
-            $polyclinics[$polyclinic] = 0;
-        }
+    //     // Create data polyclinic with default count 0
+    //     $polyclinics = array();
+    //     $optionPolyclinic = Option::where('name', 'polyclinic')->get()->pluck('value');
+    //     foreach ( $optionPolyclinic as $polyclinic ) {
+    //         $polyclinics[$polyclinic] = 0;
+    //     }
 
-        $visitors = Checkup::with('doctor')->whereBetween('date', [$startDate, $endDate])->get();
-        // Visitor data groupby selected date format & polyclinic
-        $visitors = $visitors->groupBy([
-            function ($visitor) use ($format) {
-                return Carbon::parse($visitor->date)->format($format);
-            },
-            'doctor.polyclinic'
-        ]);
+    //     $visitors = Checkup::with('doctor')->whereBetween('date', [$startDate, $endDate])->get();
+    //     // Visitor data groupby selected date format & polyclinic
+    //     $visitors = $visitors->groupBy([
+    //         function ($visitor) use ($format) {
+    //             return Carbon::parse($visitor->date)->translatedFormat($format);
+    //         },
+    //         'doctor.polyclinic'
+    //     ]);
 
-        $dates = array();
-        // WIP------------------------------------------------------------------------
-        // $loopDate = Carbon::parse($startDate);
-        // $endLoopDate = Carbon::parse($endDate);
-        // while ( $loopDate <= $endLoopDate ) {
+    //     return $visitors;
 
-        //     // Get loop index date in formatted view
-        //     $indexDate = $loopDate->format($format);
-        //     $dates[$indexDate] = $polyclinics;
+    //     $dates = array();
+    //     // WIP------------------------------------------------------------------------
+    //     // $loopDate = Carbon::parse($startDate);
+    //     // $endLoopDate = Carbon::parse($endDate);
+    //     // while ( $loopDate <= $endLoopDate ) {
 
-        //     return $indexDate;
-        //     return $visitors;
-        //     if ( isset($visitors->$indexDate) ) {
-        //         foreach ( $visitors[$indexDate] as $visitorPolyclinics ) {
-        //             foreach ( $visitorPolyclinics as $polyclinic ) {
-        //                 $dates[$indexDate][$polyclinic] = 233232;
-        //             }
-        //         }
-        //     }
+    //     //     // Get loop index date in formatted view
+    //     //     $indexDate = $loopDate->format($format);
+    //     //     $dates[$indexDate] = $polyclinics;
 
-        //     // Addition data for looping
-        //     $loopDate = $loopDate->$addition(1);
-        // }
+    //     //     return $indexDate;
+    //     //     return $visitors;
+    //     //     if ( isset($visitors->$indexDate) ) {
+    //     //         foreach ( $visitors[$indexDate] as $visitorPolyclinics ) {
+    //     //             foreach ( $visitorPolyclinics as $polyclinic ) {
+    //     //                 $dates[$indexDate][$polyclinic] = 233232;
+    //     //             }
+    //     //         }
+    //     //     }
 
-        return collect($dates);
-    }
+    //     //     // Addition data for looping
+    //     //     $loopDate = $loopDate->$addition(1);
+    //     // }
+
+    //     return collect($dates);
+    // }
 }

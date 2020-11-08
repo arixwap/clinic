@@ -221,31 +221,44 @@
         })
 
         // WIP-----------------------------------------------------------------------------------------
-        $.get('{{ route("ajax") }}',
-            {
-                ajax : 'getVisitor',
-                view : 'month',
-                start_date : '2018-01-01',
-                end_date : '2022-01-01'
-            },
-            function(response) {
-                console.log(response);
-            }
-        );
+        // $.get('{{ route("ajax") }}',
+        //     {
+        //         ajax : 'getChartVisitor',
+        //         view : 'month',
+        //         start_date : '2018-01-01',
+        //         end_date : '2022-01-01'
+        //     },
+        //     function(response) {
+        //         console.log(response);
+        //         drawChart();
+        //     }
+        // );
 
-        // WIP-----------------------------------------------------------------------------------------
-        // Load the charts library with a callback
+        // // Load the charts library with a callback
         // GoogleCharts.load(drawChart);
         // function drawChart() {
-        //     // Standard google charts functionality is available as GoogleCharts.api after load
         //     const data = GoogleCharts.api.visualization.arrayToDataTable([
-        //         ['Chart thing', 'Chart amount'],
-        //         ['Lorem ipsum', 60],
-        //         ['Dolor sit', 22],
-        //         ['Sit amet', 18]
+        //         // WIP - This is example data we need
+        //         ['Month', 'Umum', 'Doctor'],
+        //         ['January', rand(), rand()],
+        //         ['Feb', rand(), rand()],
+        //         ['March', rand(), rand()],
+        //         ['April', rand(), rand()],
+        //         ['May', rand(), rand()],
+        //         ['June', rand(), rand()],
+        //         ['July', rand(), rand()],
+        //         ['August', rand(), rand()],
+        //         ['September', rand(), rand()],
+        //         ['October', rand(), rand()],
+        //         ['November', rand(), rand()],
+        //         ['December', rand(), rand()]
         //     ]);
-        //     const pie_1_chart = new GoogleCharts.api.visualization.AreaChart(document.getElementById('chart-visitor'));
-        //     pie_1_chart.draw(data);
+        //     const chartVisitor = new GoogleCharts.api.visualization.AreaChart(document.getElementById('chart-visitor'));
+        //     chartVisitor.draw(data);
+        // }
+
+        // function rand() {
+        //     return Math.floor(Math.random() * 100) + 1;
         // }
 
     </script>
