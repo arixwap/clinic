@@ -56,7 +56,13 @@
             </div>
         </div>
     </div>
+    <button class="btn btn-primary" data-toggle="modal" data-target="#modal-patient-card">Modal</button>
 @endsection
+
+{{-- Modal Patien Card --}}
+@push('footer-before-script')
+    <x-modal-patient-card/>
+@endpush
 
 {{-- Modal Form Delete --}}
 @push('footer-before-script')

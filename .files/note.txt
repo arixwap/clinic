@@ -1,13 +1,14 @@
 TASK
+- Card Patient Member
+- Export
+  PDF : Checkup Detail, Rekam Medis
+  Excel : Checkup List, Patient List, Doctor List
 - Dashboard : Graphic Patient Checkup Last Week / Last Month
 - Menu - Visitor Report (Laporan Kunjungan)
   - Chart Visitor Checkup per day dengan google Chart
   - Filter : Daily, Monthly, Yearly, Polyclinic (Multi Chart per Polyclinic / Single Chart / Total All )
   - Dibawah ada tabel dengan title nama date / bulan / year dan row polyclinic
   - Only Success Checkup, DON'T include cancel checkup
-- Export
-  PDF : Checkup Detail, Rekam Medis
-  Excel : Checkup List, Patient List, Doctor List
 - Form Checkup Patient
   - Popup information doctor schedule
   - Alert on Limit Patient reach
