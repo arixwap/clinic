@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Date;
 use Illuminate\Database\Eloquent\Model;
@@ -39,7 +39,7 @@ class Patient extends Model
      */
     public function checkups()
     {
-        return $this->hasMany('App\Checkup');
+        return $this->hasMany(Checkup::class);
     }
 
     /**

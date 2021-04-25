@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Auth;
-use App\Checkup;
-use App\Doctor;
-use App\Option;
-use App\Patient;
-use App\Schedule;
+use App\Models\Checkup;
+use App\Models\Doctor;
+use App\Models\Option;
+use App\Models\Patient;
+use App\Models\Schedule;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 

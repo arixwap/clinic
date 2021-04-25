@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Doctor;
-use App\Option;
-use App\Role;
-use App\Schedule;
-use App\User;
+use App\Models\Doctor;
+use App\Models\Option;
+use App\Models\Role;
+use App\Models\Schedule;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 

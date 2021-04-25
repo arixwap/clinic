@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
@@ -48,7 +48,7 @@ class Schedule extends Model
      */
     public function doctor()
     {
-        return $this->belongsTo('App\Doctor');
+        return $this->belongsTo(Doctor::class);
     }
 
     /**
@@ -56,7 +56,7 @@ class Schedule extends Model
      */
     public function checkups()
     {
-        return $this->hasMany('App\Checkup');
+        return $this->hasMany(Checkup::class);
     }
 
     /**

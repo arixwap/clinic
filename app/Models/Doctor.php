@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Auth;
 use Date;
@@ -37,13 +37,10 @@ class Doctor extends Model
 
     /**
      * Relationship to User - 1 to 1
-     * 'App\User'   => Eloquent Filename
-     * 'id'         => foreign_key id for relationship  -> table users.id
-     * 'user_id'    => local_key id for relationship    -> table doctors.user_id
      */
     public function user()
     {
-        return $this->hasOne('App\User', 'id', 'user_id');
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
 
     /**
@@ -51,7 +48,7 @@ class Doctor extends Model
      */
     public function schedules()
     {
-        return $this->hasMany('App\Schedule');
+        return $this->hasMany(Schedule::class);
     }
 
     /**
@@ -59,7 +56,7 @@ class Doctor extends Model
      */
     public function checkups()
     {
-        return $this->hasMany('App\Checkup');
+        return $this->hasMany(Checkup::class);
     }
 
     /**

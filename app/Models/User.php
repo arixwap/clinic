@@ -1,17 +1,20 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Auth;
 use Date;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
-    use Notifiable, SoftDeletes;
+    use HasFactory;
+    use Notifiable;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -27,7 +30,6 @@ class User extends Authenticatable
         'birthdate',
         'address',
         'phone',
-        'photo',
     ];
 
     /**
@@ -50,7 +52,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Appended Attribute
+     * The accessors to append to the model's array form.
      *
      * @var array
      */
@@ -61,7 +63,7 @@ class User extends Authenticatable
      */
     public function role()
     {
-        return $this->belongsTo('App\Role');
+        return $this->belongsTo(Role::class);
     }
 
     /**
@@ -69,7 +71,7 @@ class User extends Authenticatable
      */
     public function doctor()
     {
-        return $this->hasOne('App\Doctor');
+        return $this->hasOne(Doctor::class);
     }
 
     /**
@@ -77,7 +79,7 @@ class User extends Authenticatable
      */
     public function checkups()
     {
-        return $this->hasMany('App\Checkup');
+        return $this->hasMany(Checkup::class);
     }
 
     /**

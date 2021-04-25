@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Checkup;
-use App\Doctor;
-use App\Option;
-use App\Patient;
-use App\User;
+use App\Models\Checkup;
+use App\Models\Doctor;
+use App\Models\Option;
+use App\Models\Patient;
+use App\Models\User;
 use Carbon\Carbon;
 
 class AjaxController extends Controller

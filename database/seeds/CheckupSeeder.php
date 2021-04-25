@@ -1,9 +1,9 @@
 <?php
 
-use App\Checkup;
-use App\Patient;
-use App\Schedule;
-use App\User;
+use App\Models\Checkup;
+use App\Models\Patient;
+use App\Models\Schedule;
+use App\Models\User;
 use Carbon\Carbon;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;

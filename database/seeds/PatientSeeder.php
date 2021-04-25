@@ -1,6 +1,6 @@
 <?php
 
-use App\Patient;
+use App\Models\Patient;
 use Carbon\Carbon;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;

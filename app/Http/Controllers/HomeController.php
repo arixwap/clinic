@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Auth;
-use App\Checkup;
-use App\Option;
-use App\Schedule;
+use App\Models\Checkup;
+use App\Models\Option;
+use App\Models\Schedule;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 

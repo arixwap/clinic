@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Auth;
 use Date;
@@ -102,7 +102,7 @@ class Checkup extends Model
      */
     public function schedule()
     {
-        return $this->belongsTo('App\Schedule');
+        return $this->belongsTo(Schedule::class);
     }
 
     /**
@@ -110,7 +110,7 @@ class Checkup extends Model
      */
     public function patient()
     {
-        return $this->belongsTo('App\Patient');
+        return $this->belongsTo(Patient::class);
     }
 
     /**
@@ -118,7 +118,7 @@ class Checkup extends Model
      */
     public function doctor()
     {
-        return $this->belongsTo('App\Doctor');
+        return $this->belongsTo(Doctor::class);
     }
 
     /**
@@ -126,7 +126,7 @@ class Checkup extends Model
      */
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
     }
 
     /**

@@ -1,7 +1,7 @@
 <?php
 
-use App\Option;
-use App\Role;
+use App\Models\Option;
+use App\Models\Role;
 use Carbon\Carbon;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
