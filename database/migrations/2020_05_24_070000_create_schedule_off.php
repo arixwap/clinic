@@ -22,7 +22,7 @@ class CreateScheduleOff extends Migration
             $table->string('description');
             $table->timestamps();
 
-            $table->foreign('doctor_id')->references('id')->on('doctors')->onDelete('CASCADE');;
+            $table->foreign('doctor_id')->references('id')->on('doctors')->onDelete('cascade');;
         });
     }
 

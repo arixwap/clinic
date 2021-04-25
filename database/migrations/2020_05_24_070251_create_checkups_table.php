@@ -31,10 +31,10 @@ class CreateCheckupsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('schedule_id')->references('id')->on('schedules')->onDelete('SET NULL');
-            $table->foreign('patient_id')->references('id')->on('patients')->onDelete('CASCADE');
-            $table->foreign('doctor_id')->references('id')->on('doctors')->onDelete('CASCADE');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE');
+            $table->foreign('schedule_id')->references('id')->on('schedules')->onDelete('set null');
+            $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade');
+            $table->foreign('doctor_id')->references('id')->on('doctors')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

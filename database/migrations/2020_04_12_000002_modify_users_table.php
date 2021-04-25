@@ -14,28 +14,15 @@ class ModifyUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->foreignId('role_id')
-                    ->unsigned()
-                    ->after('id')
-                    ->nullable();
-            $table->string('gender')
-                    ->after('remember_token')
-                    ->nullable();
-            $table->string('birthplace')
-                    ->after('gender')
-                    ->nullable();
-            $table->date('birthdate')
-                    ->after('birthplace')
-                    ->nullable();
-            $table->longText('address')
-                    ->after('birthdate')
-                    ->nullable();
-            $table->string('phone')
-                    ->after('address')
-                    ->nullable();
+            $table->foreignId('role_id')->unsigned()->after('id')->nullable();
+            $table->string('gender')->after('remember_token')->nullable();
+            $table->string('birthplace')->after('gender')->nullable();
+            $table->date('birthdate')->after('birthplace')->nullable();
+            $table->longText('address')->after('birthdate')->nullable();
+            $table->string('phone')->after('address')->nullable();
             $table->softDeletes();
 
-            $table->foreign('role_id')->references('id')->on('roles')->onDelete('SET NULL');
+            $table->foreign('role_id')->references('id')->on('roles')->constrained()->onDelete('set null');
         });
     }
 
@@ -48,7 +35,6 @@ class ModifyUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn(
-                'role_id',
                 'gender',
                 'birthplace',
                 'birthdate',
@@ -56,6 +42,8 @@ class ModifyUsersTable extends Migration
                 'phone',
                 'deleted_at'
             );
+
+            $table->dropForeign(['role_id']);
         });
     }
 }
