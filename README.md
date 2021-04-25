@@ -1,5 +1,7 @@
 # Clinic Web App **(Alpha Version)**
 
+![Clinic](https://raw.githubusercontent.com/arixwap/clinic/master/screenshot.png)
+
 Clinic application system using web based made with Laravel.
 
 
